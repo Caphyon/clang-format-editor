@@ -32,7 +32,7 @@ jobs:
         run: nuget restore ClangFormatDetector.sln
       
       - name: Build Solution
-        run: msbuild ClangFormatDetector.sln
+        run: msbuild ClangFormatDetector.sln /t:ClangFormatDetector /p:Configuration="Release"
 
       - name: Execute unit tests
         run: dotnet test
