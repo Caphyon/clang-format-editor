@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClangFormatDetector", "ClangFormatDetector\ClangFormatDetector.csproj", "{6F56DB08-E63F-4554-959B-F73B3F91BABB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClangFormatDetectorTests", "ClangFormatDetectorTests\ClangFormatDetectorTests.csproj", "{DE07A8DC-ED83-4497-B678-4435256812B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F56DB08-E63F-4554-959B-F73B3F91BABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F56DB08-E63F-4554-959B-F73B3F91BABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F56DB08-E63F-4554-959B-F73B3F91BABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F56DB08-E63F-4554-959B-F73B3F91BABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE07A8DC-ED83-4497-B678-4435256812B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE07A8DC-ED83-4497-B678-4435256812B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE07A8DC-ED83-4497-B678-4435256812B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE07A8DC-ED83-4497-B678-4435256812B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC4B1A7F-DCE0-4364-ACAF-BC2FA3430019}
+	EndGlobalSection
+EndGlobal
