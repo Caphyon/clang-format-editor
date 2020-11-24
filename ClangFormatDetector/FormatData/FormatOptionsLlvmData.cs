@@ -1,10 +1,11 @@
-﻿using ClangPowerTools.MVVM.Interfaces;
-using ClangPowerTools.MVVM.Models;
+﻿using ClangFormatDetector.Enums;
+using ClangFormatDetector.Interfaces;
+using ClangFormatDetector.Models;
 using System.Collections.Generic;
 
-namespace ClangPowerTools
+namespace ClangFormatDetector
 {
-  public class FormatOptionsData
+  public class FormatOptionsLlvmData : FormatOptionsFunctionality
   {
     public List<IFormatOption> FormatOptions = new List<IFormatOption>()
     {
@@ -104,13 +105,5 @@ namespace ClangPowerTools
       new FormatOptionInputModel{ Name = "TabWidth", Paramater = "unsigned", Description = "The number of columns used for tab stops.", Input = "8"},
       new FormatOptionInputModel{ Name = "UseTab", Paramater = "UseTabStyle", Description = "The way to use tab characters in the resulting file.\r\nPossible values:\r\n- UT_Never (in configuration: Never) Never use tab.\r\n- UT_ForIndentation (in configuration: ForIndentation) Use tabs only for indentation.\r\n- UT_ForContinuationAndIndentation (in configuration: ForContinuationAndIndentation) Use tabs only for line continuation and indentation.\r\n- UT_Always (in configuration: Always) Use tabs whenever we need to fill whitespace that spans at least from one tab stop to the next on", Input = "Never"}
     };
-
-    public void DisableAllOptions()
-    {
-      foreach (var item in FormatOptions)
-      {
-        item.IsEnabled = false;
-      }
-    }
   }
 }

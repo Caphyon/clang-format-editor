@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ClangPowerTools
+namespace ClangFormatDetector
 {
   public class FormatOptionsInputValues
   {
