@@ -11,4 +11,15 @@ namespace ClangFormatDetector.Enums
     [EnumMember(Value = "false")]
     False
   }
+
+  public enum FormatStyle
+  {
+    Custom,
+    LLVM,
+    Google,
+    Chromium,
+    Microsoft,
+    Mozilla,
+    WebKit,
+  }
 }
