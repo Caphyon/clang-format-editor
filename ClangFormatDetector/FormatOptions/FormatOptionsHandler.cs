@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ClangFormatDetector
 {
-  public class FormatOptionsFunctionality
+  public class FormatOptionsHandler
   {
     public void DisableAllOptions(List<IFormatOption> FormatOptions)
     {

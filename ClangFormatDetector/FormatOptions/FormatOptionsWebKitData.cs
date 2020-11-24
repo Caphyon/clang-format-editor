@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ClangFormatDetector
 {
-  public class FormatOptionsWebKitData : FormatOptionsFunctionality
+  public class FormatOptionsWebKitData : FormatOptionsHandler
   {
     public List<IFormatOption> FormatOptions = new List<IFormatOption>()
     {

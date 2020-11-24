@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ClangFormatDetector
 {
-  public class FormatOptionsGoogleData : FormatOptionsFunctionality
+  public class FormatOptionsGoogleData : FormatOptionsHandler
   {
     public List<IFormatOption> FormatOptions = new List<IFormatOption>()
     {
