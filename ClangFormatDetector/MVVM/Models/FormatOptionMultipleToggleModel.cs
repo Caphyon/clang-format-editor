@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ClangFormatDetector.Models
+namespace ClangPowerTools.MVVM.Models
 {
   public class FormatOptionMultipleToggleModel : FormatOptionModel
   {

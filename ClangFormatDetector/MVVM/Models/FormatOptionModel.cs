@@ -1,7 +1,7 @@
-﻿using ClangFormatDetector.Interfaces;
+﻿using ClangPowerTools.MVVM.Interfaces;
 using System.ComponentModel;
 
-namespace ClangFormatDetector.Models
+namespace ClangPowerTools.MVVM.Models
 {
   public class FormatOptionModel : IFormatOption, INotifyPropertyChanged
   {

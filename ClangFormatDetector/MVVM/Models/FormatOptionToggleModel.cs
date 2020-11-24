@@ -1,6 +1,4 @@
-﻿using ClangFormatDetector.Enums;
-
-namespace ClangFormatDetector.Models
+﻿namespace ClangPowerTools.MVVM.Models
 {
   public class FormatOptionToggleModel : FormatOptionModel
   {
@@ -31,7 +29,7 @@ namespace ClangFormatDetector.Models
       set
       {
         booleanComboboxValue = value;
-        if (IsEnabled == false)
+        if (IsEnabled == false) 
           IsEnabled = true;
 
         OnPropertyChanged("BooleanCombobox");
