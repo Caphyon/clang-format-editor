@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using ClangFormatDetector.MVVM.ViewModels;
+using System.Windows;
 
-namespace ClangPowerTools.MVVM.Views
+namespace ClangFormatDetector.MVVM.Views
 {
   /// <summary>
   /// Interaction logic for DetectedFormatStyleInfo.xaml

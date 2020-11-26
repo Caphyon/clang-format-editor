@@ -1,20 +1,17 @@
-﻿<platformui:DialogWindow
-  x:Class="ClangPowerTools.MVVM.Views.DiffWindow"
+﻿<Window
+  x:Class="ClangFormatDetector.MVVM.Views.DiffWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:local="clr-namespace:ClangPowerTools"
+  xmlns:local="clr-namespace:ClangFormatDetector"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:platformui="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
   Title="Clang-Format Generator"
   MinWidth="1000"
   MinHeight="750"
   d:DataContext="{d:DesignInstance local:DiffViewModel,
                                    IsDesignTimeCreatable=True}"
   Background="WhiteSmoke"
-  HasMaximizeButton="True"
-  HasMinimizeButton="False"
-  Icon="/ClangPowerTools;component/Resources/ClangPowerToolsIco.ico"
+  Icon="/ClangFormatDetector;component/Resources/ClangPowerToolsIco.ico"
   ResizeMode="CanResize"
   ShowInTaskbar="False"
   WindowStartupLocation="CenterScreen"
@@ -68,7 +65,7 @@
           Height="15"
           Margin="3"
           VerticalAlignment="Center"
-          Source="/ClangPowerTools;component/Resources/FileIcon.png" />
+          Source="/ClangFormatDetector;component/Resources/FileIcon.png" />
         <TextBlock
           Width="32"
           FontSize="16"
@@ -104,7 +101,7 @@
           Height="20"
           Margin="3"
           VerticalAlignment="Center"
-          Source="/ClangPowerTools;component/Resources/PreviewIcon.png" />
+          Source="/ClangFormatDetector;component/Resources/PreviewIcon.png" />
         <TextBlock
           Width="112"
           FontSize="16"
@@ -196,7 +193,7 @@
           ToolTip="Reset all options to the detected values">
           <Button.Template>
             <ControlTemplate>
-              <Image Source="/ClangPowerTools;component/Resources/ResetIcon.png" />
+              <Image Source="/ClangFormatDetector;component/Resources/ResetIcon.png" />
             </ControlTemplate>
           </Button.Template>
         </Button>
@@ -278,7 +275,7 @@
                       ToolTip="Reset option to the detected value">
                       <Button.Template>
                         <ControlTemplate>
-                          <Image Source="/ClangPowerTools;component/Resources/ResetIcon.png" />
+                          <Image Source="/ClangFormatDetector;component/Resources/ResetIcon.png" />
                         </ControlTemplate>
                       </Button.Template>
                     </Button>
@@ -354,7 +351,7 @@
             <Image
               Width="23"
               Height="23"
-              Source="/ClangPowerTools;component/Resources/PreviewWhiteIcon.png" />
+              Source="/ClangFormatDetector;component/Resources/PreviewWhiteIcon.png" />
             <Label
               Padding="2"
               FontSize="14"
@@ -376,7 +373,7 @@
             <Image
               Width="16"
               Height="16"
-              Source="/ClangPowerTools;component/Resources/GenerateClangFormatFile.png" />
+              Source="/ClangFormatDetector;component/Resources/GenerateClangFormatFile.png" />
             <Label
               Padding="2"
               FontSize="14"
@@ -389,4 +386,4 @@
 
     </Grid>
   </Grid>
-</platformui:DialogWindow>
+</Window>

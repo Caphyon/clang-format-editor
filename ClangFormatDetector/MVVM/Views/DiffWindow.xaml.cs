@@ -1,16 +1,16 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
+﻿using ClangFormatDetector.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ClangPowerTools.MVVM.Views
+namespace ClangFormatDetector.MVVM.Views
 {
   /// <summary>
   /// Interaction logic for DiffWindow.xaml
   /// </summary>
-  public partial class DiffWindow : DialogWindow
+  public partial class DiffWindow : Window
   {
     #region Members
 
@@ -30,7 +30,7 @@ namespace ClangPowerTools.MVVM.Views
 
     #region Public Methods
 
-    public async Task ShowDiffAsync(List<string> filesPath, DialogWindow detectingWindowOwner)
+    public async Task ShowDiffAsync(List<string> filesPath, Window detectingWindowOwner)
     {
       await diffViewModel.DiffDocumentsAsync(filesPath, detectingWindowOwner);
     }

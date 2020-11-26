@@ -1,10 +1,10 @@
-﻿using ClangPowerTools.Helpers;
-using ClangPowerTools.MVVM.Commands;
-using ClangPowerTools.MVVM.Controllers;
-using ClangPowerTools.MVVM.Interfaces;
-using ClangPowerTools.MVVM.Models;
-using ClangPowerTools.MVVM.Views;
-using Microsoft.VisualStudio.PlatformUI;
+﻿using ClangFormatDetector.Enums;
+using ClangFormatDetector.Extensions;
+using ClangFormatDetector.Helpers;
+using ClangFormatDetector.Interfaces;
+using ClangFormatDetector.MVVM.Controllers;
+using ClangFormatDetector.MVVM.Models;
+using ClangFormatDetector.MVVM.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +17,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using Brushes = System.Windows.Media.Brushes;
 
-namespace ClangPowerTools
+namespace ClangFormatDetector.MVVM.ViewModels
 {
-  public class DiffViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged, IFormatEditor
+  public class DiffViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged
   {
     #region Members
 
@@ -50,7 +50,7 @@ namespace ClangPowerTools
       get => formatStyleOptions;
       set => formatStyleOptions = value;
     }
-    public EditorStyles SelectedStyle
+    public FormatStyle SelectedStyle
     {
       get => selectedStyle;
       set => selectedStyle = value;
@@ -147,7 +147,7 @@ namespace ClangPowerTools
 
     #region Public Methods
 
-    public async Task DiffDocumentsAsync(List<string> filesPath, DialogWindow detectingWindowOwner)
+    public async Task DiffDocumentsAsync(List<string> filesPath, Window detectingWindowOwner)
     {
       ShowDetectingView(detectingWindowOwner, FormatConstants.DetectingTitle, FormatConstants.DetectingDescription, FormatConstants.DetectingDescriptionExtra);
 
@@ -320,7 +320,7 @@ namespace ClangPowerTools
       return sb.ToString();
     }
 
-    private void ShowDetectingView(DialogWindow detectingWindowOwner, string title, string description, string descriptionExtra)
+    private void ShowDetectingView(Window detectingWindowOwner, string title, string description, string descriptionExtra)
     {
       detectingView = new DetectingView();
       detectingView.WindowTitle.Text = title;

@@ -1,8 +1,7 @@
-﻿using ClangFormatDetector;
-using ClangFormatDetector.Enums;
+﻿using ClangFormatDetector.Enums;
 using ClangFormatDetector.Extensions;
 using ClangFormatDetector.Interfaces;
-using ClangFormatDetector.Models;
+using ClangFormatDetector.MVVM.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ClangPowerTools.DiffStyle
+namespace ClangFormatDetector.DiffStyle
 {
   public class StyleDetector
   {

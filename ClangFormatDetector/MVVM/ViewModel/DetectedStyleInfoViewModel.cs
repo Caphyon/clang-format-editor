@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace ClangPowerTools
+namespace ClangFormatDetector.MVVM.ViewModels
 {
   public class DetectedStyleInfoViewModel : INotifyPropertyChanged
   {

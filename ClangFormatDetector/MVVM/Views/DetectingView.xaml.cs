@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ClangPowerTools.MVVM.Views
+namespace ClangFormatDetector.MVVM.Views
 {
   /// <summary>
   /// Interaction logic for DetectingView.xaml

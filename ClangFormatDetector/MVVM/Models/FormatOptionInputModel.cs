@@ -1,4 +1,4 @@
-﻿namespace ClangPowerTools.MVVM.Models
+﻿namespace ClangFormatDetector.MVVM.Models
 {
   public class FormatOptionInputModel : FormatOptionModel
   {
@@ -28,7 +28,7 @@
       set
       {
         input = value;
-        if (IsEnabled == false) 
+        if (IsEnabled == false)
           IsEnabled = true;
 
         OnPropertyChanged("Input");

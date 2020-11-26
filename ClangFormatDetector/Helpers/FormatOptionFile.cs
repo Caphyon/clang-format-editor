@@ -1,6 +1,6 @@
 ﻿using ClangFormatDetector.Enums;
 using ClangFormatDetector.Interfaces;
-using ClangFormatDetector.Models;
+using ClangFormatDetector.MVVM.Models;
 using System.Collections.Generic;
 using System.Text;
 

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace ClangPowerTools.MVVM.Models
+namespace ClangFormatDetector.MVVM.Models
 {
   class FormatOptionMultipleInputModel : FormatOptionModel
   {
