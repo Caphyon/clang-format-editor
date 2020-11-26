@@ -1,26 +1,26 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
+﻿using ClangFormatDetector.MVVM.ViewModels;
 using System.Windows;
 
-namespace ClangPowerTools.MVVM.Views
+namespace ClangFormatDetector.MVVM.Views
 {
   /// <summary>
-  /// Interaction logic for DetectFormatStyleMenuView.xaml
+  /// Interaction logic for FileSelectorView.xaml
   /// </summary>
-  public partial class DetectStyleFileSelectorView : DialogWindow
+  public partial class FileSelectorView : Window
   {
-    private readonly DetectStyleFileSelectorViewModel fileSelectorViewModel;
+    private readonly FileSelectorViewModel fileSelectorViewModel;
 
-    public DetectStyleFileSelectorView()
+    public FileSelectorView()
     {
       InitializeComponent();
-      fileSelectorViewModel = new DetectStyleFileSelectorViewModel(this);
+      fileSelectorViewModel = new FileSelectorViewModel(this);
       DataContext = fileSelectorViewModel;
     }
 
     private void RemoveFileButton_Click(object sender, RoutedEventArgs e)
     {
       var elementIndex = GetElementIndex(sender as FrameworkElement);
-      ((DetectStyleFileSelectorViewModel)DataContext).RemoveFile(elementIndex);
+      ((FileSelectorViewModel)DataContext).RemoveFile(elementIndex);
     }
 
     private int GetElementIndex(FrameworkElement frameworkElement)

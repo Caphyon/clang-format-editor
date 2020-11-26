@@ -1,6 +1,6 @@
 ﻿using ClangFormatDetector.Enums;
 
-namespace ClangFormatDetector.Models
+namespace ClangFormatDetector.MVVM.Models
 {
   public class ToggleModel
   {

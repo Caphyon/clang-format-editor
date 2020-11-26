@@ -1,19 +1,19 @@
-﻿using ClangPowerTools.MVVM.Commands;
-using ClangPowerTools.MVVM.Models;
-using ClangPowerTools.MVVM.Views;
+﻿using ClangFormatDetector.Extensions;
+using ClangFormatDetector.MVVM.Models;
+using ClangFormatDetector.MVVM.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ClangPowerTools
+namespace ClangFormatDetector.MVVM.ViewModels
 {
-  public class DetectStyleFileSelectorViewModel : CommonSettingsFunctionality
+  public class FileSelectorViewModel : CommonSettingsFunctionality
   {
     #region Members
 
-    private readonly DetectStyleFileSelectorView view;
+    private readonly FileSelectorView view;
 
     private ICommand browseCommand;
     private ICommand removeAllFilesCommand;
@@ -34,9 +34,9 @@ namespace ClangPowerTools
 
     #region Constructor
 
-    public DetectStyleFileSelectorViewModel() { }
+    public FileSelectorViewModel() { }
 
-    public DetectStyleFileSelectorViewModel(DetectStyleFileSelectorView view)
+    public FileSelectorViewModel(FileSelectorView view)
     {
       this.view = view;
       ChangeButtonsState(false);
@@ -78,6 +78,7 @@ namespace ClangPowerTools
 
     private void BrowseForFiles()
     {
+      //TODO remove ScriptConstants and use FormatConstants
       string[] filePaths = OpenFiles(string.Empty, ".cpp", ScriptConstants.FileExtensionsSelectFile);
 
       if (filePaths == null || filePaths.Length <= 0)
