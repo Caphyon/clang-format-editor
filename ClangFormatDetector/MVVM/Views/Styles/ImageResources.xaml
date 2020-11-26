@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+  x:Class="ClangFormatDetector.MVVM.Views.Styles.ImageResources"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d">
+
+  <BitmapImage x:Key="AddInputImage" UriSource="/ClangFormatDetector;component/Resources/AddInput.png" />
+  <BitmapImage x:Key="BrowseImage" UriSource="/ClangFormatDetector;component/Resources/Browse.png" />
+  <BitmapImage x:Key="AccountAvatarIcon" UriSource="/ClangFormatDetector;component/Resources/AccountAvatarIcon.png" />
+  <BitmapImage x:Key="GitHubIcon" UriSource="/ClangFormatDetector;component/Resources/GitHubMark.png" />
+  <BitmapImage x:Key="LogoutIcon" UriSource="/ClangFormatDetector;component/Resources/LogoutIcon.png" />
+  <BitmapImage x:Key="DetectOnFileIcon" UriSource="/ClangFormatDetector;component/Resources/DetectOnFileIcon.png" />
+  <ImageBrush x:Key="RemoveImage" ImageSource="/ClangFormatDetector;component/Resources/RemoveInputIdle.png" />
+  <ImageBrush x:Key="RemoverHoverImage" ImageSource="/ClangFormatDetector;component/Resources/RemoveInputHover.png" />
+
+</ResourceDictionary>

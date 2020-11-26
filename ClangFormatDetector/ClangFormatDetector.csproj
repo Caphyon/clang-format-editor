@@ -8,13 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\ClangPowerToolsIco.ico" />
+    <None Remove="Resources\Format\clang-format.exe" />
+    <None Remove="Resources\RemoveInputHover.png" />
+    <None Remove="Resources\RemoveInputIdle.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Resources\Format\clang-format.exe">
+    <Resource Include="Resources\ClangPowerToolsIco.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Resource>
+    <Resource Include="Resources\Format\clang-format.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\RemoveInputHover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\RemoveInputIdle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
