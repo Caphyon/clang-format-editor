@@ -12,14 +12,6 @@ namespace ClangFormatDetector
 {
   public class StyleFormatter
   {
-    #region Members
-
-    //TODO fix path
-    private readonly string projectPath = "";
-
-    #endregion
-
-
     #region Methods
 
     public string FormatText(string textToFormat, List<IFormatOption> formatStyleOptions, FormatStyle selectedStyle)
@@ -29,7 +21,7 @@ namespace ClangFormatDetector
       FileSystem.WriteContentToFile(formatFilePath, FormatOptionFile.CreateOutput(formatStyleOptions, selectedStyle).ToString());
       FileSystem.WriteContentToFile(filePath, textToFormat);
 
-      var content = FormatFileOutsideProject(projectPath, filePath);
+      var content = FormatFileOutsideProject(Environment.CurrentDirectory, filePath);
 
       FileSystem.DeleteDirectory(folderPath);
 
@@ -38,24 +30,22 @@ namespace ClangFormatDetector
 
     private void CreatePaths(out string filePath, out string formatFilePath, out string folderPath)
     {
-      //TODO everything is in the project folder
-      string parentFolder = Path.Combine(projectPath, "Format");
+      string parentFolder = Path.Combine(Environment.CurrentDirectory, "Format");
       FileSystem.CreateDirectory(parentFolder);
 
       folderPath = Path.Combine(parentFolder, Guid.NewGuid().ToString());
       FileSystem.CreateDirectory(folderPath);
 
       filePath = Path.Combine(folderPath.ToString(), "FormatTemp.cpp");
-      formatFilePath = Path.Combine(projectPath, folderPath.ToString(), ".clang-format");
+      formatFilePath = Path.Combine(Environment.CurrentDirectory, folderPath.ToString(), ".clang-format");
     }
 
     private string FormatFileOutsideProject(string directoryPath, string filePath)
     {
-      // TODO fix path
-      string vsixPath = Path.GetDirectoryName("");
+      string clangFormatExe = Path.Combine(Environment.CurrentDirectory, FormatConstants.ClangFormatExe);
       string output = string.Empty;
 
-      if (string.IsNullOrWhiteSpace(vsixPath) || string.IsNullOrWhiteSpace(directoryPath)
+      if (string.IsNullOrWhiteSpace(clangFormatExe) || string.IsNullOrWhiteSpace(directoryPath)
         || string.IsNullOrWhiteSpace(filePath))
       {
         return string.Empty;
@@ -71,7 +61,7 @@ namespace ClangFormatDetector
         process.StartInfo.RedirectStandardOutput = true;
         process.StartInfo.StandardOutputEncoding = Encoding.UTF8;
         process.StartInfo.RedirectStandardError = true;
-        process.StartInfo.FileName = "PATH HERE";
+        process.StartInfo.FileName = clangFormatExe;
         process.StartInfo.WorkingDirectory = directoryPath;
         process.StartInfo.Arguments = $"-style=file \"{Path.GetFullPath(filePath)}\"";
 
