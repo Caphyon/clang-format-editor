@@ -53,7 +53,6 @@ namespace ClangFormatDetector
 
       try
       {
-        //TODO fix path
         var process = new Process();
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.CreateNoWindow = true;
