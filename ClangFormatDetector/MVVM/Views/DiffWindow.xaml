@@ -13,7 +13,6 @@
   Background="WhiteSmoke"
   Icon="/ClangFormatDetector;component/Resources/ClangPowerToolsIco.ico"
   ResizeMode="CanResize"
-  ShowInTaskbar="False"
   WindowStartupLocation="CenterScreen"
   WindowState="Maximized"
   mc:Ignorable="d">
