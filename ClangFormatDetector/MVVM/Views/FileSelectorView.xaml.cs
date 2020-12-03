@@ -13,8 +13,8 @@ namespace ClangFormatDetector.MVVM.Views
     public FileSelectorView()
     {
       InitializeComponent();
-      fileSelectorViewModel = new FileSelectorViewModel(this);
       DataContext = fileSelectorViewModel;
+      fileSelectorViewModel = new FileSelectorViewModel(this);
     }
 
     private void RemoveFileButton_Click(object sender, RoutedEventArgs e)

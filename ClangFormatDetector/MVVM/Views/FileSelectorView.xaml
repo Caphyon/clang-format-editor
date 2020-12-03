@@ -21,11 +21,16 @@
   <!--  Static resources  -->
   <Window.Resources>
     <ResourceDictionary>
-      <Style TargetType="{x:Type ListView}">
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="FontSize" Value="13" />
-      </Style>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles/AppResources.xaml" />
+        <ResourceDictionary>
+          <Style TargetType="{x:Type ListView}">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="13" />
+          </Style>
+        </ResourceDictionary>
+      </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Window.Resources>
 

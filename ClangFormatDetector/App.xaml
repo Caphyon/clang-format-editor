@@ -5,11 +5,7 @@
   xmlns:local="clr-namespace:ClangFormatDetector"
   StartupUri="MVVM/Views/FileSelectorView.xaml">
   <Application.Resources>
-    <ImageBrush x:Key="AddInputImage" ImageSource="/ClangFormatDetector;component/Resources/AddInput.png" />
-    <ImageBrush x:Key="BrowseImage" ImageSource="/ClangFormatDetector;component/Resources/Browse.png" />
-    <ImageBrush x:Key="DetectOnFileIcon" ImageSource="/ClangFormatDetector;component/Resources/DetectOnFileIcon.png" />
-    <ImageBrush x:Key="RemoveImage" ImageSource="/ClangFormatDetector;component/Resources/RemoveInputIdle.png" />
-    <ImageBrush x:Key="RemoverHoverImage" ImageSource="/ClangFormatDetector;component/Resources/RemoveInputHover.png" />
+
   </Application.Resources>
 
 </Application>
