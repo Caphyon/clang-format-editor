@@ -20,6 +20,6 @@
     public const string FontFamily = "Consolas";
     public const int FontSize = 12;
     public const string FileExtensionsSelectFile = "Code files (*.c;*.cpp;*.cxx;*.cc;*.tli;*.tlh;*.h;*.hh;*.hpp;*.hxx;)|*.c;*.cpp;*.cxx;*.cc;*.tli;*.tlh;*.h;*.hh;*.hpp;*.hxx";
-
+    public const string ClangFormatExe = "clang-format.exe";
   }
 }
