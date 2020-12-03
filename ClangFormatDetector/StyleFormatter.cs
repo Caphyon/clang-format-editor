@@ -14,7 +14,7 @@ namespace ClangFormatDetector
   {
     #region Members
 
-    //TODO fi path
+    //TODO fix path
     private readonly string projectPath = "";
 
     #endregion

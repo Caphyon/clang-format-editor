@@ -107,7 +107,6 @@ namespace ClangFormatDetector.MVVM.Controllers
 
     public void CopyOptionValues(IFormatOption optionToChange, IFormatOption optionToCopy)
     {
-      //TODO use patterns
       switch (optionToChange)
       {
         case FormatOptionToggleModel toggleModel:

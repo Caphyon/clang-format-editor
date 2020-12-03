@@ -78,8 +78,7 @@ namespace ClangFormatDetector.MVVM.ViewModels
 
     private void BrowseForFiles()
     {
-      //TODO remove ScriptConstants and use FormatConstants
-      string[] filePaths = OpenFiles(string.Empty, ".cpp", ScriptConstants.FileExtensionsSelectFile);
+      string[] filePaths = OpenFiles(string.Empty, ".cpp", FormatConstants.FileExtensionsSelectFile);
 
       if (filePaths == null || filePaths.Length <= 0)
         return;
