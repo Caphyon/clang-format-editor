@@ -6,6 +6,9 @@
     <UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ApplicationIcon>Resources\ClangPowerToolsIco.ico</ApplicationIcon>
+		<Authors>Caphyon</Authors>
+		<Product>Clang Format Detector</Product>
+		<RepositoryUrl>https://github.com/Caphyon/clang-format-detector</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
