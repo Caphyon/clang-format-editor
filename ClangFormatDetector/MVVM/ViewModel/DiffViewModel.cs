@@ -139,7 +139,6 @@ namespace ClangFormatDetector.MVVM.ViewModels
       });
       await ReloadDiffAsync(FormatConstants.ResetTitle, FormatConstants.ResetDescription, string.Empty);
       SelectedOption = FormatOptions.First();
-      diffWindow.ReloadButton.IsEnabled = false;
       OnPropertyChanged("FormatOptions");
     }
 
@@ -196,7 +195,8 @@ namespace ClangFormatDetector.MVVM.ViewModels
       {
         MarkOptionChange((FormatOptionModel)option, false, FormatConstants.NormalFontWeight);
       }
-      diffWindow.ReloadButton.IsEnabled = true;
+
+      ReloadDiffAsync(FormatConstants.UpdateTitle, FormatConstants.UpdateDescription, string.Empty).SafeFireAndForget();
     }
 
     public void ResetOption(int index)

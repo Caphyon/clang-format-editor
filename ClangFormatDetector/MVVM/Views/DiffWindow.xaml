@@ -8,8 +8,6 @@
   Title="Clang-Format Generator"
   MinWidth="1000"
   MinHeight="750"
-  d:DataContext="{d:DesignInstance local:DiffViewModel,
-                                   IsDesignTimeCreatable=True}"
   Background="WhiteSmoke"
   Icon="/ClangFormatDetector;component/Resources/ClangPowerToolsIco.ico"
   ResizeMode="CanResize"
@@ -334,7 +332,7 @@
           <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
 
-        <!--  Reload / Preview Style Changes button  -->
+        <!--  Reload / Preview Style Changes button
         <Button
           x:Name="ReloadButton"
           Grid.Column="1"
@@ -358,7 +356,7 @@
               Preview Style
             </Label>
           </StackPanel>
-        </Button>
+        </Button>-->
 
         <!--  Export / Generate button  -->
         <Button
