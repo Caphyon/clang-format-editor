@@ -10,11 +10,20 @@
 
   <ItemGroup>
     <None Remove="Resources\AddInput.png" />
+    <None Remove="Resources\BannerInfo.png" />
+    <None Remove="Resources\BannersError.png" />
+    <None Remove="Resources\bannerWarning.png" />
     <None Remove="Resources\Browse.png" />
     <None Remove="Resources\ClangPowerToolsIco.ico" />
     <None Remove="Resources\DetectOnFileIcon.png" />
+    <None Remove="Resources\FileIcon.png" />
+    <None Remove="Resources\GenerateClangFormatFile.png" />
+    <None Remove="Resources\InfoIcon.png" />
+    <None Remove="Resources\PreviewIcon.png" />
+    <None Remove="Resources\PreviewWhiteIcon.png" />
     <None Remove="Resources\RemoveInputHover.png" />
     <None Remove="Resources\RemoveInputIdle.png" />
+    <None Remove="Resources\ResetIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,27 +31,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\AddInput.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Browse.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\ClangPowerToolsIco.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\DetectOnFileIcon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Resources\AddInput.png" />
+    <Resource Include="Resources\BannerInfo.png" />
+    <Resource Include="Resources\BannersError.png" />
+    <Resource Include="Resources\bannerWarning.png" />
+    <Resource Include="Resources\Browse.png" />
+    <Resource Include="Resources\ClangPowerToolsIco.ico" />
+    <Resource Include="Resources\DetectOnFileIcon.png" />
     <Content Include="clang-format.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Resources\RemoveInputHover.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\RemoveInputIdle.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Resources\FileIcon.png" />
+    <Resource Include="Resources\GenerateClangFormatFile.png" />
+    <Resource Include="Resources\InfoIcon.png" />
+    <Resource Include="Resources\PreviewIcon.png" />
+    <Resource Include="Resources\PreviewWhiteIcon.png" />
+    <Resource Include="Resources\RemoveInputHover.png" />
+    <Resource Include="Resources\RemoveInputIdle.png" />
+    <Resource Include="Resources\ResetIcon.png" />
   </ItemGroup>
 
 </Project>
