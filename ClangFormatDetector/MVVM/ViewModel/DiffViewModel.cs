@@ -212,6 +212,7 @@ namespace ClangFormatDetector.MVVM.ViewModels
       {
         MarkOptionChange((FormatOptionModel)option, false, FormatConstants.NormalFontWeight);
       }
+
       ReloadDiffAsync(FormatConstants.UpdateTitle, FormatConstants.UpdateDescription, string.Empty).SafeFireAndForget();
     }
 
