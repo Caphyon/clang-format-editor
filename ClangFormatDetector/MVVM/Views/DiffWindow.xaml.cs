@@ -15,6 +15,8 @@ namespace ClangFormatDetector.MVVM.Views
     #region Members
 
     private readonly DiffViewModel diffViewModel;
+    private readonly InputDelayer assistant;
+    private int elementIndex;
 
     #endregion
 
@@ -24,6 +26,10 @@ namespace ClangFormatDetector.MVVM.Views
       InitializeComponent();
       diffViewModel = new DiffViewModel(this);
       DataContext = diffViewModel;
+
+      assistant = new InputDelayer();
+      assistant.Idled += AssistantIdled;
+      elementIndex = 0;
     }
 
     #endregion
@@ -54,34 +60,45 @@ namespace ClangFormatDetector.MVVM.Views
       }
     }
 
+    private void AssistantIdled(object sender, EventArgs e)
+    {
+      if (elementIndex < 0 || elementIndex >= FormatOptions.Items.Count) return;
+      Dispatcher.Invoke(() =>
+      {
+        diffViewModel.OptionChanged(elementIndex);
+      });
+    }
+
     private void OptionInputChanged(object sender, TextChangedEventArgs e)
     {
       var element = (sender as FrameworkElement).DataContext;
       if (element == null) return;
-      diffViewModel.OptionChanged(FormatOptions.Items.IndexOf(element));
+      elementIndex = FormatOptions.Items.IndexOf(element);
+      assistant.TextChanged();
     }
 
     private void OptionDropDownClosed(object sender, EventArgs e)
     {
       var element = (sender as FrameworkElement).DataContext;
       if (element == null) return;
-      diffViewModel.OptionChanged(FormatOptions.Items.IndexOf(element));
+      elementIndex = FormatOptions.Items.IndexOf(element);
+      diffViewModel.OptionChanged(elementIndex);
     }
 
     private void OpenMultipleInput(object sender, RoutedEventArgs e)
     {
       var element = (sender as FrameworkElement).DataContext;
       if (element == null) return;
-      int index = FormatOptions.Items.IndexOf(element);
-      diffViewModel.OpenMultipleInput(index);
+      elementIndex = FormatOptions.Items.IndexOf(element);
+      diffViewModel.OpenMultipleInput(elementIndex);
     }
 
     private void ResetOption(object sender, RoutedEventArgs e)
     {
       var element = (sender as FrameworkElement).DataContext;
       if (element == null) return;
-      int index = FormatOptions.Items.IndexOf(element);
-      diffViewModel.ResetOption(index);
+      elementIndex = FormatOptions.Items.IndexOf(element);
+      diffViewModel.ResetOption(elementIndex);
     }
 
     #endregion
