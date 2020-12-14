@@ -15,7 +15,7 @@ namespace ClangFormatDetector.MVVM.Views
     #region Members
 
     private readonly DiffViewModel diffViewModel;
-    private readonly InputDelayer assistant;
+    private readonly InputDelayer inputDelayer;
     private int elementIndex;
 
     #endregion
@@ -27,8 +27,8 @@ namespace ClangFormatDetector.MVVM.Views
       diffViewModel = new DiffViewModel(this);
       DataContext = diffViewModel;
 
-      assistant = new InputDelayer();
-      assistant.Idled += AssistantIdled;
+      inputDelayer = new InputDelayer(2000);
+      inputDelayer.Idled += InputIdled;
       elementIndex = 0;
     }
 
@@ -60,7 +60,7 @@ namespace ClangFormatDetector.MVVM.Views
       }
     }
 
-    private void AssistantIdled(object sender, EventArgs e)
+    private void InputIdled(object sender, EventArgs e)
     {
       if (elementIndex < 0 || elementIndex >= FormatOptions.Items.Count) return;
       Dispatcher.Invoke(() =>
@@ -74,7 +74,7 @@ namespace ClangFormatDetector.MVVM.Views
       var element = (sender as FrameworkElement).DataContext;
       if (element == null) return;
       elementIndex = FormatOptions.Items.IndexOf(element);
-      assistant.TextChanged();
+      inputDelayer.TextChanged();
     }
 
     private void OptionDropDownClosed(object sender, EventArgs e)
