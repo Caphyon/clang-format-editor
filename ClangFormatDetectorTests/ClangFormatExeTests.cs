@@ -1,5 +1,6 @@
+using ClangFormatDetector;
+using System;
 using System.IO;
-using System.Reflection;
 using Xunit;
 
 namespace ClangFormatDetectorTests
@@ -10,11 +11,11 @@ namespace ClangFormatDetectorTests
     public void Check_ClangFormatExe_Exists()
     {
       //Arrange
-      string executableName = "clang-format.exe";
-      string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+      string executableName = FormatConstants.ClangFormatExe;
+      var projectPath = Environment.CurrentDirectory.Replace("ClangFormatDetectorTests", "ClangFormatDetector");
 
       //Act
-      string path = Path.Combine(directory, executableName);
+      string path = Path.Combine(projectPath, executableName);
 
       //Assert
       Assert.True(File.Exists(path));
