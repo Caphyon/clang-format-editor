@@ -21,5 +21,8 @@
     public const int FontSize = 12;
     public const string FileExtensionsSelectFile = "Code files (*.c;*.cpp;*.cxx;*.cc;*.tli;*.tlh;*.h;*.hh;*.hpp;*.hxx;)|*.c;*.cpp;*.cxx;*.cc;*.tli;*.tlh;*.h;*.hh;*.hpp;*.hxx";
     public const string ClangFormatExe = "clang-format.exe";
+    public const string ClangFormat = ".clang-format";
+    public const string FormatTemp = "FormatTemp.cpp";
+    public const string FormatDirectory = "Format";
   }
 }

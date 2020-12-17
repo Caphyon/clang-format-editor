@@ -30,14 +30,14 @@ namespace ClangFormatDetector
 
     private void CreatePaths(out string filePath, out string formatFilePath, out string folderPath)
     {
-      string parentFolder = Path.Combine(Environment.CurrentDirectory, "Format");
+      string parentFolder = Path.Combine(Environment.CurrentDirectory, FormatConstants.FormatDirectory);
       FileSystem.CreateDirectory(parentFolder);
 
       folderPath = Path.Combine(parentFolder, Guid.NewGuid().ToString());
       FileSystem.CreateDirectory(folderPath);
 
-      filePath = Path.Combine(folderPath.ToString(), "FormatTemp.cpp");
-      formatFilePath = Path.Combine(Environment.CurrentDirectory, folderPath.ToString(), ".clang-format");
+      filePath = Path.Combine(folderPath.ToString(), FormatConstants.FormatTemp);
+      formatFilePath = Path.Combine(Environment.CurrentDirectory, folderPath.ToString(), FormatConstants.ClangFormat);
     }
 
     private string FormatFileOutsideProject(string directoryPath, string filePath)
