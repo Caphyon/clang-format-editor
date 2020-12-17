@@ -30,8 +30,8 @@ namespace ClangFormatDetector.MVVM.Views
 
       inputDelayer = new InputDelayer();
       inputDelayer.Idled += InputIdled;
-      elementIndex = 0;
       resetOptionCalled = false;
+      elementIndex = 0;
     }
 
     #endregion
