@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClangFormatDetector", "ClangFormatDetector\ClangFormatDetector.csproj", "{6F56DB08-E63F-4554-959B-F73B3F91BABB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangFormatDetector", "ClangFormatDetector\ClangFormatDetector.csproj", "{6F56DB08-E63F-4554-959B-F73B3F91BABB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClangFormatDetectorTests", "ClangFormatDetectorTests\ClangFormatDetectorTests.csproj", "{DE07A8DC-ED83-4497-B678-4435256812B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangFormatEditorTests", "ClangFormatDetectorTests\ClangFormatEditorTests.csproj", "{DE07A8DC-ED83-4497-B678-4435256812B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
