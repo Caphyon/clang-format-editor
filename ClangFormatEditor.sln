@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangFormatDetector", "ClangFormatDetector\ClangFormatDetector.csproj", "{6F56DB08-E63F-4554-959B-F73B3F91BABB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangFormatEditor", "ClangFormatEditor\ClangFormatEditor.csproj", "{E8EDA1AD-5B26-4D8C-A034-D5EDE4235F88}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangFormatEditorTests", "ClangFormatDetectorTests\ClangFormatEditorTests.csproj", "{DE07A8DC-ED83-4497-B678-4435256812B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangFormatEditorTests", "ClangFormatEditorTests\ClangFormatEditorTests.csproj", "{3AE681E1-8EA2-4661-9D5D-46CF0184D1F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F56DB08-E63F-4554-959B-F73B3F91BABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F56DB08-E63F-4554-959B-F73B3F91BABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F56DB08-E63F-4554-959B-F73B3F91BABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F56DB08-E63F-4554-959B-F73B3F91BABB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE07A8DC-ED83-4497-B678-4435256812B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE07A8DC-ED83-4497-B678-4435256812B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE07A8DC-ED83-4497-B678-4435256812B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE07A8DC-ED83-4497-B678-4435256812B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8EDA1AD-5B26-4D8C-A034-D5EDE4235F88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8EDA1AD-5B26-4D8C-A034-D5EDE4235F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8EDA1AD-5B26-4D8C-A034-D5EDE4235F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8EDA1AD-5B26-4D8C-A034-D5EDE4235F88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE681E1-8EA2-4661-9D5D-46CF0184D1F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE681E1-8EA2-4661-9D5D-46CF0184D1F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE681E1-8EA2-4661-9D5D-46CF0184D1F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE681E1-8EA2-4661-9D5D-46CF0184D1F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
