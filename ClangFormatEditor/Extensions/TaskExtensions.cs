@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace ClangFormatEditor.Extensions
+namespace ClangFormatEditor
 {
   /// <summary>
   /// Extension methods for System.Threading.Tasks.Task

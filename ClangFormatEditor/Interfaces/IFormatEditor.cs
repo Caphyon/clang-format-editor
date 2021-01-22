@@ -8,6 +8,7 @@ namespace ClangFormatEditor.Interfaces
   {
     IEnumerable<ToggleValues> BooleanComboboxValues { get; }
     ICommand CreateFormatFileCommand { get; }
+    ICommand ImportFormatFileCommand { get; }
     ICommand ResetCommand { get; }
     List<IFormatOption> FormatOptions { get; set; }
     IFormatOption SelectedOption { get; set; }
