@@ -6,8 +6,6 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:ClangFormatEditor"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  d:DataContext="{d:DesignInstance local:TidyChecksViewModel,
-                                   IsDesignTimeCreatable=True}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   mc:Ignorable="d">
@@ -205,7 +203,7 @@
             <Style TargetType="{x:Type Rectangle}">
               <Setter Property="Fill">
                 <Setter.Value>
-                  <ImageBrush ImageSource="pack://application:,,,/ClangPowerTools;component/Resources/CleanSearchIcon.png" />
+                  <ImageBrush ImageSource="pack://application:,,,/ClangFormatEditor;component/Resources/CleanSearchIcon.png" />
                 </Setter.Value>
               </Setter>
               <Style.Triggers>
@@ -213,7 +211,7 @@
                   <DataTrigger.Setters>
                     <Setter Property="Fill">
                       <Setter.Value>
-                        <ImageBrush ImageSource="pack://application:,,,/ClangPowerTools;component/Resources/SearchIcon.png" />
+                        <ImageBrush ImageSource="pack://application:,,,/ClangFormatEditor;component/Resources/SearchIcon.png" />
                       </Setter.Value>
                     </Setter>
                   </DataTrigger.Setters>
