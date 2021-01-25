@@ -98,7 +98,7 @@ namespace ClangFormatEditor
       }
     }
 
-    private void MapInputModel(KeyValuePair<YamlNode, YamlNode> entry, FormatOptionInputModel inputModel)
+    private static void MapInputModel(KeyValuePair<YamlNode, YamlNode> entry, FormatOptionInputModel inputModel)
     {
       var inputValue = entry.Value.ToString();
       if (inputValue.Contains('^') || inputValue.Length == 0)
@@ -109,7 +109,7 @@ namespace ClangFormatEditor
       inputModel.Input = inputValue;
     }
 
-    private void MapToggleModel(KeyValuePair<YamlNode, YamlNode> entry, FormatOptionToggleModel toggleModel)
+    private static void MapToggleModel(KeyValuePair<YamlNode, YamlNode> entry, FormatOptionToggleModel toggleModel)
     {
       Enum.TryParse(entry.Value.ToString(), true, out ToggleValues value);
       toggleModel.BooleanCombobox = value;
