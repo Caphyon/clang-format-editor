@@ -405,6 +405,7 @@ namespace ClangFormatEditor
       var maxSize = .0;
       foreach (var line in lines)
       {
+#pragma warning disable CS0618 // Type or member is obsolete
         var formattedText = new FormattedText(
         line,
         CultureInfo.GetCultureInfo("en-us"),
@@ -413,6 +414,7 @@ namespace ClangFormatEditor
         FormatConstants.FontSize,
         Brushes.Black
         );
+#pragma warning restore CS0618 // Type or member is obsolete
 
         if (formattedText.Width > maxSize)
         {
