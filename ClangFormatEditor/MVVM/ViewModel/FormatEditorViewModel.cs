@@ -383,7 +383,7 @@ namespace ClangFormatEditor
       {
         try
         {
-          YAMLHandler yaml = new YAMLHandler();
+          SettingsImporter yaml = new SettingsImporter();
           yaml.ImportFormatOptions(path);
           FormatOptions = FormatOptionsAllData.FormatOptions.Values.ToList();
           SelectedOption = FormatOptions.First();
@@ -414,7 +414,7 @@ namespace ClangFormatEditor
       if (droppedFiles == null || droppedFiles.Length != 1)
         return false;
 
-     //TODO check if to remove section
+      //TODO check if to remove section
       //if (ScriptConstants.kAcceptedFileExtensions.Contains(Path.GetExtension(droppedFiles[0])) == false)
       //  return false;
 
