@@ -221,8 +221,6 @@ namespace ClangFormatEditor
     {
       get => resetSearchCommand ??= new RelayCommand(() => ResetSearchField(), () => CanExecute);
     }
-    //TODO handle selected style
-    FormatStyle IFormatEditor.SelectedStyle { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     #endregion
 
@@ -298,6 +296,7 @@ namespace ClangFormatEditor
 
     private void ChangeControlsDependingOnStyle()
     {
+      //TODO display loading 
       switch (selectedStyle)
       {
         case FormatStyle.Custom:
@@ -339,7 +338,7 @@ namespace ClangFormatEditor
 
     private void ReadCodeFromFile()
     {
-      var filePath = OpenFile(string.Empty, ".cpp", FormatConstants.FileExtensionsCodeFiles);
+      var filePath = OpenFile(string.Empty, ".cpp", FormatConstants.CodeFileExtensions);
 
       if (File.Exists(filePath))
         formatEditorView.CodeEditor.Text = File.ReadAllText(filePath);
@@ -354,8 +353,8 @@ namespace ClangFormatEditor
         InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
       });
 
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedOption"));
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatOptions"));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedOption)));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
     }
 
     private void CreateFormatFile()
@@ -377,6 +376,7 @@ namespace ClangFormatEditor
       string defaultExt = ".clang-format";
       string filter = "Configuration files (.clang-format)|*.clang-format";
 
+      //TODO display loading for a second
       string path = OpenFile(fileName, defaultExt, filter);
       if (string.IsNullOrEmpty(path) == false)
       {
@@ -412,10 +412,6 @@ namespace ClangFormatEditor
 
       if (droppedFiles == null || droppedFiles.Length != 1)
         return false;
-
-      //TODO check if to remove section
-      //if (ScriptConstants.kAcceptedFileExtensions.Contains(Path.GetExtension(droppedFiles[0])) == false)
-      //  return false;
 
       droppedFile = droppedFiles[0];
       return true;

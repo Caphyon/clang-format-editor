@@ -88,7 +88,6 @@ namespace ClangFormatEditor
 
     private static void InitializeFormatData()
     {
-      //TODO use FormatOptionsAllData for all option types 
       CustomOptionsData = new FormatOptionsAllData();
       LlvmOptionsData = new FormatOptionsLlvmData();
       GoogleOptionsData = new FormatOptionsGoogleData();
