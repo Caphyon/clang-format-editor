@@ -71,7 +71,7 @@ namespace ClangFormatEditor
       set
       {
         formatStyleOptions = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatOptions"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
       }
     }
 
@@ -85,7 +85,7 @@ namespace ClangFormatEditor
       {
         checkSearch = value;
         FindFormatOptionsAsync(checkSearch).SafeFireAndForget();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CheckSearch"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CheckSearch)));
       }
     }
 
@@ -98,7 +98,7 @@ namespace ClangFormatEditor
       set
       {
         selectedOption = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedOption"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedOption)));
       }
     }
 
@@ -129,7 +129,7 @@ namespace ClangFormatEditor
       {
         selectedStyle = value;
         ChangeControlsDependingOnStyle();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedStyle"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedStyle)));
 
         RunFormat();
       }
@@ -144,7 +144,7 @@ namespace ClangFormatEditor
       set
       {
         nameColumnWidth = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NameColumnWidth"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NameColumnWidth)));
       }
     }
 
@@ -157,7 +157,7 @@ namespace ClangFormatEditor
       set
       {
         nameColumnWidth = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EnableOptionColumnWidth"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EnableOptionColumnWidth)));
       }
     }
 
@@ -178,7 +178,7 @@ namespace ClangFormatEditor
       set
       {
         showOptionDescription = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ShowOptionDescription"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowOptionDescription)));
       }
     }
 
@@ -291,7 +291,6 @@ namespace ClangFormatEditor
 
     private void InitializeStyleOptions(FormatOptionsAllData formatOptionsData)
     {
-      //TODO remove and use only one FormatOptions reference
       formatOptionsData.DisableAllOptions();
       formatStyleOptions = formatOptionsData.GetFormatOptionsValues();
       selectedOption = formatStyleOptions.FirstOrDefault();
@@ -426,20 +425,18 @@ namespace ClangFormatEditor
     {
       CheckSearch = string.Empty;
       ShowOptionDescription = true;
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatOptions"));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
     }
 
     private async Task FindFormatOptionsAsync(string search)
     {
       await Task.Run(() =>
     {
-      if (string.IsNullOrWhiteSpace(checkSearch)) return;
-
       searchResultFormatStyleOptions = formatStyleOptions.Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase)).ToList();
       SelectedOption = searchResultFormatStyleOptions.FirstOrDefault();
       ShowOptionDescription = searchResultFormatStyleOptions.Count != 0;
 
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatOptions"));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
     });
     }
 
