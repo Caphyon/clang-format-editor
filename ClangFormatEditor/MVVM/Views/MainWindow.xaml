@@ -17,13 +17,13 @@
       <Button
         Width="80"
         Height="40"
-        Click="Button_Click"
+        Click="OpenDetector"
         Content="Diff Window" />
 
       <Button
         Width="80"
         Height="40"
-        Click="Button_Click_1"
+        Click="OpenEditor"
         Content="Editor" />
     </StackPanel>
   </Grid>
