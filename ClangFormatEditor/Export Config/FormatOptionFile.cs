@@ -66,6 +66,7 @@ namespace ClangFormatEditor
         {
           var currentOption = currentOptions[i] as FormatOptionToggleModel;
           var defaultOption = defaultOptions[i] as FormatOptionToggleModel;
+          //TODO crash at import due to index
           if (currentOption.BooleanCombobox == defaultOption.BooleanCombobox)
           {
             continue;

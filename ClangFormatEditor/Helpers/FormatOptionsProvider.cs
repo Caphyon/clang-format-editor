@@ -11,8 +11,7 @@ namespace ClangFormatEditor
   {
     #region Members
 
-    //TODO double instance of LlvmData
-    public static FormatOptionsLlvmData CustomOptionsData;
+    public static FormatOptionsAllData CustomOptionsData;
     public static FormatOptionsLlvmData LlvmOptionsData;
     public static FormatOptionsGoogleData GoogleOptionsData;
     public static FormatOptionsChromiumData ChromiumOptionsData;
@@ -41,8 +40,10 @@ namespace ClangFormatEditor
     {
       switch (style)
       {
+        case FormatStyle.Custom:
+          return new FormatOptionsAllData().FormatOptions.Values.ToList();
         case FormatStyle.LLVM:
-          return FormatOptionsAllData.FormatOptions.Values.ToList();
+          return new FormatOptionsLlvmData().FormatOptions;
         case FormatStyle.Google:
           return new FormatOptionsGoogleData().FormatOptions;
         case FormatStyle.Chromium:
@@ -88,10 +89,7 @@ namespace ClangFormatEditor
     private static void InitializeFormatData()
     {
       //TODO use FormatOptionsAllData for all option types 
-      CustomOptionsData = new FormatOptionsLlvmData
-      {
-        FormatOptions = FormatOptionsAllData.GetFormatOptionsValues()
-      };
+      CustomOptionsData = new FormatOptionsAllData();
       LlvmOptionsData = new FormatOptionsLlvmData();
       GoogleOptionsData = new FormatOptionsGoogleData();
       ChromiumOptionsData = new FormatOptionsChromiumData();

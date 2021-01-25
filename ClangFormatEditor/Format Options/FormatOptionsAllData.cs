@@ -8,7 +8,7 @@ namespace ClangFormatEditor
 {
   public class FormatOptionsAllData
   {
-    public static Dictionary<string, IFormatOption> FormatOptions = new Dictionary<string, IFormatOption>()
+    public Dictionary<string, IFormatOption> FormatOptions = new Dictionary<string, IFormatOption>()
     {
       { "AccessModifierOffset", new FormatOptionInputModel{ Name = "AccessModifierOffset", Paramater = "int", Description = "The extra indent or outdent of access modifiers, e.g. \"public:\"", Input = "-2" } },
       { "AlignAfterOpenBracket", new FormatOptionInputModel{ Name = "AlignAfterOpenBracket", Paramater = "BracketAlignmentStyle", Description = "If \"true\", horizontally aligns arguments after an open bracket.\r\nThis applies to round brackets (parentheses), angle brackets and square brackets.\r\nPossible values:\r\n- BAS_Align (in configuration: Align) Align parameters on the open bracket, e.g.:\r\n- BAS_DontAlign (in configuration: DontAlign) Don’t align, instead use ContinuationIndentWidth, e.g.:\r\n- BAS_AlwaysBreak (in configuration: AlwaysBreak) Always break after an open bracket, if the parameters don’t fit on a single line, e.g.:", Input="Align" }},
@@ -137,7 +137,7 @@ namespace ClangFormatEditor
       { "WhitespaceSensitiveMacros", new FormatOptionMultipleInputModel{ Name = "WhitespaceSensitiveMacros", Paramater = "std::vector<std::string>", Description = "A vector of macros which are whitespace-sensitive and should not be touched.", MultipleInput = "" } }
     };
 
-    public static void DisableAllOptions()
+    public void DisableAllOptions()
     {
       foreach (var item in FormatOptions.Values)
       {
@@ -145,7 +145,7 @@ namespace ClangFormatEditor
       }
     }
 
-    public static List<IFormatOption> GetFormatOptionsValues()
+    public List<IFormatOption> GetFormatOptionsValues()
     {
       return FormatOptions.Values.ToList();
     }

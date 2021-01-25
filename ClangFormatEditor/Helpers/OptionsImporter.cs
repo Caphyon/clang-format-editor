@@ -10,7 +10,7 @@ using YamlDotNet.Serialization;
 
 namespace ClangFormatEditor
 {
-  public class SettingsImporter
+  public class OptionsImporter
   {
     #region Members
 
@@ -39,10 +39,11 @@ namespace ClangFormatEditor
 
     private void MapToFormatOptions()
     {
-      FormatOptionsAllData.DisableAllOptions();
+      var formatOptionsData = FormatOptionsProvider.CustomOptionsData;
+      formatOptionsData.DisableAllOptions();
       foreach (var entry in mapping.Children)
       {
-        if (FormatOptionsAllData.FormatOptions.TryGetValue(entry.Key.ToString(), out IFormatOption option))
+        if (formatOptionsData.FormatOptions.TryGetValue(entry.Key.ToString(), out IFormatOption option))
         {
           switch (option)
           {

@@ -289,12 +289,12 @@ namespace ClangFormatEditor
       return formattedText;
     }
 
-    private void InitializeStyleOptions(FormatOptionsLlvmData formatOptionsData)
+    private void InitializeStyleOptions(FormatOptionsAllData formatOptionsData)
     {
       //TODO remove and use only one FormatOptions reference
-      formatOptionsData.DisableAllOptions(formatOptionsData.FormatOptions);
-      formatStyleOptions = formatOptionsData.FormatOptions;
-      selectedOption = FormatOptions.FirstOrDefault();
+      formatOptionsData.DisableAllOptions();
+      formatStyleOptions = formatOptionsData.GetFormatOptionsValues();
+      selectedOption = formatStyleOptions.FirstOrDefault();
     }
 
     private void ChangeControlsDependingOnStyle()
@@ -302,7 +302,7 @@ namespace ClangFormatEditor
       switch (selectedStyle)
       {
         case FormatStyle.Custom:
-          SetStyleControls("260", "80", FormatOptionsProvider.CustomOptionsData.FormatOptions);
+          SetStyleControls("260", "80", FormatOptionsProvider.CustomOptionsData.GetFormatOptionsValues());
           break;
         case FormatStyle.LLVM:
           SetStyleControls(nameColumnWidthMax, "0", FormatOptionsProvider.LlvmOptionsData.FormatOptions);
@@ -383,9 +383,9 @@ namespace ClangFormatEditor
       {
         try
         {
-          SettingsImporter yaml = new SettingsImporter();
-          yaml.ImportFormatOptions(path);
-          FormatOptions = FormatOptionsAllData.FormatOptions.Values.ToList();
+          var importer = new OptionsImporter();
+          importer.ImportFormatOptions(path);
+          FormatOptions = FormatOptionsProvider.CustomOptionsData.GetFormatOptionsValues();
           SelectedOption = FormatOptions.First();
           RunFormat();
         }
@@ -402,7 +402,7 @@ namespace ClangFormatEditor
       formatEditorView.Loaded -= EditorLoaded;
     }
 
-    private bool DropFileValidation(DragEventArgs e, out string droppedFile)
+    private static bool DropFileValidation(DragEventArgs e, out string droppedFile)
     {
       droppedFile = null;
       string[] droppedFiles = null;
