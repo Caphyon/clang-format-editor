@@ -106,7 +106,7 @@
                         x:Name="InputText"
                         Grid.Column="1"
                         Width="80"
-                        Height="18"
+                        Height="20"
                         HorizontalAlignment="Right"
                         FontSize="12"
                         Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"
