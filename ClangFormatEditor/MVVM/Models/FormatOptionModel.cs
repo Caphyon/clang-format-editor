@@ -11,7 +11,7 @@ namespace ClangFormatEditor.MVVM.Models
     public event PropertyChangedEventHandler PropertyChanged;
 
     private bool isEnabled = true;
-    private string nameFontWeight = FormatConstants.NormalFontWeight;
+    private string nameFontWeight = AppConstants.NormalFontWeight;
 
     #endregion
 

@@ -18,20 +18,25 @@
     <None Remove="Resources\bannerWarning.png" />
     <None Remove="Resources\Browse.png" />
     <None Remove="Resources\ClangPowerToolsIco.ico" />
+    <None Remove="Resources\CleanSearchIcon.PNG" />
     <None Remove="Resources\DetectOnFileIcon.png" />
     <None Remove="Resources\FileIcon.png" />
     <None Remove="Resources\GenerateClangFormatFile.png" />
     <None Remove="Resources\InfoIcon.png" />
+    <None Remove="Resources\InputIcon.png" />
     <None Remove="Resources\license.txt" />
+    <None Remove="Resources\OutputIcon.png" />
     <None Remove="Resources\PreviewIcon.png" />
     <None Remove="Resources\PreviewWhiteIcon.png" />
     <None Remove="Resources\RemoveInputHover.png" />
     <None Remove="Resources\RemoveInputIdle.png" />
     <None Remove="Resources\ResetIcon.png" />
+    <None Remove="Resources\SearchIcon.PNG" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="YamlDotNet" Version="9.1.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +46,7 @@
     <Resource Include="Resources\bannerWarning.png" />
     <Resource Include="Resources\Browse.png" />
     <Resource Include="Resources\ClangPowerToolsIco.ico" />
+    <Resource Include="Resources\CleanSearchIcon.PNG" />
     <Resource Include="Resources\DetectOnFileIcon.png" />
     <Content Include="clang-format.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -51,11 +57,14 @@
     <Resource Include="Resources\FileIcon.png" />
     <Resource Include="Resources\GenerateClangFormatFile.png" />
     <Resource Include="Resources\InfoIcon.png" />
+    <Resource Include="Resources\InputIcon.png" />
+    <Resource Include="Resources\OutputIcon.png" />
     <Resource Include="Resources\PreviewIcon.png" />
     <Resource Include="Resources\PreviewWhiteIcon.png" />
     <Resource Include="Resources\RemoveInputHover.png" />
     <Resource Include="Resources\RemoveInputIdle.png" />
     <Resource Include="Resources\ResetIcon.png" />
+    <Resource Include="Resources\SearchIcon.PNG" />
   </ItemGroup>
 
 </Project>

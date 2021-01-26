@@ -5,7 +5,7 @@ namespace ClangFormatEditor
 {
   public class FormatOptionsHandler
   {
-    public void DisableAllOptions(List<IFormatOption> FormatOptions)
+    public static void DisableAllOptions(List<IFormatOption> FormatOptions)
     {
       foreach (var item in FormatOptions)
       {

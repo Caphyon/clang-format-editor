@@ -21,7 +21,7 @@ namespace ClangFormatEditor
       FileSystem.WriteContentToFile(formatFilePath, FormatOptionFile.CreateOutput(formatStyleOptions, selectedStyle).ToString());
       FileSystem.WriteContentToFile(filePath, textToFormat);
 
-      var content = FormatFileOutsideProject(Environment.CurrentDirectory, filePath);
+      var content = FormatFile(ProjectSetup.AppDataDirectory, filePath);
 
       FileSystem.DeleteDirectory(folderPath);
 
@@ -30,19 +30,19 @@ namespace ClangFormatEditor
 
     private void CreatePaths(out string filePath, out string formatFilePath, out string folderPath)
     {
-      string parentFolder = Path.Combine(Environment.CurrentDirectory, FormatConstants.FormatDirectory);
+      string parentFolder = Path.Combine(ProjectSetup.AppDataDirectory, AppConstants.FormatDirectory);
       FileSystem.CreateDirectory(parentFolder);
 
       folderPath = Path.Combine(parentFolder, Guid.NewGuid().ToString());
       FileSystem.CreateDirectory(folderPath);
 
-      filePath = Path.Combine(folderPath.ToString(), FormatConstants.FormatTemp);
-      formatFilePath = Path.Combine(Environment.CurrentDirectory, folderPath.ToString(), FormatConstants.ClangFormat);
+      filePath = Path.Combine(folderPath.ToString(), AppConstants.FormatTemp);
+      formatFilePath = Path.Combine(ProjectSetup.AppDataDirectory, folderPath.ToString(), AppConstants.ClangFormat);
     }
 
-    private string FormatFileOutsideProject(string directoryPath, string filePath)
+    private string FormatFile(string directoryPath, string filePath)
     {
-      string clangFormatExe = Path.Combine(Environment.CurrentDirectory, FormatConstants.ClangFormatExe);
+      string clangFormatExe = Path.Combine(ProjectSetup.AppDataDirectory, AppConstants.ClangFormatExe);
       string output = string.Empty;
 
       if (string.IsNullOrWhiteSpace(clangFormatExe) || string.IsNullOrWhiteSpace(directoryPath)

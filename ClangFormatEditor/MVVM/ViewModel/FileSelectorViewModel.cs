@@ -51,16 +51,16 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     public ICommand Browse
     {
-      get => browseCommand ?? (browseCommand = new RelayCommand(() => BrowseForFiles(), () => CanExecute));
+      get => browseCommand ??= new RelayCommand(() => BrowseForFiles(), () => CanExecute);
     }
     public ICommand RemoveAllFilesCommand
     {
-      get => removeAllFilesCommand ?? (removeAllFilesCommand = new RelayCommand(() => RemoveAllFiles(), () => CanExecute));
+      get => removeAllFilesCommand ??= new RelayCommand(() => RemoveAllFiles(), () => CanExecute);
     }
 
     public ICommand DetectFormatStyleCommand
     {
-      get => detectFormatStyleCommand ?? (detectFormatStyleCommand = new RelayCommand(() => DetectFormatStyleAsync().SafeFireAndForget(), () => CanExecute));
+      get => detectFormatStyleCommand ??= new RelayCommand(() => DetectFormatStyleAsync().SafeFireAndForget(), () => CanExecute);
     }
 
     public bool CanExecute
@@ -78,7 +78,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private void BrowseForFiles()
     {
-      string[] filePaths = OpenFiles(string.Empty, ".cpp", FormatConstants.FileExtensionsSelectFile);
+      string[] filePaths = OpenFiles(string.Empty, ".cpp", AppConstants.CodeFileExtensions);
 
       if (filePaths == null || filePaths.Length <= 0)
         return;

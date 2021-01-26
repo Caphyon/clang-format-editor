@@ -1,5 +1,4 @@
 ﻿using ClangFormatEditor.Enums;
-using ClangFormatEditor.Extensions;
 using ClangFormatEditor.Helpers;
 using ClangFormatEditor.Interfaces;
 using ClangFormatEditor.MVVM.Controllers;
@@ -124,7 +123,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     }
     public ICommand ReloadCommand
     {
-      get => reloadCommand ??= new RelayCommand(() => ReloadDiffAsync(FormatConstants.UpdateTitle, FormatConstants.UpdateDescription, string.Empty).SafeFireAndForget(), () => CanExecute);
+      get => reloadCommand ??= new RelayCommand(() => ReloadDiffAsync(AppConstants.UpdateTitle, AppConstants.UpdateDescription, string.Empty).SafeFireAndForget(), () => CanExecute);
     }
     public ICommand ResetCommand
     {
@@ -137,7 +136,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       {
         formatStyleOptions = FormatOptionsProvider.CloneDetectedOptions(detectedOptions);
       });
-      await ReloadDiffAsync(FormatConstants.ResetTitle, FormatConstants.ResetDescription, string.Empty);
+      await ReloadDiffAsync(AppConstants.ResetTitle, AppConstants.ResetDescription, string.Empty);
       SelectedOption = FormatOptions.First();
       OnPropertyChanged("FormatOptions");
     }
@@ -148,7 +147,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     public async Task DiffDocumentsAsync(List<string> filesPath, Window detectingWindowOwner)
     {
-      ShowDetectingView(detectingWindowOwner, FormatConstants.DetectingTitle, FormatConstants.DetectingDescription, FormatConstants.DetectingDescriptionExtra);
+      ShowDetectingView(detectingWindowOwner, AppConstants.DetectingTitle, AppConstants.DetectingDescription, AppConstants.DetectingDescriptionExtra);
 
       diffController.CancellationSource = new CancellationTokenSource();
       diffController.CancelTokenDisposed = false;
@@ -158,7 +157,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
         filesContent = FileSystem.ReadContentFromMultipleFiles(filesPath, Environment.NewLine);
         (SelectedStyle, FormatOptions) = await diffController.GetFormatOptionsAsync(filesContent, cancelToken);
         SelectedOption = FormatOptions.First();
-        ChangeOptionsFontWeight(FormatConstants.BoldFontWeight);
+        ChangeOptionsFontWeight(AppConstants.BoldFontWeight);
         flowDocuments = await diffController.CreateFlowDocumentsAsync(filesContent, SelectedStyle, FormatOptions, cancelToken);
         detectedOptions = FormatOptionsProvider.CloneDetectedOptions(FormatOptions);
         defaultOptions = FormatOptionsProvider.GetDefaultOptionsForStyle(SelectedStyle);
@@ -178,7 +177,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     public void OpenMultipleInput(int index)
     {
       SelectedOption = FormatOptions[index];
-      OpenMultipleInput(SelectedOption);
+      OpenMultipleInput(SelectedOption, diffWindow);
       multipleInputDataIndex = index;
       CloseMultipleInput += CloseMultipleInputDataView;
     }
@@ -189,14 +188,14 @@ namespace ClangFormatEditor.MVVM.ViewModels
       var defaultOption = defaultOptions[index];
       if (diffController.IsOptionChanged(option, defaultOption))
       {
-        MarkOptionChange((FormatOptionModel)option, true, FormatConstants.BoldFontWeight);
+        MarkOptionChange((FormatOptionModel)option, true, AppConstants.BoldFontWeight);
       }
       else
       {
-        MarkOptionChange((FormatOptionModel)option, false, FormatConstants.NormalFontWeight);
+        MarkOptionChange((FormatOptionModel)option, false, AppConstants.NormalFontWeight);
       }
 
-      ReloadDiffAsync(FormatConstants.UpdateTitle, FormatConstants.UpdateDescription, string.Empty).SafeFireAndForget();
+      ReloadDiffAsync(AppConstants.UpdateTitle, AppConstants.UpdateDescription, string.Empty).SafeFireAndForget();
     }
 
     public void ResetOption(int index)
@@ -206,14 +205,14 @@ namespace ClangFormatEditor.MVVM.ViewModels
       diffController.CopyOptionValues(option, detectedOption);
       if (detectedOption.IsModifed)
       {
-        MarkOptionChange((FormatOptionModel)option, true, FormatConstants.BoldFontWeight);
+        MarkOptionChange((FormatOptionModel)option, true, AppConstants.BoldFontWeight);
       }
       else
       {
-        MarkOptionChange((FormatOptionModel)option, false, FormatConstants.NormalFontWeight);
+        MarkOptionChange((FormatOptionModel)option, false, AppConstants.NormalFontWeight);
       }
 
-      ReloadDiffAsync(FormatConstants.UpdateTitle, FormatConstants.UpdateDescription, string.Empty).SafeFireAndForget();
+      ReloadDiffAsync(AppConstants.UpdateTitle, AppConstants.UpdateDescription, string.Empty).SafeFireAndForget();
     }
 
     #endregion
@@ -324,13 +323,9 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private void ShowDetectingView(Window detectingWindowOwner, string title, string description, string descriptionExtra)
     {
-      detectingView = new DetectingView();
-      detectingView.WindowTitle.Text = title;
-      detectingView.Description.Text = description;
-      detectingView.DescriptionExtra.Text = descriptionExtra;
-      detectingView.Owner = detectingWindowOwner;
-
+      detectingView = new DetectingView(title, description, descriptionExtra);
       detectingView.Show();
+      detectingView.Owner = detectingWindowOwner;
       detectingView.Closed += diffController.CloseLoadDetectionView;
     }
 

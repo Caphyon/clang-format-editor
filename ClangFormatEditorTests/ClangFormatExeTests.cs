@@ -11,7 +11,7 @@ namespace ClangFormatEditorTests
     public void Check_ClangFormatExe_Exists()
     {
       //Arrange
-      string executableName = FormatConstants.ClangFormatExe;
+      string executableName = AppConstants.ClangFormatExe;
       var projectPath = Environment.CurrentDirectory.Replace("ClangFormatEditorTests", "ClangFormatEditor");
 
       //Act

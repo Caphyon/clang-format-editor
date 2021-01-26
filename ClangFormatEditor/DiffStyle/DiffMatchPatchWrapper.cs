@@ -160,7 +160,7 @@ namespace ClangFormatEditor
       {
         paragraphOutput.FontWeight = FontWeights.DemiBold;
         paragraphOutput.Foreground = Brushes.Green;
-        paragraphOutput.Inlines.Add(FormatConstants.DiffPerfectMatchFound);
+        paragraphOutput.Inlines.Add(AppConstants.DiffPerfectMatchFound);
       }
       else
       {
@@ -343,8 +343,8 @@ namespace ClangFormatEditor
 
     private void CreateDiffParagraph(Paragraph paragraph, List<(object, LineChanges)> operationLines, Brush lineDiffColor)
     {
-      paragraph.FontFamily = new FontFamily(FormatConstants.FontFamily);
-      paragraph.FontSize = FormatConstants.FontSize;
+      paragraph.FontFamily = new FontFamily(AppConstants.FontFamily);
+      paragraph.FontSize = AppConstants.FontSize;
 
       for (int i = 0; i < operationLines.Count; i++)
       {
@@ -405,14 +405,16 @@ namespace ClangFormatEditor
       var maxSize = .0;
       foreach (var line in lines)
       {
+#pragma warning disable CS0618 // Type or member is obsolete
         var formattedText = new FormattedText(
         line,
         CultureInfo.GetCultureInfo("en-us"),
         FlowDirection.LeftToRight,
-        new Typeface(FormatConstants.FontFamily),
-        FormatConstants.FontSize,
+        new Typeface(AppConstants.FontFamily),
+        AppConstants.FontSize,
         Brushes.Black
         );
+#pragma warning restore CS0618 // Type or member is obsolete
 
         if (formattedText.Width > maxSize)
         {

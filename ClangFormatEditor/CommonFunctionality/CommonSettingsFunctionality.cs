@@ -12,14 +12,15 @@ namespace ClangFormatEditor
   {
     #region Methods
 
-    protected string OpenFile(string fileName, string defaultExt, string filter)
+    protected static string OpenFile(string fileName, string defaultExt, string filter)
     {
-      OpenFileDialog openFileDialog = new OpenFileDialog();
       string path = string.Empty;
-
-      openFileDialog.FileName = fileName;
-      openFileDialog.DefaultExt = defaultExt;
-      openFileDialog.Filter = filter;
+      var openFileDialog = new OpenFileDialog
+      {
+        FileName = fileName,
+        DefaultExt = defaultExt,
+        Filter = filter
+      };
 
       bool? result = openFileDialog.ShowDialog();
 
@@ -31,14 +32,15 @@ namespace ClangFormatEditor
       return path;
     }
 
-    protected string[] OpenFiles(string fileName, string defaultExt, string filter)
+    protected static string[] OpenFiles(string fileName, string defaultExt, string filter)
     {
-      OpenFileDialog openFileDialog = new OpenFileDialog();
-
-      openFileDialog.FileName = fileName;
-      openFileDialog.DefaultExt = defaultExt;
-      openFileDialog.Filter = filter;
-      openFileDialog.Multiselect = true;
+      var openFileDialog = new OpenFileDialog
+      {
+        FileName = fileName,
+        DefaultExt = defaultExt,
+        Filter = filter,
+        Multiselect = true
+      };
 
       if (openFileDialog.ShowDialog() != true)
         return null;
@@ -53,9 +55,8 @@ namespace ClangFormatEditor
     /// <param name="searchFilePattern">Search pattern to apply in the file search</param>
     /// <param name="searchOption">Information about how to search inside the selected folder</param>
     /// <returns>Array of files path</returns>
-    protected string[] BrowseForFolderFiles(string searchFilePattern, SearchOption searchOption)
+    protected static string[] BrowseForFolderFiles(string searchFilePattern, SearchOption searchOption)
     {
-      //TODO check browse without forms
       using var folderBrowseDialog = new System.Windows.Forms.FolderBrowserDialog();
       System.Windows.Forms.DialogResult result = folderBrowseDialog.ShowDialog();
 
@@ -65,14 +66,13 @@ namespace ClangFormatEditor
       return Directory.GetFiles(folderBrowseDialog.SelectedPath, searchFilePattern, searchOption);
     }
 
-
     /// <summary>
     /// Browse for folder path 
     /// </summary>
     /// <param name="searchFilePattern">Search pattern to apply in the file search</param>
     /// <param name="searchOption">Information about how to search inside the selected folder</param>
     /// <returns>Array of files path</returns>
-    protected string BrowseForFolderFiles()
+    protected static string BrowseForFolderFiles()
     {
       using var folderBrowseDialog = new System.Windows.Forms.FolderBrowserDialog();
       System.Windows.Forms.DialogResult result = folderBrowseDialog.ShowDialog();
@@ -83,7 +83,7 @@ namespace ClangFormatEditor
       return folderBrowseDialog.SelectedPath;
     }
 
-    protected string SaveFile(string fileName, string defaultExt, string filter)
+    protected static string SaveFile(string fileName, string defaultExt, string filter)
     {
       SaveFileDialog saveFileDialog = new SaveFileDialog();
       string path = string.Empty;
@@ -104,14 +104,14 @@ namespace ClangFormatEditor
       return path;
     }
 
-    protected void WriteContentToFile(string path, string content)
+    protected static void WriteContentToFile(string path, string content)
     {
       FileSystem.WriteContentToFile(path, content);
     }
 
     protected string OpenContentDialog(string content)
     {
-      InputDataViewModel inputDataViewModel = new InputDataViewModel(content);
+      var inputDataViewModel = new InputDataViewModel(content);
       inputDataViewModel.ShowViewDialog();
       string input = CreateInput(inputDataViewModel.Inputs.ToList());
 
@@ -120,7 +120,7 @@ namespace ClangFormatEditor
 
     private string CreateInput(List<InputDataModel> models)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
 
       foreach (var item in models)
       {
