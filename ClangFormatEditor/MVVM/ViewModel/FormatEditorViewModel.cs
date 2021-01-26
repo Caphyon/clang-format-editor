@@ -337,7 +337,7 @@ namespace ClangFormatEditor
 
     private void ReadCodeFromFile()
     {
-      var filePath = OpenFile(string.Empty, ".cpp", FormatConstants.CodeFileExtensions);
+      var filePath = OpenFile(string.Empty, ".cpp", AppConstants.CodeFileExtensions);
 
       if (File.Exists(filePath))
         formatEditorView.CodeEditor.Text = File.ReadAllText(filePath);
@@ -358,9 +358,9 @@ namespace ClangFormatEditor
 
     private void CreateFormatFile()
     {
-      string fileName = FormatConstants.ClangFormat;
-      string defaultExt = FormatConstants.ClangFormat;
-      string filter = FormatConstants.ClangFormatExtension;
+      string fileName = AppConstants.ClangFormat;
+      string defaultExt = AppConstants.ClangFormat;
+      string filter = AppConstants.ClangFormatExtension;
 
       string path = SaveFile(fileName, defaultExt, filter);
       if (string.IsNullOrEmpty(path) == false)
@@ -371,9 +371,9 @@ namespace ClangFormatEditor
 
     private void ImportFormatTile()
     {
-      string fileName = FormatConstants.ClangFormat;
-      string defaultExt = FormatConstants.ClangFormat;
-      string filter = FormatConstants.ClangFormatExtension;
+      string fileName = AppConstants.ClangFormat;
+      string defaultExt = AppConstants.ClangFormat;
+      string filter = AppConstants.ClangFormatExtension;
 
       string path = OpenFile(fileName, defaultExt, filter);
       if (string.IsNullOrEmpty(path) == false)

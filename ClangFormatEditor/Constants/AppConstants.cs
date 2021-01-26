@@ -1,6 +1,6 @@
 ﻿namespace ClangFormatEditor
 {
-  public static class FormatConstants
+  public static class AppConstants
   {
     public const string CodeFileExtensions = "Code files (*.c;*.cpp;*.cxx;*.cc;*.cs;*.tli;*.tlh;*.h;*.hh;*.hpp;*.hxx;*.java;*.js)|*.c;*.cpp;*.cxx;*.cc;*.cs;*.tli;*.tlh;*.h;*.hh;*.hpp;*.hxx;*.java;*.js";
     public const string ClangFormatExtension = "Configuration files (.clang-format)|*.clang-format";

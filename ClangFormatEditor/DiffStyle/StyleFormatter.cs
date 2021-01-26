@@ -30,19 +30,19 @@ namespace ClangFormatEditor
 
     private void CreatePaths(out string filePath, out string formatFilePath, out string folderPath)
     {
-      string parentFolder = Path.Combine(Environment.CurrentDirectory, FormatConstants.FormatDirectory);
+      string parentFolder = Path.Combine(Environment.CurrentDirectory, AppConstants.FormatDirectory);
       FileSystem.CreateDirectory(parentFolder);
 
       folderPath = Path.Combine(parentFolder, Guid.NewGuid().ToString());
       FileSystem.CreateDirectory(folderPath);
 
-      filePath = Path.Combine(folderPath.ToString(), FormatConstants.FormatTemp);
-      formatFilePath = Path.Combine(Environment.CurrentDirectory, folderPath.ToString(), FormatConstants.ClangFormat);
+      filePath = Path.Combine(folderPath.ToString(), AppConstants.FormatTemp);
+      formatFilePath = Path.Combine(Environment.CurrentDirectory, folderPath.ToString(), AppConstants.ClangFormat);
     }
 
     private string FormatFileOutsideProject(string directoryPath, string filePath)
     {
-      string clangFormatExe = Path.Combine(Environment.CurrentDirectory, FormatConstants.ClangFormatExe);
+      string clangFormatExe = Path.Combine(Environment.CurrentDirectory, AppConstants.ClangFormatExe);
       string output = string.Empty;
 
       if (string.IsNullOrWhiteSpace(clangFormatExe) || string.IsNullOrWhiteSpace(directoryPath)

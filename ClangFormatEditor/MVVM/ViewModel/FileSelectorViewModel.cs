@@ -78,7 +78,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private void BrowseForFiles()
     {
-      string[] filePaths = OpenFiles(string.Empty, ".cpp", FormatConstants.CodeFileExtensions);
+      string[] filePaths = OpenFiles(string.Empty, ".cpp", AppConstants.CodeFileExtensions);
 
       if (filePaths == null || filePaths.Length <= 0)
         return;
