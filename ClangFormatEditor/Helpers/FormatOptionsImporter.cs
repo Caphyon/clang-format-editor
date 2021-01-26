@@ -10,7 +10,7 @@ using YamlDotNet.Serialization;
 
 namespace ClangFormatEditor
 {
-  public class OptionsImporter
+  public class FormatOptionsImporter
   {
     #region Members
 

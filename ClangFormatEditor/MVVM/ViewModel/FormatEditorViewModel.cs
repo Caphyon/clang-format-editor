@@ -382,7 +382,7 @@ namespace ClangFormatEditor
       {
         try
         {
-          var importer = new OptionsImporter();
+          var importer = new FormatOptionsImporter();
           importer.ImportFormatOptions(path);
           FormatOptions = FormatOptionsProvider.CustomOptionsData.GetFormatOptionsValues();
           SelectedOption = FormatOptions.First();
