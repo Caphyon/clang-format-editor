@@ -323,14 +323,9 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private void ShowDetectingView(Window detectingWindowOwner, string title, string description, string descriptionExtra)
     {
-      //TODO make generic to be used by editor
-      detectingView = new DetectingView();
-      detectingView.WindowTitle.Text = title;
-      detectingView.Description.Text = description;
-      detectingView.DescriptionExtra.Text = descriptionExtra;
-      detectingView.Owner = detectingWindowOwner;
-
+      detectingView = new DetectingView(title, description, descriptionExtra);
       detectingView.Show();
+      detectingView.Owner = detectingWindowOwner;
       detectingView.Closed += diffController.CloseLoadDetectionView;
     }
 
