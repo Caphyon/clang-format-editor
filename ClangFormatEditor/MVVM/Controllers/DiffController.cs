@@ -170,7 +170,7 @@ namespace ClangFormatEditor.MVVM.Controllers
 
     public void DeleteFormatFolder()
     {
-      string folderPath = Path.Combine(Environment.CurrentDirectory, "Format");
+      string folderPath = Path.Combine(ProjectSetup.AppDataDirectory, AppConstants.FormatDirectory);
       FileSystem.DeleteDirectory(folderPath);
     }
 
