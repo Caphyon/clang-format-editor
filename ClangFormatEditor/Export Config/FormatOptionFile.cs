@@ -4,6 +4,7 @@ using ClangFormatEditor.MVVM.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace ClangFormatEditor
 {
@@ -15,46 +16,53 @@ namespace ClangFormatEditor
       var output = new StringBuilder();
       output.AppendLine("# Format Style Options - Created with Clang Power Tools");
       output.AppendLine("---");
-
-      switch (style)
+      try
       {
-        case FormatStyle.LLVM:
-          output.AppendLine("BasedOnStyle: LLVM");
-          options = GetChangedOptions(formatOptions, new FormatOptionsLlvmData().FormatOptions);
-          AddActiveOptionToFile(options, output);
-          break;
-        case FormatStyle.Google:
-          output.AppendLine("BasedOnStyle: Google");
-          options = GetChangedOptions(formatOptions, new FormatOptionsGoogleData().FormatOptions);
-          AddActiveOptionToFile(options, output);
-          break;
-        case FormatStyle.Chromium:
-          output.AppendLine("BasedOnStyle: Chromium");
-          options = GetChangedOptions(formatOptions, new FormatOptionsChromiumData().FormatOptions);
-          AddActiveOptionToFile(options, output);
-          break;
-        case FormatStyle.Mozilla:
-          output.AppendLine("BasedOnStyle: Mozilla");
-          options = GetChangedOptions(formatOptions, new FormatOptionsMozillaData().FormatOptions);
-          AddActiveOptionToFile(options, output);
-          break;
-        case FormatStyle.WebKit:
-          output.AppendLine("BasedOnStyle: WebKit");
-          options = GetChangedOptions(formatOptions, new FormatOptionsWebKitData().FormatOptions);
-          AddActiveOptionToFile(options, output);
-          break;
-        case FormatStyle.Microsoft:
-          output.AppendLine("BasedOnStyle: Microsoft");
-          options = GetChangedOptions(formatOptions, new FormatOptionsMicrosoftData().FormatOptions);
-          AddActiveOptionToFile(options, output);
-          break;
-        default:
-          AddActiveOptionToFile(formatOptions, output);
-          break;
-      }
-      output.AppendLine("...");
+        switch (style)
+        {
+          case FormatStyle.LLVM:
+            output.AppendLine("BasedOnStyle: LLVM");
+            options = GetChangedOptions(formatOptions, new FormatOptionsLlvmData().FormatOptions);
+            AddActiveOptionToFile(options, output);
+            break;
+          case FormatStyle.Google:
+            output.AppendLine("BasedOnStyle: Google");
+            options = GetChangedOptions(formatOptions, new FormatOptionsGoogleData().FormatOptions);
+            AddActiveOptionToFile(options, output);
+            break;
+          case FormatStyle.Chromium:
+            output.AppendLine("BasedOnStyle: Chromium");
+            options = GetChangedOptions(formatOptions, new FormatOptionsChromiumData().FormatOptions);
+            AddActiveOptionToFile(options, output);
+            break;
+          case FormatStyle.Mozilla:
+            output.AppendLine("BasedOnStyle: Mozilla");
+            options = GetChangedOptions(formatOptions, new FormatOptionsMozillaData().FormatOptions);
+            AddActiveOptionToFile(options, output);
+            break;
+          case FormatStyle.WebKit:
+            output.AppendLine("BasedOnStyle: WebKit");
+            options = GetChangedOptions(formatOptions, new FormatOptionsWebKitData().FormatOptions);
+            AddActiveOptionToFile(options, output);
+            break;
+          case FormatStyle.Microsoft:
+            output.AppendLine("BasedOnStyle: Microsoft");
+            options = GetChangedOptions(formatOptions, new FormatOptionsMicrosoftData().FormatOptions);
+            AddActiveOptionToFile(options, output);
+            break;
+          default:
+            AddActiveOptionToFile(formatOptions, output);
+            break;
+        }
+        output.AppendLine("...");
 
-      return output;
+        return output;
+      }
+      catch (Exception e)
+      {
+        MessageBox.Show(e.Message, "Clang-Format Export Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+        return output;
+      }
     }
 
     private static List<IFormatOption> GetChangedOptions(List<IFormatOption> currentOptions, List<IFormatOption> defaultOptions)
