@@ -296,7 +296,6 @@ namespace ClangFormatEditor
 
     private void ChangeControlsDependingOnStyle()
     {
-      //TODO display loading 
       switch (selectedStyle)
       {
         case FormatStyle.Custom:
@@ -359,9 +358,9 @@ namespace ClangFormatEditor
 
     private void CreateFormatFile()
     {
-      string fileName = ".clang-format";
-      string defaultExt = ".clang-format";
-      string filter = "Configuration files (.clang-format)|*.clang-format";
+      string fileName = FormatConstants.ClangFormat;
+      string defaultExt = FormatConstants.ClangFormat;
+      string filter = FormatConstants.ClangFormatExtension;
 
       string path = SaveFile(fileName, defaultExt, filter);
       if (string.IsNullOrEmpty(path) == false)
@@ -372,11 +371,10 @@ namespace ClangFormatEditor
 
     private void ImportFormatTile()
     {
-      string fileName = ".clang-format";
-      string defaultExt = ".clang-format";
-      string filter = "Configuration files (.clang-format)|*.clang-format";
+      string fileName = FormatConstants.ClangFormat;
+      string defaultExt = FormatConstants.ClangFormat;
+      string filter = FormatConstants.ClangFormatExtension;
 
-      //TODO display loading for a second
       string path = OpenFile(fileName, defaultExt, filter);
       if (string.IsNullOrEmpty(path) == false)
       {

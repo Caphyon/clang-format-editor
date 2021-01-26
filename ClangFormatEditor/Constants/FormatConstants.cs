@@ -3,6 +3,7 @@
   public static class FormatConstants
   {
     public const string CodeFileExtensions = "Code files (*.c;*.cpp;*.cxx;*.cc;*.cs;*.tli;*.tlh;*.h;*.hh;*.hpp;*.hxx;*.java;*.js)|*.c;*.cpp;*.cxx;*.cc;*.cs;*.tli;*.tlh;*.h;*.hh;*.hpp;*.hxx;*.java;*.js";
+    public const string ClangFormatExtension = "Configuration files (.clang-format)|*.clang-format";
     public const string BoldFontWeight = "Bold";
     public const string NormalFontWeight = "Normal";
     public const string DiffPerfectMatchFound = "// Clang Power Tools has found a perfect diff match for this file.\r\n//\r\n// Generate your Clang-Format file and start using it in your projects.";
