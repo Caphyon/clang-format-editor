@@ -4,6 +4,7 @@ using ClangFormatEditor.MVVM.Models;
 using ClangFormatEditor.MVVM.Views;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace ClangFormatEditor
 {
@@ -20,15 +21,15 @@ namespace ClangFormatEditor
 
     #region Protected Methods
 
-    protected void OpenMultipleInput(IFormatOption selectedOption)
+    protected void OpenMultipleInput(IFormatOption selectedOption, Window owner)
     {
       if (selectedOption is FormatOptionMultipleInputModel multiInputModel)
       {
-        OpenInputDataView(multiInputModel);
+        OpenInputDataView(multiInputModel, owner);
       }
       else if (selectedOption is FormatOptionMultipleToggleModel multiToggelModel)
       {
-        OpenToggleDataView(multiToggelModel);
+        OpenToggleDataView(multiToggelModel, owner);
       }
     }
 
@@ -36,16 +37,16 @@ namespace ClangFormatEditor
 
     #region Private Methods
 
-    private void OpenInputDataView(FormatOptionMultipleInputModel multipleInputModel)
+    private void OpenInputDataView(FormatOptionMultipleInputModel multipleInputModel, Window owner)
     {
-      var inputMultipleDataView = new InputMultipleDataView(multipleInputModel.MultipleInput);
+      var inputMultipleDataView = new InputMultipleDataView(multipleInputModel.MultipleInput, owner);
       inputMultipleDataView.Closed += CloseInputDataView;
       inputMultipleDataView.Show();
     }
 
-    private void OpenToggleDataView(FormatOptionMultipleToggleModel multipleToggleModel)
+    private void OpenToggleDataView(FormatOptionMultipleToggleModel multipleToggleModel, Window owner)
     {
-      var toggleMultipleDataView = new ToggleMultipleDataView(multipleToggleModel.ToggleFlags);
+      var toggleMultipleDataView = new ToggleMultipleDataView(multipleToggleModel.ToggleFlags, owner);
       toggleMultipleDataView.Closed += CloseToggleDataView;
       toggleMultipleDataView.Show();
     }

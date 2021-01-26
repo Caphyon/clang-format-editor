@@ -1,5 +1,4 @@
 ﻿using ClangFormatEditor.Enums;
-using ClangFormatEditor.Extensions;
 using ClangFormatEditor.Helpers;
 using ClangFormatEditor.Interfaces;
 using ClangFormatEditor.MVVM.Controllers;
@@ -178,7 +177,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     public void OpenMultipleInput(int index)
     {
       SelectedOption = FormatOptions[index];
-      OpenMultipleInput(SelectedOption);
+      OpenMultipleInput(SelectedOption, diffWindow);
       multipleInputDataIndex = index;
       CloseMultipleInput += CloseMultipleInputDataView;
     }
@@ -324,6 +323,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private void ShowDetectingView(Window detectingWindowOwner, string title, string description, string descriptionExtra)
     {
+      //TODO make generic to be used by editor
       detectingView = new DetectingView();
       detectingView.WindowTitle.Text = title;
       detectingView.Description.Text = description;

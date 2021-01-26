@@ -251,7 +251,7 @@ namespace ClangFormatEditor
       if (windowLoaded == false) return;
       CloseMultipleInput += FormatAfterClosingMultipleInput;
       SelectedOption = FormatOptions[index];
-      OpenMultipleInput(SelectedOption);
+      OpenMultipleInput(SelectedOption, formatEditorView);
     }
 
     public void FormatAfterClosingMultipleInput(object sender, EventArgs e)

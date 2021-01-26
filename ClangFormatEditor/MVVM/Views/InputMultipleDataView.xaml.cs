@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Windows;
+﻿using System.Windows;
 
 namespace ClangFormatEditor.MVVM.Views
 {
@@ -8,12 +7,11 @@ namespace ClangFormatEditor.MVVM.Views
   /// </summary>
   public partial class InputMultipleDataView : Window
   {
-    public InputMultipleDataView(string input)
+    public InputMultipleDataView(string input, Window owner)
     {
-      //TODO handle owner
       InitializeComponent();
       DataContext = new InputMultipleDataViewModel(input);
-      //Owner = SettingsProvider.FormatEditorView;
+      Owner = owner;
     }
   }
 }

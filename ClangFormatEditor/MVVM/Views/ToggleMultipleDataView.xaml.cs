@@ -9,12 +9,11 @@ namespace ClangFormatEditor.MVVM.Views
   /// </summary>
   public partial class ToggleMultipleDataView : Window
   {
-    public ToggleMultipleDataView(List<ToggleModel> input)
+    public ToggleMultipleDataView(List<ToggleModel> input, Window owner)
     {
-      //TODO handle owner
       InitializeComponent();
       DataContext = new ToggleMultipleDataViewModel(input);
-      //Owner = SettingsProvider.FormatEditorView;
+      Owner = owner;
     }
   }
 }
