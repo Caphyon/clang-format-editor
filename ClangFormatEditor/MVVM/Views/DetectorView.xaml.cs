@@ -8,13 +8,13 @@ using System.Windows.Controls;
 namespace ClangFormatEditor.MVVM.Views
 {
   /// <summary>
-  /// Interaction logic for DiffWindow.xaml
+  /// Interaction logic for DetectorView.xaml
   /// </summary>
-  public partial class DiffWindow : Window
+  public partial class DetectorView : Window
   {
     #region Members
 
-    private readonly DiffViewModel diffViewModel;
+    private readonly DetectorViewModel diffViewModel;
     private readonly InputDelayer inputDelayer;
     private int elementIndex;
     private bool resetOptionCalled;
@@ -22,10 +22,10 @@ namespace ClangFormatEditor.MVVM.Views
     #endregion
 
     #region Constructor
-    public DiffWindow()
+    public DetectorView()
     {
       InitializeComponent();
-      diffViewModel = new DiffViewModel(this);
+      diffViewModel = new DetectorViewModel(this);
       DataContext = diffViewModel;
 
       inputDelayer = new InputDelayer();

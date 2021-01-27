@@ -7,17 +7,17 @@ namespace ClangFormatEditor.MVVM.Views
   /// <summary>
   /// Interaction logic for FormatFileCreationView.xaml
   /// </summary>
-  public partial class FormatEditorView : Window
+  public partial class ConfiguratorView : Window
   {
-    private readonly FormatEditorViewModel formatEditorViewModel;
+    private readonly ConfiguratorViewModel formatEditorViewModel;
 
     private const string inputWindowDefaulText = "// --- Clang Power Tools - Format Style Editor ---\r\n//\r\n// Add your code here\r\n//\r\n// Format is run automatically \r\n//\r\n// Check the OUTPUT tab to see your formatted code";
     private const string outputWindowDefaulText = "// Turn ON any format option or select a Style to run format";
 
-    public FormatEditorView()
+    public ConfiguratorView()
     {
       InitializeComponent();
-      formatEditorViewModel = new FormatEditorViewModel(this);
+      formatEditorViewModel = new ConfiguratorViewModel(this);
       DataContext = formatEditorViewModel;
       CodeEditor.Text = inputWindowDefaulText;
       CodeEditorReadOnly.Text = outputWindowDefaulText;

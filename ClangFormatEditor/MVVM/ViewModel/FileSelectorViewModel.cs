@@ -13,7 +13,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
   {
     #region Members
 
-    private readonly FileSelectorView view;
+    private readonly FileSelectorView selectorView;
 
     private ICommand browseCommand;
     private ICommand removeAllFilesCommand;
@@ -27,7 +27,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     private bool totalFileSizeFlag = false;
 
     private FileSizeWarningView warningWindow;
-    private DiffWindow diffWindow;
+    private DetectorView detectorView;
 
     #endregion
 
@@ -38,7 +38,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     public FileSelectorViewModel(FileSelectorView view)
     {
-      this.view = view;
+      this.selectorView = view;
       ChangeButtonsState(false);
     }
 
@@ -102,16 +102,16 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
       ChangeButtonsState(SelectedFiles.Count > 0);
 
-      if (view.WarningTextBox.Visibility != System.Windows.Visibility.Visible &&
+      if (selectorView.WarningTextBox.Visibility != System.Windows.Visibility.Visible &&
         SelectedFiles.Any(file => file.FileSize > MAX_SIZE_PER_FILE))
       {
-        view.WarningTextBox.Visibility = System.Windows.Visibility.Visible;
+        selectorView.WarningTextBox.Visibility = System.Windows.Visibility.Visible;
       }
 
       if (!totalFileSizeFlag && totalFilesSize > MAX_FILE_SIZE)
       {
         totalFileSizeFlag = true;
-        warningWindow = new FileSizeWarningView(view);
+        warningWindow = new FileSizeWarningView(selectorView);
         warningWindow.Closed += ChildWindow_Closed;
         warningWindow.Show();
       }
@@ -124,21 +124,12 @@ namespace ClangFormatEditor.MVVM.ViewModels
         warningWindow.Closed -= ChildWindow_Closed;
         warningWindow = null;
       }
-
-      if (diffWindow != null)
-      {
-        diffWindow.Closed -= ChildWindow_Closed;
-        diffWindow = null;
-      }
     }
 
     public void CloseWindow()
     {
       if (warningWindow != null)
         warningWindow.Close();
-
-      if (diffWindow != null)
-        diffWindow.Close();
     }
 
     private bool IsDuplicate(string filePath) => SelectedFiles.FirstOrDefault(model => model.FilePath == filePath) != null;
@@ -172,7 +163,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       SelectedFiles.Clear();
       totalFileSizeFlag = false;
       totalFilesSize = 0;
-      view.WarningTextBox.Visibility = System.Windows.Visibility.Hidden;
+      selectorView.WarningTextBox.Visibility = System.Windows.Visibility.Hidden;
       ChangeButtonsState(false);
     }
 
@@ -188,31 +179,28 @@ namespace ClangFormatEditor.MVVM.ViewModels
       ChangeButtonsState(SelectedFiles.Count != 0);
 
       if (!SelectedFiles.Any(file => file.FileSize > MAX_SIZE_PER_FILE))
-        view.WarningTextBox.Visibility = System.Windows.Visibility.Hidden;
+        selectorView.WarningTextBox.Visibility = System.Windows.Visibility.Hidden;
 
       totalFileSizeFlag = totalFilesSize > MAX_FILE_SIZE;
     }
 
     private async Task DetectFormatStyleAsync()
     {
-      diffWindow = new DiffWindow()
-      {
-        Owner = view
-      };
-      diffWindow.Closed += ChildWindow_Closed;
+      detectorView = new DetectorView();
 
       List<string> filesPath = SelectedFiles.Select(model => model.FilePath).ToList();
 
-      view.IsEnabled = false;
-      await diffWindow.ShowDiffAsync(filesPath, view);
-      view.IsEnabled = true;
+      selectorView.IsEnabled = false;
+      await detectorView.ShowDiffAsync(filesPath, selectorView);
+      selectorView.IsEnabled = true;
+      selectorView.Close();
     }
 
     private void ChangeButtonsState(bool stateFlag)
     {
-      view.DetectFormatStyleButton.IsEnabled = stateFlag;
-      view.RemoveAllSection.IsEnabled = stateFlag;
-      view.RemoveAllTextBlock.Foreground = stateFlag ?
+      selectorView.DetectFormatStyleButton.IsEnabled = stateFlag;
+      selectorView.RemoveAllSection.IsEnabled = stateFlag;
+      selectorView.RemoveAllTextBlock.Foreground = stateFlag ?
         System.Windows.Media.Brushes.Black : System.Windows.Media.Brushes.Gray;
     }
 

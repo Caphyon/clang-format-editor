@@ -14,13 +14,13 @@ using Process = System.Diagnostics.Process;
 
 namespace ClangFormatEditor
 {
-  public class FormatEditorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged, IFormatEditor
+  public class ConfiguratorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged, IFormatEditor
   {
     #region Members
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    private readonly FormatEditorView formatEditorView;
+    private readonly ConfiguratorView formatEditorView;
     private ICommand selctCodeFileCommand;
     private ICommand createFormatFileCommand;
     private ICommand importFormatFileCommand;
@@ -41,7 +41,7 @@ namespace ClangFormatEditor
 
     #region Constructor
 
-    public FormatEditorViewModel(FormatEditorView formatEditorView)
+    public ConfiguratorViewModel(ConfiguratorView formatEditorView)
     {
       formatEditorView.Loaded += EditorLoaded;
       this.formatEditorView = formatEditorView;
@@ -49,7 +49,7 @@ namespace ClangFormatEditor
     }
 
     //Empty constructor used for XAML IntelliSense
-    public FormatEditorViewModel()
+    public ConfiguratorViewModel()
     {
 
     }
@@ -330,9 +330,20 @@ namespace ClangFormatEditor
       SelectedOption = FormatOptions.FirstOrDefault();
     }
 
-    private void OpenUri(string uri)
+    private static void OpenUri(string uri)
     {
-      Process.Start(new ProcessStartInfo(uri));
+      try
+      {
+        var processStartInfo = new ProcessStartInfo(uri)
+        {
+          UseShellExecute = true,
+        };
+        Process.Start(processStartInfo);
+      }
+      catch (Exception e)
+      {
+        MessageBox.Show(e.Message, "Clang Format Editor Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+      }
     }
 
     private void ReadCodeFromFile()
@@ -380,10 +391,14 @@ namespace ClangFormatEditor
       {
         try
         {
+          SelectedStyle = FormatStyle.Custom;
+          ChangeControlsDependingOnStyle();
+
           var importer = new FormatOptionsImporter();
           importer.ImportFormatOptions(path);
           FormatOptions = FormatOptionsProvider.CustomOptionsData.GetFormatOptionsValues();
           SelectedOption = FormatOptions.First();
+
           RunFormat();
         }
         catch (Exception e)

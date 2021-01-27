@@ -9,6 +9,8 @@
   Width="800"
   Height="450"
   Icon="/ClangFormatEditor;component/Resources/ClangPowerToolsIco.ico"
+  ResizeMode="NoResize"
+  WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
 
   <Grid>
@@ -38,7 +40,7 @@
       Grid.Column="3"
       Width="80"
       Height="40"
-      Click="OpenEditor"
-      Content="Editor" />
+      Click="OpenConfigurator"
+      Content="Configurator" />
   </Grid>
 </Window>
