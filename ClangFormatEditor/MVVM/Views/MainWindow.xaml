@@ -9,6 +9,8 @@
   Width="800"
   Height="450"
   Icon="/ClangFormatEditor;component/Resources/ClangPowerToolsIco.ico"
+  ResizeMode="NoResize"
+  WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
 
   <Grid>
