@@ -16,12 +16,14 @@ namespace ClangFormatEditor.MVVM.Views
     {
       var selectorView = new FileSelectorView();
       selectorView.Show();
+      Close();
     }
 
     private void OpenConfigurator(object sender, RoutedEventArgs e)
     {
       var editorView = new FormatEditorView();
       editorView.Show();
+      Close();
     }
   }
 }
