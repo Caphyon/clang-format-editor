@@ -332,7 +332,18 @@ namespace ClangFormatEditor
 
     private void OpenUri(string uri)
     {
-      Process.Start(new ProcessStartInfo(uri));
+      try
+      {
+        var processStartInfo = new ProcessStartInfo(uri)
+        {
+          UseShellExecute = true,
+        };
+        Process.Start(processStartInfo);
+      }
+      catch (Exception e)
+      {
+        MessageBox.Show(e.Message, "Clang Format Editor Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+      }
     }
 
     private void ReadCodeFromFile()
