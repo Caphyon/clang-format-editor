@@ -21,7 +21,7 @@ namespace ClangFormatEditor.MVVM.Views
 
     private void OpenConfigurator(object sender, RoutedEventArgs e)
     {
-      var editorView = new FormatEditorView();
+      var editorView = new ConfiguratorView();
       editorView.Show();
       Close();
     }

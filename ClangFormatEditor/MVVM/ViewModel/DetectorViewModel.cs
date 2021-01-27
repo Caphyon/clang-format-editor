@@ -18,13 +18,13 @@ using Brushes = System.Windows.Media.Brushes;
 
 namespace ClangFormatEditor.MVVM.ViewModels
 {
-  public class DiffViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged
+  public class DetectorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged
   {
     #region Members
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    private readonly DiffWindow diffWindow;
+    private readonly DetectorView diffWindow;
     private readonly DiffController diffController;
     private DetectingView detectingView;
     private List<IFormatOption> detectedOptions;
@@ -99,7 +99,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     #endregion
 
     #region Constructor 
-    public DiffViewModel(DiffWindow diffWindow)
+    public DetectorViewModel(DetectorView diffWindow)
     {
       this.diffWindow = diffWindow;
       diffWindow.Closed += DiffWindow_Closed;
@@ -108,7 +108,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     }
 
     //Empty constructor used for XAML IntelliSense
-    public DiffViewModel()
+    public DetectorViewModel()
     {
 
     }

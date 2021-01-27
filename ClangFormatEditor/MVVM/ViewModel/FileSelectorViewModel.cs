@@ -27,7 +27,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     private bool totalFileSizeFlag = false;
 
     private FileSizeWarningView warningWindow;
-    private DiffWindow diffWindow;
+    private DetectorView diffWindow;
 
     #endregion
 
@@ -195,7 +195,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private async Task DetectFormatStyleAsync()
     {
-      diffWindow = new DiffWindow()
+      diffWindow = new DetectorView()
       {
         Owner = view
       };

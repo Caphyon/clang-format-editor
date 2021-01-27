@@ -14,13 +14,13 @@ using Process = System.Diagnostics.Process;
 
 namespace ClangFormatEditor
 {
-  public class FormatEditorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged, IFormatEditor
+  public class ConfiguratorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged, IFormatEditor
   {
     #region Members
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    private readonly FormatEditorView formatEditorView;
+    private readonly ConfiguratorView formatEditorView;
     private ICommand selctCodeFileCommand;
     private ICommand createFormatFileCommand;
     private ICommand importFormatFileCommand;
@@ -41,7 +41,7 @@ namespace ClangFormatEditor
 
     #region Constructor
 
-    public FormatEditorViewModel(FormatEditorView formatEditorView)
+    public ConfiguratorViewModel(ConfiguratorView formatEditorView)
     {
       formatEditorView.Loaded += EditorLoaded;
       this.formatEditorView = formatEditorView;
@@ -49,7 +49,7 @@ namespace ClangFormatEditor
     }
 
     //Empty constructor used for XAML IntelliSense
-    public FormatEditorViewModel()
+    public ConfiguratorViewModel()
     {
 
     }
