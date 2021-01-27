@@ -38,7 +38,7 @@
       Grid.Column="3"
       Width="80"
       Height="40"
-      Click="OpenEditor"
-      Content="Editor" />
+      Click="OpenConfigurator"
+      Content="Configurator" />
   </Grid>
 </Window>

@@ -330,7 +330,7 @@ namespace ClangFormatEditor
       SelectedOption = FormatOptions.FirstOrDefault();
     }
 
-    private void OpenUri(string uri)
+    private static void OpenUri(string uri)
     {
       try
       {
@@ -391,10 +391,14 @@ namespace ClangFormatEditor
       {
         try
         {
+          SelectedStyle = FormatStyle.Custom;
+          ChangeControlsDependingOnStyle();
+
           var importer = new FormatOptionsImporter();
           importer.ImportFormatOptions(path);
           FormatOptions = FormatOptionsProvider.CustomOptionsData.GetFormatOptionsValues();
           SelectedOption = FormatOptions.First();
+
           RunFormat();
         }
         catch (Exception e)
