@@ -45,7 +45,7 @@
       Grid.Column="1"
       Width="80"
       Height="40"
-      Click="OpenDetector"
+      Command="{Binding OpenFileSelectorCommand}"
       Content="Style Detector"
       Foreground="White"
       Style="{StaticResource SettingsButton}" />
@@ -55,7 +55,7 @@
       Grid.Column="3"
       Width="80"
       Height="40"
-      Click="OpenConfigurator"
+      Command="{Binding OpenConfiguratorCommand}"
       Content="Configurator"
       Foreground="White"
       Style="{StaticResource SettingsButton}" />

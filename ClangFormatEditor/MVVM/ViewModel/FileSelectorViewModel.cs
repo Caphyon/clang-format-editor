@@ -36,9 +36,10 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     public FileSelectorViewModel() { }
 
-    public FileSelectorViewModel(FileSelectorView view)
+    public FileSelectorViewModel(FileSelectorView selector, DetectorView detector)
     {
-      this.selectorView = view;
+      selectorView = selector;
+      detectorView = detector;
       ChangeButtonsState(false);
     }
 
@@ -186,8 +187,6 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private async Task DetectFormatStyleAsync()
     {
-      detectorView = new DetectorView();
-
       List<string> filesPath = SelectedFiles.Select(model => model.FilePath).ToList();
 
       selectorView.IsEnabled = false;
