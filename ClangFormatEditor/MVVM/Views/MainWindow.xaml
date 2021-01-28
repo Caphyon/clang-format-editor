@@ -13,7 +13,20 @@
   WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
 
+  <!--  Static resources  -->
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles/AppResources.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </ResourceDictionary>
+  </Window.Resources>
+
   <Grid>
+    <Grid.Background>
+      <ImageBrush ImageSource="/ClangFormatEditor;component/Resources/ClangSplitBackground.png" Stretch="UniformToFill" />
+    </Grid.Background>
     <Grid.RowDefinitions>
       <RowDefinition Height="150" />
       <RowDefinition Height="auto" />
@@ -33,7 +46,9 @@
       Width="80"
       Height="40"
       Click="OpenDetector"
-      Content="Style Detector" />
+      Content="Style Detector"
+      Foreground="White"
+      Style="{StaticResource SettingsButton}" />
 
     <Button
       Grid.Row="1"
@@ -41,6 +56,8 @@
       Width="80"
       Height="40"
       Click="OpenConfigurator"
-      Content="Configurator" />
+      Content="Configurator"
+      Foreground="White"
+      Style="{StaticResource SettingsButton}" />
   </Grid>
 </Window>

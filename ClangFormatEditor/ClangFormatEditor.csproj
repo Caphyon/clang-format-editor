@@ -18,6 +18,7 @@
     <None Remove="Resources\bannerWarning.png" />
     <None Remove="Resources\Browse.png" />
     <None Remove="Resources\ClangPowerToolsIco.ico" />
+    <None Remove="Resources\ClangSplitBackground.png" />
     <None Remove="Resources\CleanSearchIcon.PNG" />
     <None Remove="Resources\DetectOnFileIcon.png" />
     <None Remove="Resources\FileIcon.png" />
@@ -46,6 +47,7 @@
     <Resource Include="Resources\bannerWarning.png" />
     <Resource Include="Resources\Browse.png" />
     <Resource Include="Resources\ClangPowerToolsIco.ico" />
+    <Resource Include="Resources\ClangSplitBackground.png" />
     <Resource Include="Resources\CleanSearchIcon.PNG" />
     <Resource Include="Resources\DetectOnFileIcon.png" />
     <Content Include="clang-format.exe">
