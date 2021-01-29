@@ -1,7 +1,6 @@
 ﻿using ClangFormatEditor.Extensions;
 using ClangFormatEditor.MVVM.Models;
 using ClangFormatEditor.MVVM.Views;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -187,12 +186,15 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private async Task DetectFormatStyleAsync()
     {
-      List<string> filesPath = SelectedFiles.Select(model => model.FilePath).ToList();
+      var filesPath = SelectedFiles.Select(model => model.FilePath).ToList();
 
       selectorView.IsEnabled = false;
       await detectorView.ShowDiffAsync(filesPath, selectorView);
       selectorView.IsEnabled = true;
-      selectorView.Close();
+      if (detectorView.IsLoaded)
+      {
+        selectorView.Close();
+      }
     }
 
     private void ChangeButtonsState(bool stateFlag)
