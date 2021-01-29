@@ -64,7 +64,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       get => detectFormatStyleCommand ??= new RelayCommand(() => DetectFormatStyleAsync().SafeFireAndForget(), () => CanExecute);
     }
 
-    public bool CanExecute
+    public static bool CanExecute
     {
       get
       {
@@ -142,7 +142,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       SelectedFiles.Add(model);
     }
 
-    private string CreateMiddleEllipsis(string filePath)
+    private static string CreateMiddleEllipsis(string filePath)
     {
       if (filePath.Length <= MAX_LENGTH_FILE_PATH)
         return filePath;
