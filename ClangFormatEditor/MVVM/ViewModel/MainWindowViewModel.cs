@@ -42,7 +42,7 @@ namespace ClangFormatEditor.MVVM.ViewModel
 
     private static void OpenDetector()
     {
-      if (detector == null)
+      if (detector == null && fileSelector == null)
       {
         detector = new DetectorView();
         detector.Closed += DetectorClosed;
@@ -57,7 +57,10 @@ namespace ClangFormatEditor.MVVM.ViewModel
         {
           fileSelector.Activate();
         }
-        detector.Activate();
+        else
+        {
+          detector.Activate();
+        }
       }
     }
 
@@ -82,6 +85,10 @@ namespace ClangFormatEditor.MVVM.ViewModel
 
     private static void SelectorClosed(object sender, EventArgs e)
     {
+      if (detector.IsLoaded == false)
+      {
+        detector = null;
+      }
       fileSelector = null;
     }
 
