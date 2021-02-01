@@ -1,5 +1,6 @@
 ﻿using ClangFormatEditor.MVVM.Views;
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ClangFormatEditor.MVVM.ViewModel
@@ -59,6 +60,10 @@ namespace ClangFormatEditor.MVVM.ViewModel
         }
         else
         {
+          if (detector.WindowState == WindowState.Minimized)
+          {
+            detector.WindowState = WindowState.Normal;
+          }
           detector.Activate();
         }
       }
@@ -74,6 +79,10 @@ namespace ClangFormatEditor.MVVM.ViewModel
       }
       else
       {
+        if (configurator.WindowState == WindowState.Minimized)
+        {
+          configurator.WindowState = WindowState.Normal;
+        }
         configurator.Activate();
       }
     }
