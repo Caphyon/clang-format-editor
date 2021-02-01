@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using ClangFormatEditor.MVVM.ViewModel;
+using System.Windows;
 
 namespace ClangFormatEditor.MVVM.Views
 {
@@ -10,18 +11,7 @@ namespace ClangFormatEditor.MVVM.Views
     public MainWindow()
     {
       InitializeComponent();
-    }
-
-    private void OpenDetector(object sender, RoutedEventArgs e)
-    {
-      var selectorView = new FileSelectorView();
-      selectorView.Show();
-    }
-
-    private void OpenConfigurator(object sender, RoutedEventArgs e)
-    {
-      var editorView = new ConfiguratorView();
-      editorView.Show();
+      DataContext = new MainWindowViewModel();
     }
   }
 }

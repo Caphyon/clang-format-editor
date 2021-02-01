@@ -10,10 +10,10 @@ namespace ClangFormatEditor.MVVM.Views
   {
     private readonly FileSelectorViewModel fileSelectorViewModel;
 
-    public FileSelectorView()
+    public FileSelectorView(DetectorView detector)
     {
       InitializeComponent();
-      fileSelectorViewModel = new FileSelectorViewModel(this);
+      fileSelectorViewModel = new FileSelectorViewModel(this, detector);
       DataContext = fileSelectorViewModel;
     }
 

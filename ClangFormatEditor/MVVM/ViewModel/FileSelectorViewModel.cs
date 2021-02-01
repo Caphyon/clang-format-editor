@@ -1,7 +1,6 @@
 ﻿using ClangFormatEditor.Extensions;
 using ClangFormatEditor.MVVM.Models;
 using ClangFormatEditor.MVVM.Views;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,9 +35,10 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     public FileSelectorViewModel() { }
 
-    public FileSelectorViewModel(FileSelectorView view)
+    public FileSelectorViewModel(FileSelectorView selector, DetectorView detector)
     {
-      this.selectorView = view;
+      selectorView = selector;
+      detectorView = detector;
       ChangeButtonsState(false);
     }
 
@@ -63,7 +63,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       get => detectFormatStyleCommand ??= new RelayCommand(() => DetectFormatStyleAsync().SafeFireAndForget(), () => CanExecute);
     }
 
-    public bool CanExecute
+    public static bool CanExecute
     {
       get
       {
@@ -141,7 +141,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       SelectedFiles.Add(model);
     }
 
-    private string CreateMiddleEllipsis(string filePath)
+    private static string CreateMiddleEllipsis(string filePath)
     {
       if (filePath.Length <= MAX_LENGTH_FILE_PATH)
         return filePath;
@@ -186,14 +186,15 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private async Task DetectFormatStyleAsync()
     {
-      detectorView = new DetectorView();
-
-      List<string> filesPath = SelectedFiles.Select(model => model.FilePath).ToList();
+      var filesPath = SelectedFiles.Select(model => model.FilePath).ToList();
 
       selectorView.IsEnabled = false;
       await detectorView.ShowDiffAsync(filesPath, selectorView);
       selectorView.IsEnabled = true;
-      selectorView.Close();
+      if (detectorView.IsLoaded)
+      {
+        selectorView.Close();
+      }
     }
 
     private void ChangeButtonsState(bool stateFlag)

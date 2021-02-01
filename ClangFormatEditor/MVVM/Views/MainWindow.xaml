@@ -7,40 +7,117 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   Title="Clang Format Editor"
   Width="800"
-  Height="450"
+  Height="400"
   Icon="/ClangFormatEditor;component/Resources/ClangPowerToolsIco.ico"
   ResizeMode="NoResize"
   WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
 
+  <!--  Static resources  -->
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles/AppResources.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </ResourceDictionary>
+  </Window.Resources>
+
   <Grid>
+    <Grid.Background>
+      <ImageBrush ImageSource="/ClangFormatEditor;component/Resources/ClangSplitBackground.png" Stretch="UniformToFill" />
+    </Grid.Background>
     <Grid.RowDefinitions>
-      <RowDefinition Height="150" />
+      <RowDefinition Height="80" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="20" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="40" />
+      <RowDefinition Height="30" />
       <RowDefinition Height="auto" />
     </Grid.RowDefinitions>
 
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="auto" />
-      <ColumnDefinition Width="50" />
-      <ColumnDefinition Width="auto" />
+      <ColumnDefinition Width="228" />
+      <ColumnDefinition Width="156" />
+      <ColumnDefinition Width="228" />
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
 
-    <Button
+    <!--  Style Detector  -->
+    <Image
       Grid.Row="1"
       Grid.Column="1"
-      Width="80"
-      Height="40"
-      Click="OpenDetector"
-      Content="Style Detector" />
+      Source="/ClangFormatEditor;component/Resources/StyleDetector.png"
+      Stretch="None" />
+
+    <TextBlock
+      Grid.Row="3"
+      Grid.Column="1"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      FontSize="20"
+      Foreground="White"
+      Text="Style Detector" />
+
+    <TextBlock
+      Grid.Row="4"
+      Grid.Column="1"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      FontSize="12"
+      Foreground="White"
+      Text="Detect the best matching format style for your code"
+      TextAlignment="Center"
+      TextWrapping="Wrap" />
 
     <Button
+      Grid.Row="6"
+      Grid.Column="1"
+      Width="150"
+      Height="30"
+      Command="{Binding OpenFileSelectorCommand}"
+      Content="Open Detector"
+      FontSize="14"
+      Foreground="White"
+      Style="{StaticResource SettingsButton}" />
+
+    <!--  Configurator  -->
+    <Image
       Grid.Row="1"
       Grid.Column="3"
-      Width="80"
-      Height="40"
-      Click="OpenConfigurator"
-      Content="Configurator" />
+      Source="/ClangFormatEditor;component/Resources/Configurator.png"
+      Stretch="None" />
+
+    <TextBlock
+      Grid.Row="3"
+      Grid.Column="3"
+      HorizontalAlignment="Center"
+      FontSize="20"
+      Foreground="Black"
+      Text="Format Configurator" />
+
+    <TextBlock
+      Grid.Row="4"
+      Grid.Column="3"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      FontSize="12"
+      Foreground="Black"
+      Text="Create a .clang-format from scratch or configure an existing one"
+      TextAlignment="Center"
+      TextWrapping="Wrap" />
+
+    <Button
+      Grid.Row="6"
+      Grid.Column="3"
+      Width="150"
+      Height="30"
+      Command="{Binding OpenConfiguratorCommand}"
+      Content="Open Configurator"
+      FontSize="14"
+      Foreground="White"
+      Style="{StaticResource SettingsButton}" />
   </Grid>
 </Window>

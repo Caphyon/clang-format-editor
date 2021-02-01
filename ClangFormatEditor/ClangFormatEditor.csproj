@@ -18,7 +18,9 @@
     <None Remove="Resources\bannerWarning.png" />
     <None Remove="Resources\Browse.png" />
     <None Remove="Resources\ClangPowerToolsIco.ico" />
+    <None Remove="Resources\ClangSplitBackground.png" />
     <None Remove="Resources\CleanSearchIcon.PNG" />
+    <None Remove="Resources\Configurator.png" />
     <None Remove="Resources\DetectOnFileIcon.png" />
     <None Remove="Resources\FileIcon.png" />
     <None Remove="Resources\GenerateClangFormatFile.png" />
@@ -32,6 +34,7 @@
     <None Remove="Resources\RemoveInputIdle.png" />
     <None Remove="Resources\ResetIcon.png" />
     <None Remove="Resources\SearchIcon.PNG" />
+    <None Remove="Resources\StyleDetector.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +49,9 @@
     <Resource Include="Resources\bannerWarning.png" />
     <Resource Include="Resources\Browse.png" />
     <Resource Include="Resources\ClangPowerToolsIco.ico" />
+    <Resource Include="Resources\ClangSplitBackground.png" />
     <Resource Include="Resources\CleanSearchIcon.PNG" />
+    <Resource Include="Resources\Configurator.png" />
     <Resource Include="Resources\DetectOnFileIcon.png" />
     <Content Include="clang-format.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -65,6 +70,7 @@
     <Resource Include="Resources\RemoveInputIdle.png" />
     <Resource Include="Resources\ResetIcon.png" />
     <Resource Include="Resources\SearchIcon.PNG" />
+    <Resource Include="Resources\StyleDetector.png" />
   </ItemGroup>
 
 </Project>
