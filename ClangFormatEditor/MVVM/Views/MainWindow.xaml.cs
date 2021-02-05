@@ -11,7 +11,7 @@ namespace ClangFormatEditor.MVVM.Views
     public MainWindow()
     {
       InitializeComponent();
-      DataContext = new MainWindowViewModel();
+      DataContext = new MainWindowViewModel(this);
     }
   }
 }
