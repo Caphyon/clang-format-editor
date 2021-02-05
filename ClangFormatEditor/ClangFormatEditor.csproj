@@ -9,6 +9,7 @@
 		<Authors>Caphyon</Authors>
 		<Product>Clang Format Detector</Product>
 		<RepositoryUrl>https://github.com/Caphyon/clang-format-detector</RepositoryUrl>
+		<Version>7.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
