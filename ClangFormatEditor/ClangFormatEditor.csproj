@@ -7,7 +7,7 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<ApplicationIcon>Resources\ClangPowerToolsIco.ico</ApplicationIcon>
 		<Authors>Caphyon</Authors>
-		<Product>Clang Format Detector</Product>
+		<Product>Clang-Format Editor</Product>
 		<RepositoryUrl>https://github.com/Caphyon/clang-format-detector</RepositoryUrl>
 		<Version>7.0.1</Version>
   </PropertyGroup>
