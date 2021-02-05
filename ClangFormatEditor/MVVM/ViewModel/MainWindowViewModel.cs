@@ -1,5 +1,4 @@
 ﻿using ClangFormatEditor.MVVM.Views;
-using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,7 +13,6 @@ namespace ClangFormatEditor.MVVM.ViewModel
     private static DetectorView detector;
     private static ConfiguratorView configurator;
     private static FileSelectorView fileSelector;
-    private static MainWindow mainWindow;
 
     #endregion
 
@@ -22,14 +20,6 @@ namespace ClangFormatEditor.MVVM.ViewModel
 
     public bool CanExecute
     { get; set; } = true;
-
-    #endregion
-
-    #region Constructor
-    public MainWindowViewModel(MainWindow window)
-    {
-      mainWindow = window;
-    }
 
     #endregion
 
