@@ -49,7 +49,7 @@
       <TextBlock
         Margin="0,5"
         FontSize="14"
-        Text="A small number of files with a wide variety of code syntaxes is a better way to discover your best Clang Format style."
+        Text="A small number of files with a wide variety of code syntaxes is a better way to discover your best Clang-Format style."
         TextWrapping="Wrap" />
     </StackPanel>
 

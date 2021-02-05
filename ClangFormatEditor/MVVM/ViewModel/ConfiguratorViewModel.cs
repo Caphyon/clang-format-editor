@@ -342,7 +342,7 @@ namespace ClangFormatEditor
       }
       catch (Exception e)
       {
-        MessageBox.Show(e.Message, "Clang Format Editor Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(e.Message, "Clang-Format Editor Failed", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 
