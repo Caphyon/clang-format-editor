@@ -1,5 +1,4 @@
 ﻿using ClangFormatEditor.MVVM.Views;
-using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -43,18 +42,17 @@ namespace ClangFormatEditor.MVVM.ViewModel
 
     private static void OpenDetector()
     {
-      if (detector == null && fileSelector == null)
+      if ((detector == null || detector.IsLoaded == false) &&
+          (fileSelector == null || fileSelector.IsLoaded == false))
       {
         detector = new DetectorView();
-        detector.Closed += DetectorClosed;
 
         fileSelector = new FileSelectorView(detector);
-        fileSelector.Closed += SelectorClosed;
         fileSelector.Show();
       }
       else
       {
-        if (fileSelector != null && fileSelector.IsActive == false)
+        if (fileSelector.IsActive == false && fileSelector.IsLoaded)
         {
           fileSelector.Activate();
         }
@@ -71,10 +69,9 @@ namespace ClangFormatEditor.MVVM.ViewModel
 
     private static void OpenConfigurator()
     {
-      if (configurator == null)
+      if (configurator == null || configurator.IsLoaded == false)
       {
         configurator = new ConfiguratorView();
-        configurator.Closed += ConfiguratorClosed;
         configurator.Show();
       }
       else
@@ -85,25 +82,6 @@ namespace ClangFormatEditor.MVVM.ViewModel
         }
         configurator.Activate();
       }
-    }
-
-    private static void DetectorClosed(object sender, EventArgs e)
-    {
-      detector = null;
-    }
-
-    private static void SelectorClosed(object sender, EventArgs e)
-    {
-      if (detector.IsLoaded == false)
-      {
-        detector = null;
-      }
-      fileSelector = null;
-    }
-
-    private static void ConfiguratorClosed(object sender, EventArgs e)
-    {
-      configurator = null;
     }
 
     #endregion

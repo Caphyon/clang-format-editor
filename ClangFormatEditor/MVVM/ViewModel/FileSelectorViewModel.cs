@@ -129,7 +129,13 @@ namespace ClangFormatEditor.MVVM.ViewModels
     public void CloseWindow()
     {
       if (warningWindow != null)
+      {
         warningWindow.Close();
+      }
+      if (detectorView.IsLoaded == false)
+      {
+        detectorView.Close();
+      }
     }
 
     private bool IsDuplicate(string filePath) => SelectedFiles.FirstOrDefault(model => model.FilePath == filePath) != null;

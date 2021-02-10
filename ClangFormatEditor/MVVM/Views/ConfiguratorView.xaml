@@ -6,7 +6,7 @@
   xmlns:local="clr-namespace:ClangFormatEditor"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:searchBox="clr-namespace:ClangFormatEditor.MVVM.Views"
-  Title="Clang Format Configurator"
+  Title="Clang-Format Configurator"
   Width="1100"
   Height="750"
   MinWidth="1100"
