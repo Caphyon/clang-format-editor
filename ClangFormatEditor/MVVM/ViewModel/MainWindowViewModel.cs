@@ -1,4 +1,5 @@
 ﻿using ClangFormatEditor.MVVM.Views;
+using ClangFormatEditor.Update;
 using System.Windows;
 using System.Windows.Input;
 
@@ -21,6 +22,14 @@ namespace ClangFormatEditor.MVVM.ViewModel
     public bool CanExecute
     { get; set; } = true;
 
+    #endregion
+
+    #region
+    public MainWindowViewModel()
+    {
+      var updater = new Updater();
+      updater.UpdateEditor();
+    }
     #endregion
 
 
