@@ -40,7 +40,7 @@ namespace ClangFormatEditor
       formatFilePath = Path.Combine(ProjectSetup.AppDataDirectory, folderPath.ToString(), AppConstants.ClangFormat);
     }
 
-    private string FormatFile(string directoryPath, string filePath)
+    private static string FormatFile(string directoryPath, string filePath)
     {
       string clangFormatExe = Path.Combine(ProjectSetup.AppDataDirectory, AppConstants.ClangFormatExe);
       string output = string.Empty;
