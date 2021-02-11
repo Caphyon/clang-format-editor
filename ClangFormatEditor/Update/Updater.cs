@@ -8,67 +8,28 @@ namespace ClangFormatEditor.Update
 {
   public class Updater
   {
-    #region Members
-
-
-    private int exitCode;
-
-    #endregion
-
-
     #region Public Methods
 
-    public void UpdateEditor()
+    public static void UpdateEditor()
     {
       if (UpdaterExecutableFound() == false) return;
-      HandleUpdate();
-    }
-
-    private void HandleUpdate()
-    {
-
+      CheckForUpdateProcess();
     }
 
     #endregion
 
     #region Private Methods
 
-    private static bool UpdaterExecutableFound()
-    {
-      return FileSystem.DoesFileExist(UpdaterConstants.Path, UpdaterConstants.Executable);
-    }
-
-    private static string GetInfoArguments()
-    {
-      var path = Path.Combine(UpdaterConstants.Path, UpdaterConstants.Executable);
-      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", " /justcheck");
-    }
-
-    private void UpdaterProcessExited(object sender, EventArgs e)
-    {
-      if (sender is Process)
-      {
-        var x = (Process)sender;
-        // exitCode = sender.ExitCode;
-        // sender.Close();
-      }
-    }
-
-    private void LaunchUpdate()
-    {
-
-    }
-
-    private void CallUpdaterProcess(string arguments)
+    private static void CheckForUpdateProcess()
     {
       try
       {
         var process = new Process();
         process.StartInfo.FileName = UpdaterConstants.Cmd;
-        process.StartInfo.Arguments = arguments;
+        process.StartInfo.Arguments = GetJustCheckArguments();
         process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
         process.EnableRaisingEvents = true;
-        process.Exited += UpdaterProcessExited;
+        process.Exited += CheckForUpdateProcessExited;
         process.Start();
       }
       catch (Exception e)
@@ -76,7 +37,68 @@ namespace ClangFormatEditor.Update
         MessageBox.Show(e.Message, "Clang-Format Updater", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
-    #endregion
 
+    private static void CheckForUpdateProcessExited(object sender, EventArgs e)
+    {
+      if (sender is Process process)
+      {
+        switch (process.ExitCode)
+        {
+          case UpdaterConstants.NoUpdateReturnCode:
+            return;
+          case UpdaterConstants.UpdateFoundReturnCode:
+            StartUpdateProcess();
+            break;
+          default:
+            return;
+        }
+        process.Close();
+      }
+    }
+
+    private static void StartUpdateProcess()
+    {
+      try
+      {
+        var process = new Process();
+        process.StartInfo.FileName = UpdaterConstants.Cmd;
+        process.StartInfo.Arguments = GetStartUpdateArguments();
+        process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        process.EnableRaisingEvents = true;
+        process.Exited += StartUpdateProcessExited;
+        process.Start();
+      }
+      catch (Exception e)
+      {
+        MessageBox.Show(e.Message, "Clang-Format Updater", MessageBoxButton.OK, MessageBoxImage.Error);
+      }
+    }
+
+    private static void StartUpdateProcessExited(object sender, EventArgs e)
+    {
+      if (sender is Process process)
+      {
+        process.Close();
+      }
+    }
+
+    private static bool UpdaterExecutableFound()
+    {
+      return FileSystem.DoesFileExist(UpdaterConstants.Path, UpdaterConstants.Executable);
+    }
+
+    private static string GetJustCheckArguments()
+    {
+      var path = Path.Combine(UpdaterConstants.Path, UpdaterConstants.Executable);
+      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", " /justcheck");
+    }
+
+    private static string GetStartUpdateArguments()
+    {
+      var path = Path.Combine(UpdaterConstants.Path, UpdaterConstants.Executable);
+      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", " /checknow -minuseractions");
+    }
+
+    #endregion
   }
 }
