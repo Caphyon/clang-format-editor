@@ -13,24 +13,24 @@ namespace ClangFormatEditor.Update
     public static void UpdateEditor()
     {
       if (UpdaterExecutableFound() == false) return;
-      CheckForUpdateProcess();
+      StartUpdaterProcess(GetArguments(UpdaterConstants.CheckUpdateParamaters), CheckForUpdateProcessExited);
     }
 
     #endregion
 
     #region Private Methods
 
-    private static void CheckForUpdateProcess()
+    private static void StartUpdaterProcess(string arguments, EventHandler ClosedEvent)
     {
       try
       {
         var process = new Process();
         process.StartInfo.FileName = UpdaterConstants.Cmd;
-        process.StartInfo.Arguments = GetJustCheckArguments();
+        process.StartInfo.Arguments = arguments;
         process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
         process.StartInfo.CreateNoWindow = true;
         process.EnableRaisingEvents = true;
-        process.Exited += CheckForUpdateProcessExited;
+        process.Exited += ClosedEvent;
         process.Start();
       }
       catch (Exception e)
@@ -48,31 +48,12 @@ namespace ClangFormatEditor.Update
           case UpdaterConstants.NoUpdateReturnCode:
             return;
           case UpdaterConstants.UpdateFoundReturnCode:
-            StartUpdateProcess();
+            StartUpdaterProcess(GetArguments(UpdaterConstants.StartUpdateParameters), StartUpdateProcessExited);
             break;
           default:
             return;
         }
         process.Close();
-      }
-    }
-
-    private static void StartUpdateProcess()
-    {
-      try
-      {
-        var process = new Process();
-        process.StartInfo.FileName = UpdaterConstants.Cmd;
-        process.StartInfo.Arguments = GetStartUpdateArguments();
-        process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-        process.StartInfo.CreateNoWindow = true;
-        process.EnableRaisingEvents = true;
-        process.Exited += StartUpdateProcessExited;
-        process.Start();
-      }
-      catch (Exception e)
-      {
-        MessageBox.Show(e.Message, UpdaterConstants.ClangFormatUpdater, MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 
@@ -89,16 +70,10 @@ namespace ClangFormatEditor.Update
       return FileSystem.DoesFileExist(UpdaterConstants.Path, UpdaterConstants.Executable);
     }
 
-    private static string GetJustCheckArguments()
+    private static string GetArguments(string updateParameters)
     {
       var path = Path.Combine(UpdaterConstants.Path, UpdaterConstants.Executable);
-      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", UpdaterConstants.CheckUpdateParamaters);
-    }
-
-    private static string GetStartUpdateArguments()
-    {
-      var path = Path.Combine(UpdaterConstants.Path, UpdaterConstants.Executable);
-      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", UpdaterConstants.StartUpdateParameters);
+      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", updateParameters);
     }
 
     #endregion
