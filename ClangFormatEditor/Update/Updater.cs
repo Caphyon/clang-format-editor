@@ -28,6 +28,7 @@ namespace ClangFormatEditor.Update
         process.StartInfo.FileName = UpdaterConstants.Cmd;
         process.StartInfo.Arguments = GetJustCheckArguments();
         process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        process.StartInfo.CreateNoWindow = true;
         process.EnableRaisingEvents = true;
         process.Exited += CheckForUpdateProcessExited;
         process.Start();
@@ -64,6 +65,7 @@ namespace ClangFormatEditor.Update
         process.StartInfo.FileName = UpdaterConstants.Cmd;
         process.StartInfo.Arguments = GetStartUpdateArguments();
         process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        process.StartInfo.CreateNoWindow = true;
         process.EnableRaisingEvents = true;
         process.Exited += StartUpdateProcessExited;
         process.Start();

@@ -12,9 +12,9 @@ namespace ClangFormatEditor
   {
     private void AppStartup(object sender, StartupEventArgs e)
     {
-      Update(e);
       var mainWindow = new MainWindow();
       mainWindow.Show();
+      Update(e);
     }
 
 
