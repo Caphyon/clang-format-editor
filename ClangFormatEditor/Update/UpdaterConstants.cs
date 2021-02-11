@@ -9,6 +9,7 @@
     public const string Cmd = "cmd.exe";
     public const string VisualStudio = "VisualStudio";
     public const string CommandParamater = "/C ";
+    public const string ClangFormatUpdater = "Clang-Format Updater";
     public const int NoUpdateReturnCode = -536870895;
     public const int UpdateFoundReturnCode = 0;
   }

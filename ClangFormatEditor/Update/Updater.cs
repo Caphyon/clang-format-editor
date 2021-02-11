@@ -35,7 +35,7 @@ namespace ClangFormatEditor.Update
       }
       catch (Exception e)
       {
-        MessageBox.Show(e.Message, "Clang-Format Updater", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(e.Message, UpdaterConstants.ClangFormatUpdater, MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 
@@ -72,7 +72,7 @@ namespace ClangFormatEditor.Update
       }
       catch (Exception e)
       {
-        MessageBox.Show(e.Message, "Clang-Format Updater", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(e.Message, UpdaterConstants.ClangFormatUpdater, MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 

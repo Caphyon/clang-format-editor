@@ -18,8 +18,7 @@ namespace ClangFormatEditor.MVVM.ViewModel
 
     #region Properties
 
-    public bool CanExecute
-    { get; set; } = true;
+    public bool CanExecute { get; set; } = true;
 
     #endregion
 
