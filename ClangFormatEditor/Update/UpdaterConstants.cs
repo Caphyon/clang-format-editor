@@ -4,7 +4,8 @@
   {
     public const string Path = @"C:\Program Files (x86)\Caphyon\Clang Format Editor";
     public const string Executable = "Clang Format Editor Updater.exe";
-    public const string CheckUpdate = "/checknow - minuseractions";
+    public const string CheckUpdateParamaters = "/justcheck";
+    public const string StartUpdateParameters = "/checknow -minuseractions";
     public const string Cmd = "cmd.exe";
     public const string VisualStudio = "VisualStudio";
     public const string CommandParamater = "/C ";

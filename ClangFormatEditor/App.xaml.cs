@@ -17,7 +17,6 @@ namespace ClangFormatEditor
       Update(e);
     }
 
-
     private static void Update(StartupEventArgs e)
     {
       if (e.Args.Length > 0 && e.Args.First() == UpdaterConstants.VisualStudio) return;

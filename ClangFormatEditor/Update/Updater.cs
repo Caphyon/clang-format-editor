@@ -92,13 +92,13 @@ namespace ClangFormatEditor.Update
     private static string GetJustCheckArguments()
     {
       var path = Path.Combine(UpdaterConstants.Path, UpdaterConstants.Executable);
-      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", " /justcheck");
+      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", UpdaterConstants.CheckUpdateParamaters);
     }
 
     private static string GetStartUpdateArguments()
     {
       var path = Path.Combine(UpdaterConstants.Path, UpdaterConstants.Executable);
-      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", " /checknow -minuseractions");
+      return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", UpdaterConstants.StartUpdateParameters);
     }
 
     #endregion
