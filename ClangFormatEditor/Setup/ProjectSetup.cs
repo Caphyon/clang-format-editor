@@ -24,7 +24,7 @@ namespace ClangFormatEditor
 
     static ProjectSetup()
     {
-      AppDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppConstants.ClangFormatDetector);
+      AppDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppConstants.ClangFormatEditor);
       CreateDirectory();
     }
 

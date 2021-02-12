@@ -25,6 +25,6 @@
     public const string FormatTemp = "FormatTemp.cpp";
     public const string FormatDirectory = "Format";
 
-    public const string ClangFormatDetector = "ClangFormatDetector";
+    public const string ClangFormatEditor = "ClangFormatEditor";
   }
 }
