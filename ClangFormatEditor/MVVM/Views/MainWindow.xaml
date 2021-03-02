@@ -34,7 +34,9 @@
       <RowDefinition Height="auto" />
       <RowDefinition Height="40" />
       <RowDefinition Height="30" />
-      <RowDefinition Height="auto" />
+      <RowDefinition Height="30" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="50" />
     </Grid.RowDefinitions>
 
     <Grid.ColumnDefinitions>
@@ -119,5 +121,47 @@
       FontSize="14"
       Foreground="White"
       Style="{StaticResource SettingsButton}" />
+
+    <!--  GitHub  -->
+    <Button
+      Grid.Row="8"
+      Grid.ColumnSpan="5"
+      Background="#060331"
+      Cursor="Hand">
+      <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="25" />
+          <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Image
+          Grid.RowSpan="2"
+          Width="60"
+          Height="60"
+          VerticalAlignment="Bottom"
+          Source="/Resources/GitHubIcon.png" />
+        <TextBlock
+          Grid.Row="0"
+          Grid.Column="1"
+          VerticalAlignment="Bottom"
+          FontFamily="Segoe UI"
+          FontSize="12"
+          FontWeight="Regular"
+          Foreground="#CFD0F9"
+          Text="Feedback &amp; Issues" />
+        <TextBlock
+          Grid.Row="1"
+          Grid.Column="1"
+          VerticalAlignment="Top"
+          FontSize="15"
+          Foreground="White"
+          Text="Join our GitHub Community" />
+      </Grid>
+    </Button>
   </Grid>
 </Window>
