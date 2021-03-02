@@ -127,6 +127,7 @@
       Grid.Row="8"
       Grid.ColumnSpan="5"
       Background="#060331"
+      Command="{Binding OpenGitHubCommand}"
       Cursor="Hand"
       Style="{StaticResource HoverButtonStyle}">
       <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -161,7 +162,7 @@
           VerticalAlignment="Top"
           FontSize="15"
           Foreground="White"
-          Text="Join our GitHub Community" />
+          Text="Join our GitHub Community ›" />
       </Grid>
     </Button>
   </Grid>
