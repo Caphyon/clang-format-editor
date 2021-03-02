@@ -76,4 +76,10 @@
     <Resource Include="Resources\StyleDetector.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="MVVM\Views\Styles\HoverButtonStyle.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>
