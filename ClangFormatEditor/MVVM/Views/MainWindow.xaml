@@ -127,7 +127,8 @@
       Grid.Row="8"
       Grid.ColumnSpan="5"
       Background="#060331"
-      Cursor="Hand">
+      Cursor="Hand"
+      Style="{StaticResource HoverButtonStyle}">
       <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
           <RowDefinition Height="25" />
@@ -135,19 +136,19 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50*" />
-          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Image
           Grid.RowSpan="2"
+          Grid.Column="0"
           Height="45"
           VerticalAlignment="Bottom"
           Source="/Resources/GitHubIcon.png" />
         <TextBlock
           Grid.Row="0"
           Grid.Column="1"
-          Grid.ColumnSpan="2"
           VerticalAlignment="Bottom"
           FontFamily="Segoe UI"
           FontSize="12"
@@ -157,7 +158,6 @@
         <TextBlock
           Grid.Row="1"
           Grid.Column="1"
-          Grid.ColumnSpan="2"
           VerticalAlignment="Top"
           FontSize="15"
           Foreground="White"
