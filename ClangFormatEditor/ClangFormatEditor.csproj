@@ -25,6 +25,7 @@
     <None Remove="Resources\DetectOnFileIcon.png" />
     <None Remove="Resources\FileIcon.png" />
     <None Remove="Resources\GenerateClangFormatFile.png" />
+    <None Remove="Resources\GitHubIcon.png" />
     <None Remove="Resources\InfoIcon.png" />
     <None Remove="Resources\InputIcon.png" />
     <None Remove="Resources\license.txt" />
@@ -62,6 +63,7 @@
     </Content>
     <Resource Include="Resources\FileIcon.png" />
     <Resource Include="Resources\GenerateClangFormatFile.png" />
+    <Resource Include="Resources\GitHubIcon.png" />
     <Resource Include="Resources\InfoIcon.png" />
     <Resource Include="Resources\InputIcon.png" />
     <Resource Include="Resources\OutputIcon.png" />
