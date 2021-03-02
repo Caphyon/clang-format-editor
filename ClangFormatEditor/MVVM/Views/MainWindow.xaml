@@ -135,19 +135,19 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="50*" />
+          <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
         <Image
           Grid.RowSpan="2"
-          Width="60"
-          Height="60"
+          Height="45"
           VerticalAlignment="Bottom"
           Source="/Resources/GitHubIcon.png" />
         <TextBlock
           Grid.Row="0"
           Grid.Column="1"
+          Grid.ColumnSpan="2"
           VerticalAlignment="Bottom"
           FontFamily="Segoe UI"
           FontSize="12"
@@ -157,6 +157,7 @@
         <TextBlock
           Grid.Row="1"
           Grid.Column="1"
+          Grid.ColumnSpan="2"
           VerticalAlignment="Top"
           FontSize="15"
           Foreground="White"
