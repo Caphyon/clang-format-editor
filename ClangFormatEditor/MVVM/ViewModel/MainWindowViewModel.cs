@@ -1,6 +1,5 @@
-﻿using ClangFormatEditor.MVVM.Views;
-using System;
-using System.Diagnostics;
+﻿using ClangFormatEditor.Helpers;
+using ClangFormatEditor.MVVM.Views;
 using System.Windows;
 using System.Windows.Input;
 
@@ -39,7 +38,7 @@ namespace ClangFormatEditor.MVVM.ViewModel
 
     public ICommand OpenGitHubCommand
     {
-      get => openGitHub ??= new RelayCommand(() => OpenUri("https://github.com/Caphyon/clang-format-editor/issues"), () => CanExecute);
+      get => openGitHub ??= new RelayCommand(() => WebsiteHandler.OpenUri("https://github.com/Caphyon/clang-format-editor/issues"), () => CanExecute);
     }
     #endregion
 
@@ -86,22 +85,6 @@ namespace ClangFormatEditor.MVVM.ViewModel
           configurator.WindowState = WindowState.Normal;
         }
         configurator.Activate();
-      }
-    }
-
-    private static void OpenUri(string uri)
-    {
-      try
-      {
-        var processStartInfo = new ProcessStartInfo(uri)
-        {
-          UseShellExecute = true,
-        };
-        Process.Start(processStartInfo);
-      }
-      catch (Exception e)
-      {
-        MessageBox.Show(e.Message, "Clang-Format Editor Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 

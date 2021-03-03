@@ -1,16 +1,15 @@
 ﻿using ClangFormatEditor.Enums;
+using ClangFormatEditor.Helpers;
 using ClangFormatEditor.Interfaces;
 using ClangFormatEditor.MVVM.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Process = System.Diagnostics.Process;
 
 namespace ClangFormatEditor
 {
@@ -204,7 +203,7 @@ namespace ClangFormatEditor
 
     public ICommand OpenClangFormatUriCommand
     {
-      get => openUri ??= new RelayCommand(() => OpenUri("https://clangpowertools.com/blog/getting-started-with-clang-format-style-options.html"), () => CanExecute);
+      get => openUri ??= new RelayCommand(() => WebsiteHandler.OpenUri("https://clangpowertools.com/blog/getting-started-with-clang-format-style-options.html"), () => CanExecute);
     }
 
     public ICommand ResetCommand
@@ -329,23 +328,6 @@ namespace ClangFormatEditor
       FormatOptions = options;
       SelectedOption = FormatOptions.FirstOrDefault();
     }
-
-    private static void OpenUri(string uri)
-    {
-      try
-      {
-        var processStartInfo = new ProcessStartInfo(uri)
-        {
-          UseShellExecute = true,
-        };
-        Process.Start(processStartInfo);
-      }
-      catch (Exception e)
-      {
-        MessageBox.Show(e.Message, "Clang-Format Editor Error", MessageBoxButton.OK, MessageBoxImage.Error);
-      }
-    }
-
     private void ReadCodeFromFile()
     {
       var filePath = OpenFile(string.Empty, ".cpp", AppConstants.CodeFileExtensions);
