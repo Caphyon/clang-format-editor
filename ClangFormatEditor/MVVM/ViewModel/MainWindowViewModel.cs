@@ -1,5 +1,6 @@
 ﻿using ClangFormatEditor.Helpers;
 using ClangFormatEditor.MVVM.Views;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,6 +20,15 @@ namespace ClangFormatEditor.MVVM.ViewModel
     #endregion
 
     #region Properties
+
+    public static string Version
+    {
+      get
+      {
+        var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        return version.Substring(0, version.LastIndexOf('.'));
+      }
+    }
 
     public bool CanExecute { get; set; } = true;
 

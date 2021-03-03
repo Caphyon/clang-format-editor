@@ -165,5 +165,13 @@
           Text="Join our GitHub Community ›" />
       </Grid>
     </Button>
+
+    <TextBlock
+      Grid.Row="8"
+      Grid.Column="4"
+      HorizontalAlignment="Right"
+      VerticalAlignment="Bottom"
+      Foreground="White"
+      Text="{Binding Version}" />
   </Grid>
 </Window>
