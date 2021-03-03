@@ -101,7 +101,7 @@ namespace ClangFormatEditor.MVVM.ViewModel
       }
       catch (Exception e)
       {
-        MessageBox.Show(e.Message, "Clang-Format Editor Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(e.Message, "Clang-Format Editor Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 

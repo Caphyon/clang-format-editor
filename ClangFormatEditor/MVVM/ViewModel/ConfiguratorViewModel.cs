@@ -342,7 +342,7 @@ namespace ClangFormatEditor
       }
       catch (Exception e)
       {
-        MessageBox.Show(e.Message, "Clang-Format Editor Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(e.Message, "Clang-Format Editor Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 
@@ -403,7 +403,7 @@ namespace ClangFormatEditor
         }
         catch (Exception e)
         {
-          MessageBox.Show(e.Message, "Clang-Format Import Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+          MessageBox.Show(e.Message, "Clang-Format Import Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
       }
     }
