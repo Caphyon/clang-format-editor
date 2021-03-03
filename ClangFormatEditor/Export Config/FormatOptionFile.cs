@@ -60,7 +60,7 @@ namespace ClangFormatEditor
       }
       catch (Exception e)
       {
-        MessageBox.Show(e.Message, "Clang-Format Export Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(e.Message, "Clang-Format Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return output;
       }
     }

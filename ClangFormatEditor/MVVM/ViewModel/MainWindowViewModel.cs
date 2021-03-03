@@ -1,4 +1,5 @@
-﻿using ClangFormatEditor.MVVM.Views;
+﻿using ClangFormatEditor.Helpers;
+using ClangFormatEditor.MVVM.Views;
 using System.Windows;
 using System.Windows.Input;
 
@@ -10,6 +11,7 @@ namespace ClangFormatEditor.MVVM.ViewModel
 
     private ICommand openFileSelector;
     private ICommand openConfigurator;
+    private ICommand openGitHub;
     private static DetectorView detector;
     private static ConfiguratorView configurator;
     private static FileSelectorView fileSelector;
@@ -34,6 +36,10 @@ namespace ClangFormatEditor.MVVM.ViewModel
       get => openConfigurator ??= new RelayCommand(() => OpenConfigurator(), () => CanExecute);
     }
 
+    public ICommand OpenGitHubCommand
+    {
+      get => openGitHub ??= new RelayCommand(() => WebsiteHandler.OpenUri("https://github.com/Caphyon/clang-format-editor/issues"), () => CanExecute);
+    }
     #endregion
 
     #region Methods

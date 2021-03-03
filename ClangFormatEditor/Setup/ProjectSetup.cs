@@ -50,7 +50,7 @@ namespace ClangFormatEditor
       }
       catch (Exception e)
       {
-        MessageBox.Show(e.Message, "Clang-Format Setup Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show(e.Message, "Clang-Format Setup Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
 
