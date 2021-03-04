@@ -171,6 +171,7 @@
       Grid.Column="4"
       HorizontalAlignment="Right"
       VerticalAlignment="Bottom"
+      FontSize="10"
       Foreground="White"
       Text="{Binding Version}" />
   </Grid>
