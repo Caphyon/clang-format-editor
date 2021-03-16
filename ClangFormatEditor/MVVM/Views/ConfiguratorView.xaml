@@ -235,8 +235,8 @@
     <Grid Grid.Row="1" Grid.Column="3">
       <Grid.RowDefinitions>
         <RowDefinition Height="25" />
+        <RowDefinition Height="*" />
         <RowDefinition Height="auto" />
-        <RowDefinition Height="225" />
       </Grid.RowDefinitions>
 
       <Grid.ColumnDefinitions>
@@ -244,7 +244,7 @@
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
 
-      <!--  Input  -->
+      <!--  Input Headline  -->
       <StackPanel
         Grid.Row="0"
         Grid.Column="0"
@@ -261,27 +261,8 @@
           FontWeight="DemiBold"
           Text="Input" />
       </StackPanel>
-      <TextBox
-        Name="CodeEditor"
-        Grid.Row="1"
-        Grid.Column="0"
-        MinWidth="400"
-        MinHeight="550"
-        AcceptsReturn="True"
-        AcceptsTab="True"
-        AllowDrop="True"
-        Background="Black"
-        FontFamily="Consolas"
-        FontSize="14"
-        Foreground="White"
-        HorizontalScrollBarVisibility="Auto"
-        PreviewDragOver="CodeEditor_PreviewDragOver"
-        PreviewDrop="CodeEditor_PreviewDrop"
-        TextChanged="RunFormat_Editor"
-        TextWrapping="NoWrap"
-        VerticalScrollBarVisibility="Auto" />
 
-      <!--  Output  -->
+      <!--  Output Headline  -->
       <StackPanel
         Grid.Row="0"
         Grid.Column="1"
@@ -299,22 +280,52 @@
           Text="Output" />
       </StackPanel>
 
-      <TextBox
-        Name="CodeEditorReadOnly"
-        Grid.Row="1"
-        Grid.Column="1"
-        MinWidth="400"
-        MinHeight="550"
-        AcceptsReturn="True"
-        AcceptsTab="True"
-        Background="DimGray"
-        FontFamily="Consolas"
-        FontSize="14"
-        Foreground="White"
-        HorizontalScrollBarVisibility="Auto"
-        IsReadOnly="True"
-        TextWrapping="NoWrap"
-        VerticalScrollBarVisibility="Auto" />
+      <Grid Grid.Row="1" Grid.ColumnSpan="2">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" MinWidth="220" />
+          <ColumnDefinition Width="4" />
+          <ColumnDefinition Width="*" MinWidth="290" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBox
+          Name="CodeEditor"
+          Grid.Column="0"
+          AcceptsReturn="True"
+          AcceptsTab="True"
+          AllowDrop="True"
+          Background="Black"
+          FontFamily="Consolas"
+          FontSize="14"
+          Foreground="White"
+          HorizontalScrollBarVisibility="Auto"
+          PreviewDragOver="CodeEditor_PreviewDragOver"
+          PreviewDrop="CodeEditor_PreviewDrop"
+          TextChanged="RunFormat_Editor"
+          TextWrapping="NoWrap"
+          VerticalScrollBarVisibility="Auto" />
+
+        <GridSplitter
+          Grid.Column="1"
+          Width="4"
+          HorizontalAlignment="Stretch"
+          Background="Red" />
+
+        <TextBox
+          Name="CodeEditorReadOnly"
+          Grid.Column="2"
+          AcceptsReturn="True"
+          AcceptsTab="True"
+          Background="DimGray"
+          FontFamily="Consolas"
+          FontSize="14"
+          Foreground="White"
+          HorizontalScrollBarVisibility="Auto"
+          IsReadOnly="True"
+          TextWrapping="NoWrap"
+          VerticalScrollBarVisibility="Auto" />
+      </Grid>
 
       <!--  Buttons  -->
       <Grid Grid.Row="3" Grid.ColumnSpan="2">
