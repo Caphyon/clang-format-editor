@@ -11,8 +11,12 @@ namespace ClangFormatEditor.MVVM.Views
   {
     private readonly ConfiguratorViewModel formatEditorViewModel;
 
-    private const string inputWindowDefaulText = "// --- Clang Power Tools - Format Style Editor ---\r\n//\r\n// Add your code here\r\n//\r\n// Format is run automatically \r\n//\r\n// Check the OUTPUT tab to see your formatted code";
-    private const string outputWindowDefaulText = "// Turn ON any format option or select a Style to run format";
+    private const string inputWindowDefaulText = "// --- Clang Power Tools - Format Style Editor ---\r\n//\r\n" +
+                                                 "// Add your code here\r\n//\r\n" +
+                                                 "// Turn ON any format option or select a Style\r\n//\r\n" +
+                                                 "// Format is run automatically\r\n//\r\n" +
+                                                "// Check the OUTPUT to see your formatted code";
+    private const string outputWindowDefaulText = "// Your formatted code is displayed here";
 
     public ConfiguratorView()
     {
