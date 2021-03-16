@@ -281,7 +281,7 @@
       <Grid Grid.Row="1" Grid.ColumnSpan="2">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" MinWidth="220" />
-          <ColumnDefinition Width="4" />
+          <ColumnDefinition Width="3" />
           <ColumnDefinition Width="*" MinWidth="220" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -306,9 +306,9 @@
 
         <GridSplitter
           Grid.Column="1"
-          Width="4"
+          Width="3"
           HorizontalAlignment="Stretch"
-          Background="Red" />
+          Background="#9E005A" />
 
         <TextBox
           Name="CodeEditorReadOnly"
