@@ -9,7 +9,9 @@
   Title="Clang-Format Configurator"
   MinWidth="1100"
   MinHeight="750"
+  d:DataContext="{d:DesignInstance Type=local:ConfiguratorViewModel}"
   Background="WhiteSmoke"
+  DataContext="ConfiguratorViewModel"
   Icon="/ClangFormatEditor;component/Resources/ClangPowerToolsIco.ico"
   ResizeMode="CanResize"
   ShowInTaskbar="true"
@@ -41,6 +43,7 @@
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="10" />
     </Grid.ColumnDefinitions>
+
     <!--  Parent grid containing the two secondary grids  -->
     <Grid Grid.Row="1" Grid.Column="1">
       <Grid>
@@ -278,8 +281,10 @@
           Text="Output" />
       </StackPanel>
 
+      <!--  Code Editor  -->
       <Grid Grid.Row="1" Grid.ColumnSpan="2">
         <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="50" />
           <ColumnDefinition Width="*" MinWidth="220" />
           <ColumnDefinition Width="3" />
           <ColumnDefinition Width="*" MinWidth="220" />
@@ -287,40 +292,48 @@
         <Grid.RowDefinitions>
           <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <TextBlock
+          FontFamily="Consolas"
+          FontSize="12"
+          Text="{Binding LineNumber, UpdateSourceTrigger=PropertyChanged}"
+          TextAlignment="Right" />
+
         <TextBox
           Name="CodeEditor"
-          Grid.Column="0"
+          Grid.Column="1"
           AcceptsReturn="True"
           AcceptsTab="True"
           AllowDrop="True"
           Background="Black"
           FontFamily="Consolas"
-          FontSize="14"
+          FontSize="12"
           Foreground="White"
           HorizontalScrollBarVisibility="Auto"
           PreviewDragOver="CodeEditor_PreviewDragOver"
           PreviewDrop="CodeEditor_PreviewDrop"
-          TextChanged="RunFormat_Editor"
+          Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"
           TextWrapping="NoWrap"
           VerticalScrollBarVisibility="Auto" />
 
         <GridSplitter
-          Grid.Column="1"
+          Grid.Column="2"
           Width="3"
           HorizontalAlignment="Stretch"
           Background="#9E005A" />
 
         <TextBox
           Name="CodeEditorReadOnly"
-          Grid.Column="2"
+          Grid.Column="3"
           AcceptsReturn="True"
           AcceptsTab="True"
           Background="DimGray"
           FontFamily="Consolas"
-          FontSize="14"
+          FontSize="12"
           Foreground="White"
           HorizontalScrollBarVisibility="Auto"
           IsReadOnly="True"
+          Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}"
           TextWrapping="NoWrap"
           VerticalScrollBarVisibility="Auto" />
       </Grid>

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -28,13 +29,16 @@ namespace ClangFormatEditor
     private ICommand openUri;
     private ICommand resetSearchCommand;
 
+    private string input = AppConstants.InputCodeText;
+    private string output = AppConstants.OutputCodeText;
+    private string lineNumber = "1";
     private string checkSearch = string.Empty;
     private bool showOptionDescription = true;
     private List<IFormatOption> searchResultFormatStyleOptions;
     private bool windowLoaded = false;
     private string nameColumnWidth;
     private string droppedFile;
-    private string lineNumber;
+
 
     private const string nameColumnWidthMax = "340";
 
@@ -48,12 +52,6 @@ namespace ClangFormatEditor
       formatEditorView.Loaded += EditorLoaded;
       this.formatEditorView = formatEditorView;
       InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
-    }
-
-    //Empty constructor used for XAML IntelliSense
-    public ConfiguratorViewModel()
-    {
-
     }
 
     #endregion
@@ -79,10 +77,7 @@ namespace ClangFormatEditor
 
     public string CheckSearch
     {
-      get
-      {
-        return checkSearch;
-      }
+      get => checkSearch;
       set
       {
         checkSearch = value;
@@ -93,10 +88,7 @@ namespace ClangFormatEditor
 
     public IFormatOption SelectedOption
     {
-      get
-      {
-        return selectedOption;
-      }
+      get => selectedOption;
       set
       {
         selectedOption = value;
@@ -106,18 +98,12 @@ namespace ClangFormatEditor
 
     public static IEnumerable<FormatStyle> Styles
     {
-      get
-      {
-        return Enum.GetValues(typeof(FormatStyle)).Cast<FormatStyle>();
-      }
+      get => Enum.GetValues(typeof(FormatStyle)).Cast<FormatStyle>();
     }
 
     public IEnumerable<ToggleValues> BooleanComboboxValues
     {
-      get
-      {
-        return Enum.GetValues(typeof(ToggleValues)).Cast<ToggleValues>();
-      }
+      get => Enum.GetValues(typeof(ToggleValues)).Cast<ToggleValues>();
     }
 
     public FormatStyle SelectedStyle
@@ -139,10 +125,7 @@ namespace ClangFormatEditor
 
     public string NameColumnWidth
     {
-      get
-      {
-        return nameColumnWidth;
-      }
+      get => nameColumnWidth;
       set
       {
         nameColumnWidth = value;
@@ -152,10 +135,7 @@ namespace ClangFormatEditor
 
     public string EnableOptionColumnWidth
     {
-      get
-      {
-        return nameColumnWidth;
-      }
+      get => nameColumnWidth;
       set
       {
         nameColumnWidth = value;
@@ -165,18 +145,12 @@ namespace ClangFormatEditor
 
     public static bool CanExecute
     {
-      get
-      {
-        return true;
-      }
+      get => true;
     }
 
     public bool ShowOptionDescription
     {
-      get
-      {
-        return showOptionDescription;
-      }
+      get => showOptionDescription;
       set
       {
         showOptionDescription = value;
@@ -184,8 +158,47 @@ namespace ClangFormatEditor
       }
     }
 
+    public string Input
+    {
+      get
+      {
+        UpdateLineNumberAsync().SafeFireAndForget();
+        return input;
+      }
+      set
+      {
+        input = value;
+        if (IsAnyOptionEnabled())
+        {
+          OnPropertyChanged(nameof(Input));
+          RunFormat();
+        };
+      }
+    }
 
-    public string LineNumber { get; set; }
+    public string Output
+    {
+      get => output;
+      set
+      {
+        if (IsAnyOptionEnabled())
+        {
+          //TODO maybe asyncs
+          input = RunFormat(output);
+          OnPropertyChanged(nameof(Output));
+        };
+      }
+    }
+
+    public string LineNumber
+    {
+      get => lineNumber;
+      set
+      {
+        lineNumber = value;
+        OnPropertyChanged(nameof(LineNumber));
+      }
+    }
 
     #endregion
 
@@ -242,14 +255,14 @@ namespace ClangFormatEditor
     {
       if (droppedFile == null) return;
 
-      using StreamReader streamReader = new StreamReader(droppedFile);
+      using var streamReader = new StreamReader(droppedFile);
       formatEditorView.CodeEditor.Text = streamReader.ReadToEnd();
     }
 
     public void RunFormat()
     {
       if (windowLoaded == false) return;
-      SetEditorOutputAfterFormat();
+      output = RunFormat(input);
     }
     public void OpenMultipleInput(int index)
     {
@@ -262,28 +275,14 @@ namespace ClangFormatEditor
     public void FormatAfterClosingMultipleInput(object sender, EventArgs e)
     {
       SelectedOption.IsEnabled = true;
-      SetEditorOutputAfterFormat();
+      Output = RunFormat(input);
       CloseMultipleInput -= FormatAfterClosingMultipleInput;
-    }
-
-    public bool IsAnyOptionEnabled()
-    {
-      foreach (var item in formatStyleOptions)
-      {
-        if (item.IsEnabled) return true;
-      }
-      return false;
     }
 
     #endregion
 
 
     #region Private Methods
-
-    private void SetEditorOutputAfterFormat()
-    {
-      formatEditorView.CodeEditorReadOnly.Text = RunFormat(formatEditorView.CodeEditor.Text);
-    }
 
     private string RunFormat(string text)
     {
@@ -438,9 +437,32 @@ namespace ClangFormatEditor
       });
     }
 
+    private async Task UpdateLineNumberAsync()
+    {
+      var sb = new StringBuilder();
+      await Task.Run(() =>
+      {
+        var lineCount = input.Split(Environment.NewLine).Length;
+        for (int i = 1; i <= lineCount; i++)
+        {
+          sb.AppendLine(i.ToString());
+        }
+      });
+      LineNumber = sb.ToString();
+    }
+
     private void OnPropertyChanged(string propertyName)
     {
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private bool IsAnyOptionEnabled()
+    {
+      foreach (var item in formatStyleOptions)
+      {
+        if (item.IsEnabled) return true;
+      }
+      return false;
     }
 
     #endregion
