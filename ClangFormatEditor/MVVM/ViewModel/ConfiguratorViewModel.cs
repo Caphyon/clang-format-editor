@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace ClangFormatEditor
 {
-  public class ConfiguratorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged, IFormatEditor
+  public class ConfiguratorViewModel : InputProvider, INotifyPropertyChanged, IFormatEditor
   {
     #region Members
 

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace ClangFormatEditor.MVVM.ViewModels
 {
-  public class FileSelectorViewModel : CommonSettingsFunctionality
+  public class FileSelectorViewModel : InputProvider
   {
     #region Members
 

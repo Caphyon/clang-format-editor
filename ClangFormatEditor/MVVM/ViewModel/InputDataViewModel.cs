@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace ClangFormatEditor
 {
-  public class InputDataViewModel : CommonSettingsFunctionality, INotifyPropertyChanged
+  public class InputDataViewModel : InputProvider, INotifyPropertyChanged
   {
     #region Members
 

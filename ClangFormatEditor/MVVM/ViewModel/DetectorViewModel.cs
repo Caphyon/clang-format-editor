@@ -18,7 +18,7 @@ using Brushes = System.Windows.Media.Brushes;
 
 namespace ClangFormatEditor.MVVM.ViewModels
 {
-  public class DetectorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged
+  public class DetectorViewModel : InputProvider, INotifyPropertyChanged
   {
     #region Members
 
