@@ -32,5 +32,6 @@
                                              "// Turn ON any format option or select a Style\r\n//\r\n" +
                                              "// Format is run automatically\r\n//\r\n" +
                                             "// Check the OUTPUT to see your formatted code";
+    public const string OutputCodeText = "// Your formatted code is displayed here";
   }
 }

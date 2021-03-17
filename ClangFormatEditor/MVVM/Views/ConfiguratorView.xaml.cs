@@ -11,14 +11,11 @@ namespace ClangFormatEditor.MVVM.Views
   {
     private readonly ConfiguratorViewModel configuratorViewModel;
 
-    private const string outputWindowDefaulText = "// Your formatted code is displayed here";
-
     public ConfiguratorView()
     {
       InitializeComponent();
       configuratorViewModel = new ConfiguratorViewModel(this);
       DataContext = configuratorViewModel;
-      CodeEditorReadOnly.Text = outputWindowDefaulText;
     }
 
     private void RunFormat_TextBoxChanged(object sender, TextChangedEventArgs e)
