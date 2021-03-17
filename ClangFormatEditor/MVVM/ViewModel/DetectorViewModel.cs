@@ -107,12 +107,6 @@ namespace ClangFormatEditor.MVVM.ViewModels
       FileNames = new List<string>();
     }
 
-    //Empty constructor used for XAML IntelliSense
-    public DetectorViewModel()
-    {
-
-    }
-
     #endregion
 
     #region Commands
