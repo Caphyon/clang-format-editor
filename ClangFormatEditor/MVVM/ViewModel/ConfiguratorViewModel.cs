@@ -34,7 +34,10 @@ namespace ClangFormatEditor
     private bool windowLoaded = false;
     private string nameColumnWidth;
     private string droppedFile;
+    private string lineNumber;
+
     private const string nameColumnWidthMax = "340";
+
 
     #endregion
 
@@ -70,7 +73,7 @@ namespace ClangFormatEditor
       set
       {
         formatStyleOptions = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
+        OnPropertyChanged(nameof(FormatOptions));
       }
     }
 
@@ -84,7 +87,7 @@ namespace ClangFormatEditor
       {
         checkSearch = value;
         FindFormatOptionsAsync(checkSearch).SafeFireAndForget();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CheckSearch)));
+        OnPropertyChanged(nameof(CheckSearch));
       }
     }
 
@@ -97,11 +100,11 @@ namespace ClangFormatEditor
       set
       {
         selectedOption = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedOption)));
+        OnPropertyChanged(nameof(SelectedOption));
       }
     }
 
-    public IEnumerable<FormatStyle> Styles
+    public static IEnumerable<FormatStyle> Styles
     {
       get
       {
@@ -128,7 +131,7 @@ namespace ClangFormatEditor
       {
         selectedStyle = value;
         ChangeControlsDependingOnStyle();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedStyle)));
+        OnPropertyChanged(nameof(SelectedStyle));
 
         RunFormat();
       }
@@ -143,7 +146,7 @@ namespace ClangFormatEditor
       set
       {
         nameColumnWidth = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NameColumnWidth)));
+        OnPropertyChanged(nameof(NameColumnWidth));
       }
     }
 
@@ -156,11 +159,11 @@ namespace ClangFormatEditor
       set
       {
         nameColumnWidth = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EnableOptionColumnWidth)));
+        OnPropertyChanged(nameof(EnableOptionColumnWidth));
       }
     }
 
-    public bool CanExecute
+    public static bool CanExecute
     {
       get
       {
@@ -177,9 +180,12 @@ namespace ClangFormatEditor
       set
       {
         showOptionDescription = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowOptionDescription)));
+        OnPropertyChanged(nameof(ShowOptionDescription));
       }
     }
+
+
+    public string LineNumber { get; set; }
 
     #endregion
 
@@ -345,8 +351,8 @@ namespace ClangFormatEditor
         InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
       });
 
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedOption)));
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
+      OnPropertyChanged(nameof(SelectedOption));
+      OnPropertyChanged(nameof(FormatOptions));
     }
 
     private void CreateFormatFile()
@@ -416,19 +422,25 @@ namespace ClangFormatEditor
     {
       CheckSearch = string.Empty;
       ShowOptionDescription = true;
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
+
+      OnPropertyChanged(nameof(FormatOptions));
     }
 
     private async Task FindFormatOptionsAsync(string search)
     {
       await Task.Run(() =>
-    {
-      searchResultFormatStyleOptions = formatStyleOptions.Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase)).ToList();
-      SelectedOption = searchResultFormatStyleOptions.FirstOrDefault();
-      ShowOptionDescription = searchResultFormatStyleOptions.Count != 0;
+      {
+        searchResultFormatStyleOptions = formatStyleOptions.Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase)).ToList();
+        SelectedOption = searchResultFormatStyleOptions.FirstOrDefault();
+        ShowOptionDescription = searchResultFormatStyleOptions.Count != 0;
 
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
-    });
+        OnPropertyChanged(nameof(FormatOptions));
+      });
+    }
+
+    private void OnPropertyChanged(string propertyName)
+    {
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     #endregion

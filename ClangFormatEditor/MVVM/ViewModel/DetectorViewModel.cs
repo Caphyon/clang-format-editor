@@ -55,7 +55,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       set => selectedStyle = value;
     }
     public string Style { get; set; }
-    public IEnumerable<ToggleValues> BooleanComboboxValues
+    public static IEnumerable<ToggleValues> BooleanComboboxValues
     {
       get
       {
@@ -91,10 +91,10 @@ namespace ClangFormatEditor.MVVM.ViewModels
       set
       {
         selectedOption = value;
-        OnPropertyChanged("SelectedOption");
+        OnPropertyChanged(nameof(SelectedOption));
       }
     }
-    public bool CanExecute => true;
+    public static bool CanExecute => true;
 
     #endregion
 
@@ -138,7 +138,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       });
       await ReloadDiffAsync(AppConstants.ResetTitle, AppConstants.ResetDescription, string.Empty);
       SelectedOption = FormatOptions.First();
-      OnPropertyChanged("FormatOptions");
+      OnPropertyChanged(nameof(FormatOptions));
     }
 
     #endregion
@@ -225,9 +225,9 @@ namespace ClangFormatEditor.MVVM.ViewModels
       SetFlowDocuments();
       Style = "Base Style: " + SelectedStyle.ToString();
 
-      OnPropertyChanged("FileNames");
-      OnPropertyChanged("FormatOptions");
-      OnPropertyChanged("Style");
+      OnPropertyChanged(nameof(FileNames));
+      OnPropertyChanged(nameof(FormatOptions));
+      OnPropertyChanged(nameof(Style));
     }
 
     private async Task ReloadDiffAsync(string title, string description, string descriptionExtra)
@@ -388,7 +388,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       }
     }
 
-    private void MarkOptionChange(FormatOptionModel option, bool isModified, string fontWeight)
+    private static void MarkOptionChange(FormatOptionModel option, bool isModified, string fontWeight)
     {
       option.NameFontWeight = fontWeight;
       option.IsModifed = isModified;
