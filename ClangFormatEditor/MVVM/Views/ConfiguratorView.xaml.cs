@@ -9,7 +9,7 @@ namespace ClangFormatEditor.MVVM.Views
   /// </summary>
   public partial class ConfiguratorView : Window
   {
-    private readonly ConfiguratorViewModel formatEditorViewModel;
+    private readonly ConfiguratorViewModel configuratorViewModel;
 
     private const string inputWindowDefaulText = "// --- Clang Power Tools - Format Style Editor ---\r\n//\r\n" +
                                                  "// Add your code here\r\n//\r\n" +
@@ -21,43 +21,43 @@ namespace ClangFormatEditor.MVVM.Views
     public ConfiguratorView()
     {
       InitializeComponent();
-      formatEditorViewModel = new ConfiguratorViewModel(this);
-      DataContext = formatEditorViewModel;
+      configuratorViewModel = new ConfiguratorViewModel(this);
+      DataContext = configuratorViewModel;
       CodeEditor.Text = inputWindowDefaulText;
       CodeEditorReadOnly.Text = outputWindowDefaulText;
     }
 
     private void RunFormat_TextBoxChanged(object sender, TextChangedEventArgs e)
     {
-      formatEditorViewModel.RunFormat();
+      configuratorViewModel.RunFormat();
     }
 
     private void RunFormat_Editor(object sender, EventArgs e)
     {
-      if (formatEditorViewModel.IsAnyOptionEnabled() == false) return;
-      formatEditorViewModel.RunFormat();
+      if (configuratorViewModel.IsAnyOptionEnabled() == false) return;
+      configuratorViewModel.RunFormat();
     }
 
     private void RunFormat_DropDownClosed(object sender, EventArgs e)
     {
-      formatEditorViewModel.RunFormat();
+      configuratorViewModel.RunFormat();
     }
 
     private void OpenMultipleInput(object sender, RoutedEventArgs e)
     {
       var element = (sender as FrameworkElement).DataContext;
       if (element == null) return;
-      formatEditorViewModel.OpenMultipleInput(FormatOptions.Items.IndexOf(element));
+      configuratorViewModel.OpenMultipleInput(FormatOptions.Items.IndexOf(element));
     }
 
     private void CodeEditor_PreviewDragOver(object sender, DragEventArgs e)
     {
-      formatEditorViewModel.PreviewDragOver(e);
+      configuratorViewModel.PreviewDragOver(e);
     }
 
     private void CodeEditor_PreviewDrop(object sender, DragEventArgs e)
     {
-      formatEditorViewModel.PreviewDrop(e);
+      configuratorViewModel.PreviewDrop(e);
     }
   }
 }
