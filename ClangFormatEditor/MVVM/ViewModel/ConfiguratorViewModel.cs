@@ -183,8 +183,8 @@ namespace ClangFormatEditor
       {
         if (IsAnyOptionEnabled())
         {
-          //TODO maybe asyncs
-          input = RunFormat(output);
+          //TODO maybe async
+          output = RunFormat(input);
           OnPropertyChanged(nameof(Output));
         };
       }
@@ -262,7 +262,7 @@ namespace ClangFormatEditor
     public void RunFormat()
     {
       if (windowLoaded == false) return;
-      output = RunFormat(input);
+      Output = RunFormat(input);
     }
     public void OpenMultipleInput(int index)
     {
