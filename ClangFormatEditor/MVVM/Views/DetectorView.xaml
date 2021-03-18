@@ -80,7 +80,7 @@
       </StackPanel>
 
       <RichTextBox
-        x:Name="DiffInput"
+        Name="DiffInput"
         Grid.Row="1"
         Grid.Column="0"
         FontFamily="Consolas"
@@ -109,7 +109,7 @@
       </StackPanel>
 
       <RichTextBox
-        x:Name="DiffOutput"
+        Name="DiffOutput"
         Grid.Row="1"
         Grid.Column="1"
         FontFamily="Consolas"
