@@ -204,7 +204,9 @@
           <FlowDocument>
             <Paragraph>
               <Run FontWeight="DemiBold" Text="{Binding SelectedOption.Name}" />
-              <Run Text="(" /><Run Background="#FFCDCDCD" Text="{Binding SelectedOption.Paramater}" /><Run Text=")" />
+              <Run Text="(" />
+              <Run Background="#FFCDCDCD" Text="{Binding SelectedOption.Paramater}" />
+              <Run Text=")" />
             </Paragraph>
           </FlowDocument>
         </RichTextBox>
@@ -286,7 +288,7 @@
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="auto" />
           <ColumnDefinition Width="*" MinWidth="220" />
-          <ColumnDefinition Width="3" />
+          <ColumnDefinition Width="4" />
           <ColumnDefinition Width="*" MinWidth="220" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -296,8 +298,7 @@
         <TextBox
           Name="LineNumber"
           Grid.Column="0"
-          Padding="0,0,5,0"
-          Background="Transparent"
+          Background="#D3D3D3"
           FontFamily="Consolas"
           FontSize="12"
           IsEnabled="True"
@@ -325,7 +326,7 @@
 
         <GridSplitter
           Grid.Column="2"
-          Width="3"
+          Width="4"
           HorizontalAlignment="Stretch"
           Background="#9E005A" />
 
@@ -347,7 +348,6 @@
           <RowDefinition Height="20" />
           <RowDefinition Height="auto" />
           <RowDefinition Height="20" />
-          <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -357,13 +357,27 @@
           <ColumnDefinition Width="150" />
           <ColumnDefinition Width="20" />
           <ColumnDefinition Width="150" />
+          <ColumnDefinition Width="20" />
+          <ColumnDefinition Width="150" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
+        <!--  Select file button  -->
+        <Button
+          Grid.Row="1"
+          Grid.Column="1"
+          Width="150"
+          Height="30"
+          Command="{Binding SelctCodeFileCommand}"
+          Content="Select Code File"
+          FontSize="14"
+          Foreground="White"
+          Style="{StaticResource SettingsButton}" />
 
         <!--  Reset button  -->
         <Button
           Grid.Row="1"
-          Grid.Column="1"
+          Grid.Column="3"
           Width="150"
           Height="30"
           Command="{Binding ResetCommand}"
@@ -386,22 +400,10 @@
         <!--  Export button  -->
         <Button
           Grid.Row="1"
-          Grid.Column="3"
+          Grid.Column="7"
           Width="150"
           Command="{Binding ImportFormatFileCommand}"
           Content="Import .clang-format"
-          FontSize="14"
-          Foreground="White"
-          Style="{StaticResource SettingsButton}" />
-
-        <!--  Select file button  -->
-        <Button
-          Grid.Row="3"
-          Grid.Column="3"
-          Width="150"
-          Height="30"
-          Command="{Binding SelctCodeFileCommand}"
-          Content="Select Code File"
           FontSize="14"
           Foreground="White"
           Style="{StaticResource SettingsButton}" />
