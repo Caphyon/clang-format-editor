@@ -353,11 +353,11 @@
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="150" />
-          <ColumnDefinition Width="20" />
+          <ColumnDefinition Width="10" />
           <ColumnDefinition Width="150" />
-          <ColumnDefinition Width="20" />
+          <ColumnDefinition Width="10" />
           <ColumnDefinition Width="150" />
-          <ColumnDefinition Width="20" />
+          <ColumnDefinition Width="10" />
           <ColumnDefinition Width="150" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
