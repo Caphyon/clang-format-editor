@@ -284,7 +284,7 @@
       <!--  Code Editor  -->
       <Grid Grid.Row="1" Grid.ColumnSpan="2">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="50" />
+          <ColumnDefinition Width="auto" />
           <ColumnDefinition Width="*" MinWidth="220" />
           <ColumnDefinition Width="3" />
           <ColumnDefinition Width="*" MinWidth="220" />
@@ -293,14 +293,20 @@
           <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock
+        <TextBox
+          Name="LineNumber"
+          Grid.Column="0"
+          Padding="0,0,5,0"
+          Background="Transparent"
           FontFamily="Consolas"
           FontSize="12"
+          IsEnabled="True"
+          ScrollViewer.ScrollChanged="Input_ScrollChanged"
           Text="{Binding LineNumber, UpdateSourceTrigger=PropertyChanged}"
           TextAlignment="Right" />
 
         <TextBox
-          Name="CodeEditor"
+          Name="CodeInput"
           Grid.Column="1"
           AcceptsReturn="True"
           AcceptsTab="True"
@@ -312,6 +318,7 @@
           HorizontalScrollBarVisibility="Auto"
           PreviewDragOver="CodeEditor_PreviewDragOver"
           PreviewDrop="CodeEditor_PreviewDrop"
+          ScrollViewer.ScrollChanged="Input_ScrollChanged"
           Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"
           TextWrapping="NoWrap"
           VerticalScrollBarVisibility="Auto" />

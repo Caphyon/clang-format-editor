@@ -256,7 +256,7 @@ namespace ClangFormatEditor
       if (droppedFile == null) return;
 
       using var streamReader = new StreamReader(droppedFile);
-      formatEditorView.CodeEditor.Text = streamReader.ReadToEnd();
+      formatEditorView.CodeInput.Text = streamReader.ReadToEnd();
     }
 
     public void RunFormat()
@@ -338,7 +338,7 @@ namespace ClangFormatEditor
       var filePath = OpenFile(string.Empty, ".cpp", AppConstants.CodeFileExtensions);
 
       if (File.Exists(filePath))
-        formatEditorView.CodeEditor.Text = File.ReadAllText(filePath);
+        formatEditorView.CodeInput.Text = File.ReadAllText(filePath);
     }
 
     private async Task ResetOptionsAsync()
