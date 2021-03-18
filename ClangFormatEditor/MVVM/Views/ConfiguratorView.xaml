@@ -329,19 +329,15 @@
           HorizontalAlignment="Stretch"
           Background="#9E005A" />
 
-        <TextBox
-          Name="CodeEditorReadOnly"
+        <RichTextBox
+          Name="CodeOutput"
           Grid.Column="3"
           AcceptsReturn="True"
           AcceptsTab="True"
-          Background="DimGray"
           FontFamily="Consolas"
           FontSize="12"
-          Foreground="White"
           HorizontalScrollBarVisibility="Auto"
           IsReadOnly="True"
-          Text="{Binding Output, UpdateSourceTrigger=PropertyChanged}"
-          TextWrapping="NoWrap"
           VerticalScrollBarVisibility="Auto" />
       </Grid>
 

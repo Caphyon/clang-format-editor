@@ -1,6 +1,7 @@
 ﻿using ClangFormatEditor.Enums;
 using ClangFormatEditor.Helpers;
 using ClangFormatEditor.Interfaces;
+using ClangFormatEditor.MVVM.Controllers;
 using ClangFormatEditor.MVVM.Views;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,10 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace ClangFormatEditor
@@ -20,7 +23,8 @@ namespace ClangFormatEditor
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    private readonly ConfiguratorView formatEditorView;
+    private readonly ConfiguratorView configuratorView;
+    private readonly DiffController diffController;
     private ICommand selctCodeFileCommand;
     private ICommand createFormatFileCommand;
     private ICommand importFormatFileCommand;
@@ -50,8 +54,10 @@ namespace ClangFormatEditor
     public ConfiguratorViewModel(ConfiguratorView formatEditorView)
     {
       formatEditorView.Loaded += EditorLoaded;
-      this.formatEditorView = formatEditorView;
+      this.configuratorView = formatEditorView;
       InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
+      diffController = new DiffController();
+      SetDefaultOutputText();
     }
 
     #endregion
@@ -176,20 +182,6 @@ namespace ClangFormatEditor
       }
     }
 
-    public string Output
-    {
-      get => output;
-      set
-      {
-        if (IsAnyOptionEnabled())
-        {
-          //TODO maybe async
-          output = RunFormat(input);
-          OnPropertyChanged(nameof(Output));
-        };
-      }
-    }
-
     public string LineNumber
     {
       get => lineNumber;
@@ -256,26 +248,26 @@ namespace ClangFormatEditor
       if (droppedFile == null) return;
 
       using var streamReader = new StreamReader(droppedFile);
-      formatEditorView.CodeInput.Text = streamReader.ReadToEnd();
+      configuratorView.CodeInput.Text = streamReader.ReadToEnd();
     }
 
     public void RunFormat()
     {
       if (windowLoaded == false) return;
-      Output = RunFormat(input);
+      RunFormatAsync().SafeFireAndForget();
     }
     public void OpenMultipleInput(int index)
     {
       if (windowLoaded == false) return;
       CloseMultipleInput += FormatAfterClosingMultipleInput;
       SelectedOption = FormatOptions[index];
-      OpenMultipleInput(SelectedOption, formatEditorView);
+      OpenMultipleInput(SelectedOption, configuratorView);
     }
 
     public void FormatAfterClosingMultipleInput(object sender, EventArgs e)
     {
       SelectedOption.IsEnabled = true;
-      Output = RunFormat(input);
+      RunFormatAsync().SafeFireAndForget();
       CloseMultipleInput -= FormatAfterClosingMultipleInput;
     }
 
@@ -284,12 +276,22 @@ namespace ClangFormatEditor
 
     #region Private Methods
 
-    private string RunFormat(string text)
+    private async Task RunFormatAsync()
     {
-      var formatter = new StyleFormatter();
-      var formattedText = formatter.FormatText(text, formatStyleOptions, selectedStyle);
-      return formattedText;
+      //var formatter = new StyleFormatter();
+      //var formattedText = formatter.FormatText(text, formatStyleOptions, selectedStyle);
+
+      if (IsAnyOptionEnabled())
+      {
+        var documents = await diffController.CreateFlowDocumentAsync(input, SelectedStyle, FormatOptions, new CancellationToken());
+        configuratorView.CodeOutput.Document = documents.Item2;
+      }
+      else
+      {
+        SetDefaultOutputText();
+      }
     }
+
 
     private void InitializeStyleOptions(FormatOptionsAllData formatOptionsData)
     {
@@ -338,7 +340,7 @@ namespace ClangFormatEditor
       var filePath = OpenFile(string.Empty, ".cpp", AppConstants.CodeFileExtensions);
 
       if (File.Exists(filePath))
-        formatEditorView.CodeInput.Text = File.ReadAllText(filePath);
+        configuratorView.CodeInput.Text = File.ReadAllText(filePath);
     }
 
     private async Task ResetOptionsAsync()
@@ -398,7 +400,7 @@ namespace ClangFormatEditor
     private void EditorLoaded(object sender, EventArgs e)
     {
       windowLoaded = true;
-      formatEditorView.Loaded -= EditorLoaded;
+      configuratorView.Loaded -= EditorLoaded;
     }
 
     private static bool DropFileValidation(DragEventArgs e, out string droppedFile)
@@ -463,6 +465,14 @@ namespace ClangFormatEditor
         if (item.IsEnabled) return true;
       }
       return false;
+    }
+
+    private void SetDefaultOutputText()
+    {
+      var paragraph = new Paragraph();
+      paragraph.Inlines.Add(new Run(AppConstants.OutputCodeText));
+      configuratorView.CodeOutput.Document.Blocks.Clear();
+      configuratorView.CodeOutput.Document.Blocks.Add(paragraph);
     }
 
     #endregion
