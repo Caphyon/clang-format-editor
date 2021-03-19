@@ -52,11 +52,13 @@ namespace ClangFormatEditor.MVVM.Views
       if (e.VerticalChange == 0 && e.HorizontalChange == 0) return;
       if (sender == DiffInput)
       {
+        DiffOutputLineNumber.ScrollToVerticalOffset(e.VerticalOffset);
         DiffOutput.ScrollToVerticalOffset(e.VerticalOffset);
         DiffOutput.ScrollToHorizontalOffset(e.HorizontalOffset);
       }
       else
       {
+        DiffInputLineNumber.ScrollToVerticalOffset(e.VerticalOffset);
         DiffInput.ScrollToVerticalOffset(e.VerticalOffset);
         DiffInput.ScrollToHorizontalOffset(e.HorizontalOffset);
       }
