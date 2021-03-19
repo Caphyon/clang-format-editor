@@ -148,8 +148,6 @@ namespace ClangFormatEditor
       var inputOperationPerLine = new List<(object, LineChanges)>();
       var outputOperationPerLine = new List<(object, LineChanges)>();
 
-      input = input.Trim();
-      output = output.Trim();
       CreateIntputOutputLines(input, output);
       SetMaxLineWidth();
       DetectOperationPerLine(input, output, inputOperationPerLine, outputOperationPerLine);
