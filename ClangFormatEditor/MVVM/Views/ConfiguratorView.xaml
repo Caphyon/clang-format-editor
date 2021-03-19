@@ -237,66 +237,48 @@
     <!--  Code editor  -->
     <Grid Grid.Row="1" Grid.Column="3">
       <Grid.RowDefinitions>
-        <RowDefinition Height="25" />
         <RowDefinition Height="*" />
         <RowDefinition Height="auto" />
       </Grid.RowDefinitions>
 
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
 
-      <!--  Input Headline  -->
-      <StackPanel
-        Grid.Row="0"
-        Grid.Column="0"
-        HorizontalAlignment="Center"
-        Orientation="Horizontal">
-        <Image
-          Width="15"
-          Height="15"
-          Margin="3"
-          Source="/ClangFormatEditor;component/Resources/InputIcon.png" />
-        <TextBlock
-          Width="65"
-          FontSize="16"
-          FontWeight="DemiBold"
-          Text="Input" />
-      </StackPanel>
-
-      <!--  Output Headline  -->
-      <StackPanel
-        Grid.Row="0"
-        Grid.Column="1"
-        HorizontalAlignment="Center"
-        Orientation="Horizontal">
-        <Image
-          Width="15"
-          Height="15"
-          Margin="3"
-          Source="/ClangFormatEditor;component/Resources/OutputIcon.png" />
-        <TextBlock
-          Width="65"
-          FontSize="16"
-          FontWeight="DemiBold"
-          Text="Output" />
-      </StackPanel>
-
-      <!--  Code Editor  -->
-      <Grid Grid.Row="1" Grid.ColumnSpan="2">
+      <!--  Code Input/Output  -->
+      <Grid Grid.Row="0">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="auto" />
-          <ColumnDefinition Width="*" MinWidth="220" />
+          <ColumnDefinition Width="*" MinWidth="100" />
           <ColumnDefinition Width="4" />
-          <ColumnDefinition Width="*" MinWidth="220" />
+          <ColumnDefinition Width="*" MinWidth="100" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+          <RowDefinition Height="25" />
           <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!--  Input  -->
+        <StackPanel
+          Grid.Row="0"
+          Grid.Column="1"
+          HorizontalAlignment="Center"
+          Orientation="Horizontal">
+          <Image
+            Width="15"
+            Height="15"
+            Margin="3"
+            Source="/ClangFormatEditor;component/Resources/InputIcon.png" />
+          <TextBlock
+            Width="65"
+            FontSize="16"
+            FontWeight="DemiBold"
+            Text="Input" />
+        </StackPanel>
+
         <TextBox
           Name="LineNumber"
+          Grid.Row="1"
           Grid.Column="0"
           Background="#D3D3D3"
           FontFamily="Consolas"
@@ -308,6 +290,7 @@
 
         <TextBox
           Name="CodeInput"
+          Grid.Row="1"
           Grid.Column="1"
           AcceptsReturn="True"
           AcceptsTab="True"
@@ -325,13 +308,33 @@
           VerticalScrollBarVisibility="Auto" />
 
         <GridSplitter
+          Grid.Row="1"
           Grid.Column="2"
           Width="4"
           HorizontalAlignment="Stretch"
           Background="#9E005A" />
 
+        <!--  Output  -->
+        <StackPanel
+          Grid.Row="0"
+          Grid.Column="3"
+          HorizontalAlignment="Center"
+          Orientation="Horizontal">
+          <Image
+            Width="15"
+            Height="15"
+            Margin="3"
+            Source="/ClangFormatEditor;component/Resources/OutputIcon.png" />
+          <TextBlock
+            Width="65"
+            FontSize="16"
+            FontWeight="DemiBold"
+            Text="Output" />
+        </StackPanel>
+
         <RichTextBox
           Name="CodeOutput"
+          Grid.Row="1"
           Grid.Column="3"
           AcceptsReturn="True"
           AcceptsTab="True"
@@ -343,7 +346,7 @@
       </Grid>
 
       <!--  Buttons  -->
-      <Grid Grid.Row="3" Grid.ColumnSpan="2">
+      <Grid Grid.Row="1">
         <Grid.RowDefinitions>
           <RowDefinition Height="20" />
           <RowDefinition Height="auto" />
@@ -409,7 +412,6 @@
           Style="{StaticResource SettingsButton}" />
 
       </Grid>
-
     </Grid>
   </Grid>
 </Window>
