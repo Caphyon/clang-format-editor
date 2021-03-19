@@ -141,7 +141,7 @@ namespace ClangFormatEditor
     /// <param name="input">The input code thar will be formatted </param>
     /// <param name="output">The output after the format</param>
     /// <returns></returns>
-    public (FlowDocument, FlowDocument) DiffAsFlowDocuments(string input, string output)
+    public (FlowDocument, FlowDocument, int) DiffAsFlowDocuments(string input, string output)
     {
       var paragraphInput = new Paragraph();
       var paragraphOutput = new Paragraph();
@@ -167,7 +167,7 @@ namespace ClangFormatEditor
         CreateDiffParagraph(paragraphOutput, outputOperationPerLine, Brushes.Yellow);
       }
 
-      return CreateFlowDocuments(paragraphInput, paragraphOutput);
+      return CreateFlowDocuments(paragraphInput, paragraphOutput, outputOperationPerLine.Count);
     }
 
     private void CreateIntputOutputLines(string input, string output)
@@ -348,8 +348,6 @@ namespace ClangFormatEditor
 
       for (int i = 0; i < operationLines.Count; i++)
       {
-        AddLineNumberToParagraphLine(paragraph, i + 1, operationLines.Count, 2);
-
         var run = new Run();
         switch (operationLines[i].Item2)
         {
@@ -380,7 +378,7 @@ namespace ClangFormatEditor
       }
     }
 
-    private (FlowDocument, FlowDocument) CreateFlowDocuments(Paragraph paragraphInput, Paragraph paragraphOutput)
+    private (FlowDocument, FlowDocument, int) CreateFlowDocuments(Paragraph paragraphInput, Paragraph paragraphOutput, int lineCount)
     {
       var diffInput = new FlowDocument();
       var diffOutput = new FlowDocument();
@@ -390,7 +388,7 @@ namespace ClangFormatEditor
       diffInput.PageWidth = maxLineWidth;
       diffOutput.PageWidth = maxLineWidth;
 
-      return (diffInput, diffOutput);
+      return (diffInput, diffOutput, lineCount);
     }
 
     private void SetMaxLineWidth()
@@ -424,7 +422,7 @@ namespace ClangFormatEditor
       return (int)maxSize + LineWidthSafety;
     }
 
-    private string AddPadding(string text, int targetPadding, bool isNewLine)
+    private static string AddPadding(string text, int targetPadding, bool isNewLine)
     {
       var paddingCount = targetPadding - text.Length;
       if (isNewLine)
@@ -462,7 +460,7 @@ namespace ClangFormatEditor
       }
     }
 
-    private void ColorTextDependingOnOperation(Paragraph paragraph, List<Diff> localdiffs)
+    private static void ColorTextDependingOnOperation(Paragraph paragraph, List<Diff> localdiffs)
     {
       foreach (Diff aDiff in localdiffs)
       {
@@ -490,18 +488,7 @@ namespace ClangFormatEditor
       paragraph.Inlines.Add(Environment.NewLine);
     }
 
-    private void AddLineNumberToParagraphLine(Paragraph paragraph, int currentLineNumber, int numberOfLines, int paddingLeft)
-    {
-      int numberOfSpaces = LengthOfNumber(numberOfLines) - LengthOfNumber(currentLineNumber) + paddingLeft;
-      var lineNumber = string.Concat(new string(' ', numberOfSpaces), (currentLineNumber).ToString(), " ");
-      var lineNumberRun = new Run(lineNumber)
-      {
-        Background = (Brush)new BrushConverter().ConvertFrom("#D3D3D3")
-      };
-      paragraph.Inlines.Add(lineNumberRun);
-    }
-
-    private int LengthOfNumber(int numberOfLines)
+    private static int LengthOfNumber(int numberOfLines)
     {
       return (int)Math.Floor(Math.Log10(numberOfLines) + 1);
     }

@@ -52,9 +52,9 @@ namespace ClangFormatEditor.MVVM.Controllers
       return await styleDetector.DetectStyleOptionsAsync(filesContent, cancelToken);
     }
 
-    public async Task<List<(FlowDocument, FlowDocument)>> CreateFlowDocumentsAsync(List<string> filesContent, FormatStyle formatStyle, List<IFormatOption> formatOptions, CancellationToken cancelToken)
+    public static async Task<List<(FlowDocument, FlowDocument, int)>> CreateFlowDocumentsAsync(List<string> filesContent, FormatStyle formatStyle, List<IFormatOption> formatOptions, CancellationToken cancelToken)
     {
-      var flowDocuments = new List<(FlowDocument, FlowDocument)>();
+      var flowDocuments = new List<(FlowDocument, FlowDocument, int)>();
 
       foreach (var file in filesContent)
       {
@@ -64,7 +64,7 @@ namespace ClangFormatEditor.MVVM.Controllers
       return flowDocuments;
     }
 
-    public async Task<(FlowDocument, FlowDocument)> CreateFlowDocumentAsync(string input, FormatStyle formatStyle, List<IFormatOption> formatOptions, CancellationToken cancelToken)
+    public static async Task<(FlowDocument, FlowDocument, int)> CreateFlowDocumentAsync(string input, FormatStyle formatStyle, List<IFormatOption> formatOptions, CancellationToken cancelToken)
     {
       var diffMatchPatchWrapper = new DiffMatchPatchWrapper();
       string output = string.Empty;
@@ -78,7 +78,7 @@ namespace ClangFormatEditor.MVVM.Controllers
       return diffMatchPatchWrapper.DiffAsFlowDocuments(input, output);
     }
 
-    public async Task<(bool, string)> CheckOptionValidityAsync(string input, FormatStyle formatStyle, List<IFormatOption> formatOptions)
+    public static async Task<(bool, string)> CheckOptionValidityAsync(string input, FormatStyle formatStyle, List<IFormatOption> formatOptions)
     {
       string output = string.Empty;
       await Task.Run(() =>
@@ -95,7 +95,7 @@ namespace ClangFormatEditor.MVVM.Controllers
     }
 
 
-    public List<string> GetFileNames(List<string> filePaths)
+    public static List<string> GetFileNames(List<string> filePaths)
     {
       var fileNames = new List<string>();
       foreach (var path in filePaths)
@@ -105,7 +105,7 @@ namespace ClangFormatEditor.MVVM.Controllers
       return fileNames;
     }
 
-    public void CopyOptionValues(IFormatOption optionToChange, IFormatOption optionToCopy)
+    public static void CopyOptionValues(IFormatOption optionToChange, IFormatOption optionToCopy)
     {
       switch (optionToChange)
       {
@@ -130,7 +130,7 @@ namespace ClangFormatEditor.MVVM.Controllers
       }
     }
 
-    public bool IsOptionChanged(IFormatOption option, IFormatOption defaultOption)
+    public static bool IsOptionChanged(IFormatOption option, IFormatOption defaultOption)
     {
       switch (option)
       {
@@ -168,7 +168,7 @@ namespace ClangFormatEditor.MVVM.Controllers
       return false;
     }
 
-    public void DeleteFormatFolder()
+    public static void DeleteFormatFolder()
     {
       string folderPath = Path.Combine(ProjectSetup.AppDataDirectory, AppConstants.FormatDirectory);
       FileSystem.DeleteDirectory(folderPath);
