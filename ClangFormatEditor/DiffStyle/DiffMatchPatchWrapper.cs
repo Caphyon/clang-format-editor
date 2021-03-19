@@ -193,10 +193,17 @@ namespace ClangFormatEditor
       {
         // Both inputLines and outputLines must be equal. The method is run on both
         // This is done my adding lines that contain just Environment.NewLine to the inputLines and outputLines
-        inputLines = EqualizeDocumentLength(output, input);
-        outputLines = EqualizeDocumentLength(input, output);
+        try
+        {
+          inputLines = EqualizeDocumentLength(output, input);
+          outputLines = EqualizeDocumentLength(input, output);
+        }
+        catch (Exception e)
+        {
+          MessageBox.Show(e.Message, "Clang-Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
 
-        if (inputLines.Count < outputLines.Count) return;
+        // if (inputLines.Count != outputLines.Count) return;
       }
 
       for (int index = 0; index < outputLines.Count; index++)
@@ -286,8 +293,8 @@ namespace ClangFormatEditor
               emptyLinesToAdd -= newLineFoundPerOperation;
             }
 
-            // If no Environment.NewLine was found,  append the text from the operation to the previous line
-            if (newLineFoundPerOperation == 0)
+            // If no Environment.NewLine was found, append the text from the operation to the previous line
+            if (newLineFoundPerOperation == 0 && lines.Count - 1 >= 0)
             {
               lines[lines.Count - 1] += text;
               break;
@@ -295,7 +302,7 @@ namespace ClangFormatEditor
 
             // If one Environment.NewLine was found, append the text before Environment.NewLine to the the previous line and 
             // the text after add it to a new line
-            if (newLineFoundPerOperation == 1)
+            if (newLineFoundPerOperation == 1 && lines.Count - 1 >= 0)
             {
               lines[lines.Count - 1] += text.SubstringBefore(Environment.NewLine);
               lines.Add(text.SubstringAfter(Environment.NewLine));
@@ -304,18 +311,23 @@ namespace ClangFormatEditor
 
             // Multiple Environment.NewLine were found, append the text before the first Environment.NewLine to the the previous line 
             // and split the remaing text based on Environment.NewLine to new lines
-            var insertLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
-            lines[lines.Count - 1] += insertLines[0];
-            insertLines.RemoveAt(0);
 
-            lines.AddRange(insertLines);
+            if (lines.Count - 1 >= 0)
+            {
+              var insertLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
+              lines[lines.Count - 1] += insertLines[0];
+              insertLines.RemoveAt(0);
+              lines.AddRange(insertLines);
+            }
             break;
           case Operation.EQUAL:
             var equalLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
 
             // If one Environment.NewLine was found, append the text before Environment.NewLine to the the previous line and 
             // the text after add it to a new line
-            if (lines.Count > 0 && equalLines.Count >= 1 && equalLines.Count > newLineFoundPerOperation)
+            if (lines.Count > 0 &&
+                equalLines.Count >= 1 &&
+                equalLines.Count > newLineFoundPerOperation)
             {
               lines[lines.Count - 1] += equalLines.First();
               equalLines.RemoveAt(0);
