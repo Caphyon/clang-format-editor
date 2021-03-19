@@ -24,7 +24,6 @@ namespace ClangFormatEditor
     public event PropertyChangedEventHandler PropertyChanged;
 
     private readonly ConfiguratorView configuratorView;
-    private readonly DiffController diffController;
     private ICommand selctCodeFileCommand;
     private ICommand createFormatFileCommand;
     private ICommand importFormatFileCommand;
@@ -33,13 +32,13 @@ namespace ClangFormatEditor
     private ICommand openUri;
     private ICommand resetSearchCommand;
 
+    private List<IFormatOption> searchResultFormatStyleOptions;
     private string input = AppConstants.InputCodeText;
-    private string output = AppConstants.OutputCodeText;
-    private string lineNumber = "1";
     private string checkSearch = string.Empty;
     private bool showOptionDescription = true;
-    private List<IFormatOption> searchResultFormatStyleOptions;
     private bool windowLoaded = false;
+    private string inputLineNumber;
+    private string outputLineNumber;
     private string nameColumnWidth;
     private string droppedFile;
 
@@ -56,8 +55,7 @@ namespace ClangFormatEditor
       formatEditorView.Loaded += EditorLoaded;
       this.configuratorView = formatEditorView;
       InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
-      diffController = new DiffController();
-      SetDefaultOutputText();
+      SetDefaultOutputTextAsync().SafeFireAndForget();
     }
 
     #endregion
@@ -168,7 +166,8 @@ namespace ClangFormatEditor
     {
       get
       {
-        UpdateLineNumberAsync().SafeFireAndForget();
+        var lineCount = input.Split(Environment.NewLine).Length;
+        SetInputLineNumberAsync(lineCount).SafeFireAndForget();
         return input;
       }
       set
@@ -182,13 +181,23 @@ namespace ClangFormatEditor
       }
     }
 
-    public string LineNumber
+    public string InputLineNumber
     {
-      get => lineNumber;
+      get => inputLineNumber;
       set
       {
-        lineNumber = value;
-        OnPropertyChanged(nameof(LineNumber));
+        inputLineNumber = value;
+        OnPropertyChanged(nameof(InputLineNumber));
+      }
+    }
+
+    public string OutputLineNumber
+    {
+      get => outputLineNumber;
+      set
+      {
+        outputLineNumber = value;
+        OnPropertyChanged(nameof(OutputLineNumber));
       }
     }
 
@@ -278,17 +287,15 @@ namespace ClangFormatEditor
 
     private async Task RunFormatAsync()
     {
-      //var formatter = new StyleFormatter();
-      //var formattedText = formatter.FormatText(text, formatStyleOptions, selectedStyle);
-
       if (IsAnyOptionEnabled())
       {
-        var documents = await diffController.CreateFlowDocumentAsync(input, SelectedStyle, FormatOptions, new CancellationToken());
+        var documents = await DiffController.CreateFlowDocumentAsync(input, SelectedStyle, FormatOptions, new CancellationToken());
+        await SetOutputLineNumberAsync(documents.Item3);
         configuratorView.CodeOutput.Document = documents.Item2;
       }
       else
       {
-        SetDefaultOutputText();
+        await SetDefaultOutputTextAsync();
       }
     }
 
@@ -439,18 +446,27 @@ namespace ClangFormatEditor
       });
     }
 
-    private async Task UpdateLineNumberAsync()
+    private async Task SetInputLineNumberAsync(int numberOfLines)
+    {
+      InputLineNumber = await GetLineNumbersAsync(numberOfLines);
+    }
+
+    private async Task SetOutputLineNumberAsync(int numberOfLines)
+    {
+      OutputLineNumber = await GetLineNumbersAsync(numberOfLines);
+    }
+
+    private static async Task<string> GetLineNumbersAsync(int numberOfLines)
     {
       var sb = new StringBuilder();
       await Task.Run(() =>
       {
-        var lineCount = input.Split(Environment.NewLine).Length;
-        for (int i = 1; i <= lineCount; i++)
+        for (int i = 1; i <= numberOfLines; i++)
         {
           sb.AppendLine(i.ToString());
         }
       });
-      LineNumber = sb.ToString();
+      return sb.ToString();
     }
 
     private void OnPropertyChanged(string propertyName)
@@ -467,12 +483,15 @@ namespace ClangFormatEditor
       return false;
     }
 
-    private void SetDefaultOutputText()
+    private async Task SetDefaultOutputTextAsync()
     {
       var paragraph = new Paragraph();
       paragraph.Inlines.Add(new Run(AppConstants.OutputCodeText));
       configuratorView.CodeOutput.Document.Blocks.Clear();
       configuratorView.CodeOutput.Document.Blocks.Add(paragraph);
+
+      var output = AppConstants.OutputCodeText.Split(Environment.NewLine).Length;
+      await SetOutputLineNumberAsync(output == 0 ? 1 : output);
     }
 
     #endregion

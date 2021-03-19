@@ -248,101 +248,139 @@
       <!--  Code Input/Output  -->
       <Grid Grid.Row="0">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="auto" />
           <ColumnDefinition Width="*" MinWidth="100" />
-          <ColumnDefinition Width="4" />
+          <ColumnDefinition Width="2" />
           <ColumnDefinition Width="*" MinWidth="100" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-          <RowDefinition Height="25" />
           <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!--  Input  -->
-        <StackPanel
-          Grid.Row="0"
-          Grid.Column="1"
-          HorizontalAlignment="Center"
-          Orientation="Horizontal">
-          <Image
-            Width="15"
-            Height="15"
-            Margin="3"
-            Source="/ClangFormatEditor;component/Resources/InputIcon.png" />
-          <TextBlock
-            Width="65"
-            FontSize="16"
-            FontWeight="DemiBold"
-            Text="Input" />
-        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
 
-        <TextBox
-          Name="LineNumber"
-          Grid.Row="1"
-          Grid.Column="0"
-          Background="#D3D3D3"
-          FontFamily="Consolas"
-          FontSize="12"
-          IsEnabled="True"
-          ScrollViewer.ScrollChanged="Input_ScrollChanged"
-          Text="{Binding LineNumber, UpdateSourceTrigger=PropertyChanged}"
-          TextAlignment="Right" />
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
 
-        <TextBox
-          Name="CodeInput"
-          Grid.Row="1"
-          Grid.Column="1"
-          AcceptsReturn="True"
-          AcceptsTab="True"
-          AllowDrop="True"
-          Background="Black"
-          FontFamily="Consolas"
-          FontSize="12"
-          Foreground="White"
-          HorizontalScrollBarVisibility="Auto"
-          PreviewDragOver="CodeEditor_PreviewDragOver"
-          PreviewDrop="CodeEditor_PreviewDrop"
-          ScrollViewer.ScrollChanged="Input_ScrollChanged"
-          Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"
-          TextWrapping="NoWrap"
-          VerticalScrollBarVisibility="Auto" />
+          <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Image
+              Width="15"
+              Height="15"
+              Margin="3"
+              Source="/ClangFormatEditor;component/Resources/InputIcon.png" />
+            <TextBlock
+              Width="65"
+              FontSize="16"
+              FontWeight="DemiBold"
+              Text="Input" />
+          </StackPanel>
 
+          <TextBox
+            Name="InputLineNumber"
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="#D3D3D3"
+            FontFamily="Consolas"
+            FontSize="12"
+            IsEnabled="True"
+            IsReadOnly="True"
+            ScrollViewer.ScrollChanged="Input_ScrollChanged"
+            Text="{Binding InputLineNumber, UpdateSourceTrigger=PropertyChanged}"
+            TextAlignment="Right" />
+
+          <TextBox
+            Name="CodeInput"
+            Grid.Row="1"
+            Grid.Column="1"
+            AcceptsReturn="True"
+            AcceptsTab="True"
+            AllowDrop="True"
+            Background="Black"
+            FontFamily="Consolas"
+            FontSize="12"
+            Foreground="White"
+            HorizontalScrollBarVisibility="Auto"
+            PreviewDragOver="CodeEditor_PreviewDragOver"
+            PreviewDrop="CodeEditor_PreviewDrop"
+            ScrollViewer.ScrollChanged="Input_ScrollChanged"
+            Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="NoWrap"
+            VerticalScrollBarVisibility="Auto" />
+        </Grid>
+
+        <!--  Splitter  -->
         <GridSplitter
           Grid.Row="1"
-          Grid.Column="2"
-          Width="4"
+          Grid.Column="1"
+          Width="2"
+          Margin="0,25,0,0"
           HorizontalAlignment="Stretch"
           Background="#9E005A" />
 
         <!--  Output  -->
-        <StackPanel
-          Grid.Row="0"
-          Grid.Column="3"
-          HorizontalAlignment="Center"
-          Orientation="Horizontal">
-          <Image
-            Width="15"
-            Height="15"
-            Margin="3"
-            Source="/ClangFormatEditor;component/Resources/OutputIcon.png" />
-          <TextBlock
-            Width="65"
-            FontSize="16"
-            FontWeight="DemiBold"
-            Text="Output" />
-        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="2">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
 
-        <RichTextBox
-          Name="CodeOutput"
-          Grid.Row="1"
-          Grid.Column="3"
-          AcceptsReturn="True"
-          AcceptsTab="True"
-          FontFamily="Consolas"
-          FontSize="12"
-          HorizontalScrollBarVisibility="Auto"
-          IsReadOnly="True"
-          VerticalScrollBarVisibility="Auto" />
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
+          <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Image
+              Width="15"
+              Height="15"
+              Margin="3"
+              Source="/ClangFormatEditor;component/Resources/OutputIcon.png" />
+            <TextBlock
+              Width="65"
+              FontSize="16"
+              FontWeight="DemiBold"
+              Text="Output" />
+          </StackPanel>
+
+          <TextBox
+            Name="OutputLineNumber"
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="#D3D3D3"
+            FontFamily="Consolas"
+            FontSize="12"
+            IsEnabled="True"
+            ScrollViewer.ScrollChanged="Output_ScrollChanged"
+            Text="{Binding OutputLineNumber, UpdateSourceTrigger=PropertyChanged}"
+            TextAlignment="Right" />
+
+          <RichTextBox
+            Name="CodeOutput"
+            Grid.Row="1"
+            Grid.Column="1"
+            AcceptsReturn="True"
+            AcceptsTab="True"
+            FontFamily="Consolas"
+            FontSize="12"
+            HorizontalScrollBarVisibility="Auto"
+            IsReadOnly="True"
+            ScrollViewer.ScrollChanged="Output_ScrollChanged"
+            VerticalScrollBarVisibility="Auto" />
+        </Grid>
       </Grid>
 
       <!--  Buttons  -->

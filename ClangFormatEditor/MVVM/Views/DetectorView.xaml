@@ -49,7 +49,7 @@
 
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" MinWidth="165" />
-        <ColumnDefinition Width="4" />
+        <ColumnDefinition Width="2" />
         <ColumnDefinition Width="*" MinWidth="165" />
       </Grid.ColumnDefinitions>
 
@@ -117,7 +117,8 @@
       <GridSplitter
         Grid.Row="1"
         Grid.Column="1"
-        Width="4"
+        Width="2"
+        Margin="0,25,0,0"
         HorizontalAlignment="Stretch"
         Background="#9E005A" />
 

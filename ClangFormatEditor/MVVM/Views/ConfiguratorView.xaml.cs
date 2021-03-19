@@ -48,11 +48,15 @@ namespace ClangFormatEditor.MVVM.Views
     private void Input_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
       if (e.VerticalChange == 0 && e.HorizontalChange == 0) return;
-      if (sender == CodeInput)
-      {
-        CodeInput.ScrollToVerticalOffset(e.VerticalOffset);
-        LineNumber.ScrollToVerticalOffset(e.VerticalOffset);
-      }
+      CodeInput.ScrollToVerticalOffset(e.VerticalOffset);
+      InputLineNumber.ScrollToVerticalOffset(e.VerticalOffset);
+    }
+
+    private void Output_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+      if (e.VerticalChange == 0 && e.HorizontalChange == 0) return;
+      CodeOutput.ScrollToVerticalOffset(e.VerticalOffset);
+      OutputLineNumber.ScrollToVerticalOffset(e.VerticalOffset);
     }
   }
 }
