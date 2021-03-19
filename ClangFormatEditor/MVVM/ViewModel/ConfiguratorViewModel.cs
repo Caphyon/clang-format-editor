@@ -55,7 +55,7 @@ namespace ClangFormatEditor
       formatEditorView.Loaded += EditorLoaded;
       this.configuratorView = formatEditorView;
       InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
-      SetDefaultOutputTextAsync().SafeFireAndForget();
+      SetDefaultOutputTextAsync(AppConstants.OutputCodeText).SafeFireAndForget();
     }
 
     #endregion
@@ -289,13 +289,27 @@ namespace ClangFormatEditor
     {
       if (IsAnyOptionEnabled())
       {
+        //TODO use dedicated class
+        string output = string.Empty;
+        await Task.Run(() =>
+        {
+          var formatter = new StyleFormatter();
+          output = formatter.FormatText(input, formatStyleOptions, selectedStyle);
+        });
+
+        if (output.Contains("YAML"))
+        {
+          await SetDefaultOutputTextAsync(output);
+          return;
+        }
+
         var documents = await DiffController.CreateFlowDocumentAsync(input, SelectedStyle, FormatOptions, new CancellationToken());
         await SetOutputLineNumberAsync(documents.Item3);
         configuratorView.CodeOutput.Document = documents.Item2;
       }
       else
       {
-        await SetDefaultOutputTextAsync();
+        await SetDefaultOutputTextAsync(AppConstants.OutputCodeText);
       }
     }
 
@@ -456,6 +470,7 @@ namespace ClangFormatEditor
       OutputLineNumber = await GetLineNumbersAsync(numberOfLines);
     }
 
+    //TODO move to a dedicated class
     private static async Task<string> GetLineNumbersAsync(int numberOfLines)
     {
       var sb = new StringBuilder();
@@ -483,10 +498,10 @@ namespace ClangFormatEditor
       return false;
     }
 
-    private async Task SetDefaultOutputTextAsync()
+    private async Task SetDefaultOutputTextAsync(string text)
     {
       var paragraph = new Paragraph();
-      paragraph.Inlines.Add(new Run(AppConstants.OutputCodeText));
+      paragraph.Inlines.Add(new Run(text));
       configuratorView.CodeOutput.Document.Blocks.Clear();
       configuratorView.CodeOutput.Document.Blocks.Add(paragraph);
 
