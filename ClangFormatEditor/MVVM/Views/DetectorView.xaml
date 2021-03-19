@@ -49,8 +49,9 @@
       </Grid.RowDefinitions>
 
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" MinWidth="140" />
+        <ColumnDefinition Width="4" />
+        <ColumnDefinition Width="*" MinWidth="140" />
       </Grid.ColumnDefinitions>
 
       <!--  Input Diff  -->
@@ -89,10 +90,18 @@
         ScrollViewer.ScrollChanged="Diff_ScrollChanged"
         VerticalScrollBarVisibility="Auto" />
 
+      <!--  Splitter  -->
+      <GridSplitter
+        Grid.Row="1"
+        Grid.Column="1"
+        Width="4"
+        HorizontalAlignment="Stretch"
+        Background="#9E005A" />
+
       <!--  Output Diff  -->
       <StackPanel
         Grid.Row="0"
-        Grid.Column="1"
+        Grid.Column="2"
         HorizontalAlignment="Center"
         Orientation="Horizontal">
         <Image
@@ -111,7 +120,7 @@
       <RichTextBox
         Name="DiffOutput"
         Grid.Row="1"
-        Grid.Column="1"
+        Grid.Column="2"
         FontFamily="Consolas"
         HorizontalScrollBarVisibility="Auto"
         IsReadOnly="True"
