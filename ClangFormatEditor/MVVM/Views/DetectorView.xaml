@@ -97,7 +97,7 @@
           Background="#D3D3D3"
           FontFamily="Consolas"
           FontSize="12"
-          IsEnabled="True"
+          IsEnabled="False"
           ScrollViewer.ScrollChanged="Diff_ScrollChanged"
           Text="{Binding LineNumber, UpdateSourceTrigger=PropertyChanged}"
           TextAlignment="Right" />
@@ -159,7 +159,7 @@
           Background="#D3D3D3"
           FontFamily="Consolas"
           FontSize="12"
-          IsEnabled="True"
+          IsEnabled="False"
           ScrollViewer.ScrollChanged="Diff_ScrollChanged"
           Text="{Binding LineNumber, UpdateSourceTrigger=PropertyChanged}"
           TextAlignment="Right" />

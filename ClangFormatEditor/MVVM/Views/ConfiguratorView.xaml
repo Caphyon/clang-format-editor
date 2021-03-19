@@ -292,8 +292,7 @@
             Background="#D3D3D3"
             FontFamily="Consolas"
             FontSize="12"
-            IsEnabled="True"
-            IsReadOnly="True"
+            IsEnabled="False"
             ScrollViewer.ScrollChanged="Input_ScrollChanged"
             Text="{Binding InputLineNumber, UpdateSourceTrigger=PropertyChanged}"
             TextAlignment="Right" />
@@ -363,7 +362,7 @@
             Background="#D3D3D3"
             FontFamily="Consolas"
             FontSize="12"
-            IsEnabled="True"
+            IsEnabled="False"
             ScrollViewer.ScrollChanged="Output_ScrollChanged"
             Text="{Binding OutputLineNumber, UpdateSourceTrigger=PropertyChanged}"
             TextAlignment="Right" />
