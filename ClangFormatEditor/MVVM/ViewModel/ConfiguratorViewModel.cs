@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -55,7 +54,7 @@ namespace ClangFormatEditor
       formatEditorView.Loaded += EditorLoaded;
       this.configuratorView = formatEditorView;
       InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
-      SetDefaultOutputTextAsync(AppConstants.OutputCodeText).SafeFireAndForget();
+      SetOutputTextAsync(AppConstants.OutputCodeText).SafeFireAndForget();
     }
 
     #endregion
@@ -287,30 +286,21 @@ namespace ClangFormatEditor
 
     private async Task RunFormatAsync()
     {
-      if (IsAnyOptionEnabled())
+      if (IsAnyOptionEnabled() == false)
       {
-        //TODO use dedicated class
-        string output = string.Empty;
-        await Task.Run(() =>
-        {
-          var formatter = new StyleFormatter();
-          output = formatter.FormatText(input, formatStyleOptions, selectedStyle);
-        });
-
-        if (output.Contains("YAML"))
-        {
-          await SetDefaultOutputTextAsync(output);
-          return;
-        }
-
-        var documents = await DiffController.CreateFlowDocumentAsync(input, SelectedStyle, FormatOptions, new CancellationToken());
-        await SetOutputLineNumberAsync(documents.Item3);
-        configuratorView.CodeOutput.Document = documents.Item2;
+        await SetOutputTextAsync(AppConstants.OutputCodeText);
+        return;
       }
-      else
+      var formatErrors = await FormatViewModelHelper.CheckOptionsValidityAsync(input, formatStyleOptions, selectedStyle);
+      if (formatErrors.Item1)
       {
-        await SetDefaultOutputTextAsync(AppConstants.OutputCodeText);
+        await SetOutputTextAsync(formatErrors.Item2);
+        return;
       }
+
+      var documents = await DiffController.CreateFlowDocumentAsync(input, SelectedStyle, FormatOptions, new CancellationToken());
+      await SetOutputLineNumberAsync(documents.Item3);
+      configuratorView.CodeOutput.Document = documents.Item2;
     }
 
 
@@ -462,26 +452,12 @@ namespace ClangFormatEditor
 
     private async Task SetInputLineNumberAsync(int numberOfLines)
     {
-      InputLineNumber = await GetLineNumbersAsync(numberOfLines);
+      InputLineNumber = await FormatViewModelHelper.GetLineNumbersAsync(numberOfLines);
     }
 
     private async Task SetOutputLineNumberAsync(int numberOfLines)
     {
-      OutputLineNumber = await GetLineNumbersAsync(numberOfLines);
-    }
-
-    //TODO move to a dedicated class
-    private static async Task<string> GetLineNumbersAsync(int numberOfLines)
-    {
-      var sb = new StringBuilder();
-      await Task.Run(() =>
-      {
-        for (int i = 1; i <= numberOfLines; i++)
-        {
-          sb.AppendLine(i.ToString());
-        }
-      });
-      return sb.ToString();
+      OutputLineNumber = await FormatViewModelHelper.GetLineNumbersAsync(numberOfLines);
     }
 
     private void OnPropertyChanged(string propertyName)
@@ -498,7 +474,7 @@ namespace ClangFormatEditor
       return false;
     }
 
-    private async Task SetDefaultOutputTextAsync(string text)
+    private async Task SetOutputTextAsync(string text)
     {
       var paragraph = new Paragraph();
       paragraph.Inlines.Add(new Run(text));

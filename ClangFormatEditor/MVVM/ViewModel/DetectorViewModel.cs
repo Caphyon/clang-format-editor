@@ -307,15 +307,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private async Task SetLineNumberAsync()
     {
-      var sb = new StringBuilder();
-      await Task.Run(() =>
-      {
-        for (int i = 1; i <= flowDocuments.FirstOrDefault().Item3; i++)
-        {
-          sb.AppendLine(i.ToString());
-        }
-      });
-      LineNumber = sb.ToString();
+      LineNumber = await FormatViewModelHelper.GetLineNumbersAsync(flowDocuments.FirstOrDefault().Item3);
     }
 
     private void CloseInfoWindow(object sender, System.EventArgs e)
@@ -326,7 +318,6 @@ namespace ClangFormatEditor.MVVM.ViewModels
       infoWindow.Closed -= CloseInfoWindow;
       infoWindow = null;
     }
-
 
     private string GetDetectedOptions()
     {
@@ -369,7 +360,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     private async Task<bool> AreOptionsValidAsync()
     {
       if (flowDocuments.Count == 0) return false;
-      (var errorDetected, var errorMessage) = await DiffController.CheckOptionValidityAsync(filesContent.First(), SelectedStyle, FormatOptions);
+      (var errorDetected, var errorMessage) = await FormatViewModelHelper.CheckOptionsValidityAsync(filesContent.First(), FormatOptions, SelectedStyle);
 
       if (errorDetected)
       {

@@ -78,23 +78,6 @@ namespace ClangFormatEditor.MVVM.Controllers
       return diffMatchPatchWrapper.DiffAsFlowDocuments(input, output);
     }
 
-    public static async Task<(bool, string)> CheckOptionValidityAsync(string input, FormatStyle formatStyle, List<IFormatOption> formatOptions)
-    {
-      string output = string.Empty;
-      await Task.Run(() =>
-      {
-        var formatter = new StyleFormatter();
-        output = formatter.FormatText(input, formatOptions, formatStyle);
-      });
-
-      if (output.Contains("YAML"))
-      {
-        return (true, output);
-      }
-      return (false, string.Empty);
-    }
-
-
     public static List<string> GetFileNames(List<string> filePaths)
     {
       var fileNames = new List<string>();
