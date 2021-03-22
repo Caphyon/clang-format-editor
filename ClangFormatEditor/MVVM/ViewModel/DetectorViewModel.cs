@@ -18,7 +18,7 @@ using Brushes = System.Windows.Media.Brushes;
 
 namespace ClangFormatEditor.MVVM.ViewModels
 {
-  public class DetectorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged
+  public class DetectorViewModel : InputProvider, INotifyPropertyChanged
   {
     #region Members
 
@@ -29,12 +29,13 @@ namespace ClangFormatEditor.MVVM.ViewModels
     private DetectingView detectingView;
     private List<IFormatOption> detectedOptions;
     private List<IFormatOption> defaultOptions;
-    private List<(FlowDocument, FlowDocument)> flowDocuments;
+    private List<(FlowDocument, FlowDocument, int)> flowDocuments;
     private List<string> filesContent;
     private ICommand createFormatFileCommand;
     private ICommand reloadCommand;
     private ICommand resetCommand;
     private string selectedFile;
+    private string lineNumber;
     private int multipleInputDataIndex;
 
     private DetectedFormatStyleInfo infoWindow;
@@ -55,7 +56,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       set => selectedStyle = value;
     }
     public string Style { get; set; }
-    public IEnumerable<ToggleValues> BooleanComboboxValues
+    public static IEnumerable<ToggleValues> BooleanComboboxValues
     {
       get
       {
@@ -91,10 +92,20 @@ namespace ClangFormatEditor.MVVM.ViewModels
       set
       {
         selectedOption = value;
-        OnPropertyChanged("SelectedOption");
+        OnPropertyChanged(nameof(SelectedOption));
       }
     }
-    public bool CanExecute => true;
+
+    public string LineNumber
+    {
+      get => lineNumber;
+      set
+      {
+        lineNumber = value;
+        OnPropertyChanged(nameof(LineNumber));
+      }
+    }
+    public static bool CanExecute => true;
 
     #endregion
 
@@ -105,12 +116,6 @@ namespace ClangFormatEditor.MVVM.ViewModels
       diffWindow.Closed += DiffWindow_Closed;
       diffController = new DiffController();
       FileNames = new List<string>();
-    }
-
-    //Empty constructor used for XAML IntelliSense
-    public DetectorViewModel()
-    {
-
     }
 
     #endregion
@@ -138,7 +143,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       });
       await ReloadDiffAsync(AppConstants.ResetTitle, AppConstants.ResetDescription, string.Empty);
       SelectedOption = FormatOptions.First();
-      OnPropertyChanged("FormatOptions");
+      OnPropertyChanged(nameof(FormatOptions));
     }
 
     #endregion
@@ -158,7 +163,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
         (SelectedStyle, FormatOptions) = await diffController.GetFormatOptionsAsync(filesContent, cancelToken);
         SelectedOption = FormatOptions.First();
         ChangeOptionsFontWeight(AppConstants.BoldFontWeight);
-        flowDocuments = await diffController.CreateFlowDocumentsAsync(filesContent, SelectedStyle, FormatOptions, cancelToken);
+        flowDocuments = await DiffController.CreateFlowDocumentsAsync(filesContent, SelectedStyle, FormatOptions, cancelToken);
         detectedOptions = FormatOptionsProvider.CloneDetectedOptions(FormatOptions);
         defaultOptions = FormatOptionsProvider.GetDefaultOptionsForStyle(SelectedStyle);
       }
@@ -171,6 +176,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
         diffController.CancellationSource.Dispose();
       }
 
+      await SetLineNumberAsync();
       DetectionFinished(filesPath);
     }
 
@@ -186,7 +192,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     {
       var option = formatStyleOptions[index];
       var defaultOption = defaultOptions[index];
-      if (diffController.IsOptionChanged(option, defaultOption))
+      if (DiffController.IsOptionChanged(option, defaultOption))
       {
         MarkOptionChange((FormatOptionModel)option, true, AppConstants.BoldFontWeight);
       }
@@ -202,7 +208,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     {
       var option = formatStyleOptions[index];
       var detectedOption = detectedOptions[index];
-      diffController.CopyOptionValues(option, detectedOption);
+      DiffController.CopyOptionValues(option, detectedOption);
       if (detectedOption.IsModifed)
       {
         MarkOptionChange((FormatOptionModel)option, true, AppConstants.BoldFontWeight);
@@ -221,13 +227,13 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private void InitializeDiffView(List<string> filePaths)
     {
-      FileNames = diffController.GetFileNames(filePaths);
+      FileNames = DiffController.GetFileNames(filePaths);
       SetFlowDocuments();
       Style = "Base Style: " + SelectedStyle.ToString();
 
-      OnPropertyChanged("FileNames");
-      OnPropertyChanged("FormatOptions");
-      OnPropertyChanged("Style");
+      OnPropertyChanged(nameof(FileNames));
+      OnPropertyChanged(nameof(FormatOptions));
+      OnPropertyChanged(nameof(Style));
     }
 
     private async Task ReloadDiffAsync(string title, string description, string descriptionExtra)
@@ -243,7 +249,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
         CancellationToken cancelToken = diffController.CancellationSource.Token;
         try
         {
-          flowDocuments = await diffController.CreateFlowDocumentsAsync(filesContent, SelectedStyle, FormatOptions, cancelToken);
+          flowDocuments = await DiffController.CreateFlowDocumentsAsync(filesContent, SelectedStyle, FormatOptions, cancelToken);
           SetFlowDocuments();
         }
         catch (OperationCanceledException)
@@ -299,6 +305,11 @@ namespace ClangFormatEditor.MVVM.ViewModels
       }
     }
 
+    private async Task SetLineNumberAsync()
+    {
+      LineNumber = await FormatViewModelHelper.GetLineNumbersAsync(flowDocuments.FirstOrDefault().Item3);
+    }
+
     private void CloseInfoWindow(object sender, System.EventArgs e)
     {
       if (infoWindow == null)
@@ -307,7 +318,6 @@ namespace ClangFormatEditor.MVVM.ViewModels
       infoWindow.Closed -= CloseInfoWindow;
       infoWindow = null;
     }
-
 
     private string GetDetectedOptions()
     {
@@ -350,7 +360,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
     private async Task<bool> AreOptionsValidAsync()
     {
       if (flowDocuments.Count == 0) return false;
-      (var errorDetected, var errorMessage) = await diffController.CheckOptionValidityAsync(filesContent.First(), SelectedStyle, FormatOptions);
+      (var errorDetected, var errorMessage) = await FormatViewModelHelper.CheckOptionsValidityAsync(filesContent.First(), FormatOptions, SelectedStyle);
 
       if (errorDetected)
       {
@@ -388,7 +398,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
       }
     }
 
-    private void MarkOptionChange(FormatOptionModel option, bool isModified, string fontWeight)
+    private static void MarkOptionChange(FormatOptionModel option, bool isModified, string fontWeight)
     {
       option.NameFontWeight = fontWeight;
       option.IsModifed = isModified;
@@ -396,7 +406,7 @@ namespace ClangFormatEditor.MVVM.ViewModels
 
     private void DiffWindow_Closed(object sender, EventArgs e)
     {
-      diffController.DeleteFormatFolder();
+      DiffController.DeleteFormatFolder();
       diffWindow.Closed -= DiffWindow_Closed;
 
       if (infoWindow != null)

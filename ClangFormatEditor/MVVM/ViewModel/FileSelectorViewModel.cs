@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace ClangFormatEditor.MVVM.ViewModels
 {
-  public class FileSelectorViewModel : CommonSettingsFunctionality
+  public class FileSelectorViewModel : InputProvider
   {
     #region Members
 
@@ -24,9 +24,9 @@ namespace ClangFormatEditor.MVVM.ViewModels
     private const int MAX_SIZE_PER_FILE = 80; // KB
 
     private bool totalFileSizeFlag = false;
-
     private FileSizeWarningView warningWindow;
-    private DetectorView detectorView;
+
+    private readonly DetectorView detectorView;
 
     #endregion
 

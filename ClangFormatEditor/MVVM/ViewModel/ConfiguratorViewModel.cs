@@ -1,25 +1,28 @@
 ﻿using ClangFormatEditor.Enums;
 using ClangFormatEditor.Helpers;
 using ClangFormatEditor.Interfaces;
+using ClangFormatEditor.MVVM.Controllers;
 using ClangFormatEditor.MVVM.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace ClangFormatEditor
 {
-  public class ConfiguratorViewModel : CommonFormatEditorFunctionality, INotifyPropertyChanged, IFormatEditor
+  public class ConfiguratorViewModel : InputProvider, INotifyPropertyChanged, IFormatEditor
   {
     #region Members
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    private readonly ConfiguratorView formatEditorView;
+    private readonly ConfiguratorView configuratorView;
     private ICommand selctCodeFileCommand;
     private ICommand createFormatFileCommand;
     private ICommand importFormatFileCommand;
@@ -28,13 +31,19 @@ namespace ClangFormatEditor
     private ICommand openUri;
     private ICommand resetSearchCommand;
 
+    private List<IFormatOption> searchResultFormatStyleOptions;
+    private string input = AppConstants.InputCodeText;
     private string checkSearch = string.Empty;
     private bool showOptionDescription = true;
-    private List<IFormatOption> searchResultFormatStyleOptions;
     private bool windowLoaded = false;
+    private string inputLineNumber;
+    private string outputLineNumber;
     private string nameColumnWidth;
     private string droppedFile;
+
+
     private const string nameColumnWidthMax = "340";
+
 
     #endregion
 
@@ -43,14 +52,9 @@ namespace ClangFormatEditor
     public ConfiguratorViewModel(ConfiguratorView formatEditorView)
     {
       formatEditorView.Loaded += EditorLoaded;
-      this.formatEditorView = formatEditorView;
+      this.configuratorView = formatEditorView;
       InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
-    }
-
-    //Empty constructor used for XAML IntelliSense
-    public ConfiguratorViewModel()
-    {
-
+      SetOutputTextAsync(AppConstants.OutputCodeText).SafeFireAndForget();
     }
 
     #endregion
@@ -70,51 +74,39 @@ namespace ClangFormatEditor
       set
       {
         formatStyleOptions = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
+        OnPropertyChanged(nameof(FormatOptions));
       }
     }
 
     public string CheckSearch
     {
-      get
-      {
-        return checkSearch;
-      }
+      get => checkSearch;
       set
       {
         checkSearch = value;
         FindFormatOptionsAsync(checkSearch).SafeFireAndForget();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CheckSearch)));
+        OnPropertyChanged(nameof(CheckSearch));
       }
     }
 
     public IFormatOption SelectedOption
     {
-      get
-      {
-        return selectedOption;
-      }
+      get => selectedOption;
       set
       {
         selectedOption = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedOption)));
+        OnPropertyChanged(nameof(SelectedOption));
       }
     }
 
-    public IEnumerable<FormatStyle> Styles
+    public static IEnumerable<FormatStyle> Styles
     {
-      get
-      {
-        return Enum.GetValues(typeof(FormatStyle)).Cast<FormatStyle>();
-      }
+      get => Enum.GetValues(typeof(FormatStyle)).Cast<FormatStyle>();
     }
 
     public IEnumerable<ToggleValues> BooleanComboboxValues
     {
-      get
-      {
-        return Enum.GetValues(typeof(ToggleValues)).Cast<ToggleValues>();
-      }
+      get => Enum.GetValues(typeof(ToggleValues)).Cast<ToggleValues>();
     }
 
     public FormatStyle SelectedStyle
@@ -128,7 +120,7 @@ namespace ClangFormatEditor
       {
         selectedStyle = value;
         ChangeControlsDependingOnStyle();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedStyle)));
+        OnPropertyChanged(nameof(SelectedStyle));
 
         RunFormat();
       }
@@ -136,48 +128,75 @@ namespace ClangFormatEditor
 
     public string NameColumnWidth
     {
-      get
-      {
-        return nameColumnWidth;
-      }
+      get => nameColumnWidth;
       set
       {
         nameColumnWidth = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NameColumnWidth)));
+        OnPropertyChanged(nameof(NameColumnWidth));
       }
     }
 
     public string EnableOptionColumnWidth
     {
-      get
-      {
-        return nameColumnWidth;
-      }
+      get => nameColumnWidth;
       set
       {
         nameColumnWidth = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EnableOptionColumnWidth)));
+        OnPropertyChanged(nameof(EnableOptionColumnWidth));
       }
     }
 
-    public bool CanExecute
+    public static bool CanExecute
     {
-      get
-      {
-        return true;
-      }
+      get => true;
     }
 
     public bool ShowOptionDescription
     {
-      get
-      {
-        return showOptionDescription;
-      }
+      get => showOptionDescription;
       set
       {
         showOptionDescription = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowOptionDescription)));
+        OnPropertyChanged(nameof(ShowOptionDescription));
+      }
+    }
+
+    public string Input
+    {
+      get
+      {
+        var lineCount = input.Split(Environment.NewLine).Length;
+        SetInputLineNumberAsync(lineCount).SafeFireAndForget();
+        return input;
+      }
+      set
+      {
+        input = value;
+        if (IsAnyOptionEnabled())
+        {
+          OnPropertyChanged(nameof(Input));
+          RunFormat();
+        };
+      }
+    }
+
+    public string InputLineNumber
+    {
+      get => inputLineNumber;
+      set
+      {
+        inputLineNumber = value;
+        OnPropertyChanged(nameof(InputLineNumber));
+      }
+    }
+
+    public string OutputLineNumber
+    {
+      get => outputLineNumber;
+      set
+      {
+        outputLineNumber = value;
+        OnPropertyChanged(nameof(OutputLineNumber));
       }
     }
 
@@ -236,37 +255,28 @@ namespace ClangFormatEditor
     {
       if (droppedFile == null) return;
 
-      using StreamReader streamReader = new StreamReader(droppedFile);
-      formatEditorView.CodeEditor.Text = streamReader.ReadToEnd();
+      using var streamReader = new StreamReader(droppedFile);
+      configuratorView.CodeInput.Text = streamReader.ReadToEnd();
     }
 
     public void RunFormat()
     {
       if (windowLoaded == false) return;
-      SetEditorOutputAfterFormat();
+      RunFormatAsync().SafeFireAndForget();
     }
     public void OpenMultipleInput(int index)
     {
       if (windowLoaded == false) return;
       CloseMultipleInput += FormatAfterClosingMultipleInput;
       SelectedOption = FormatOptions[index];
-      OpenMultipleInput(SelectedOption, formatEditorView);
+      OpenMultipleInput(SelectedOption, configuratorView);
     }
 
     public void FormatAfterClosingMultipleInput(object sender, EventArgs e)
     {
       SelectedOption.IsEnabled = true;
-      SetEditorOutputAfterFormat();
+      RunFormatAsync().SafeFireAndForget();
       CloseMultipleInput -= FormatAfterClosingMultipleInput;
-    }
-
-    public bool IsAnyOptionEnabled()
-    {
-      foreach (var item in formatStyleOptions)
-      {
-        if (item.IsEnabled) return true;
-      }
-      return false;
     }
 
     #endregion
@@ -274,17 +284,25 @@ namespace ClangFormatEditor
 
     #region Private Methods
 
-    private void SetEditorOutputAfterFormat()
+    private async Task RunFormatAsync()
     {
-      formatEditorView.CodeEditorReadOnly.Text = RunFormat(formatEditorView.CodeEditor.Text);
+      if (IsAnyOptionEnabled() == false)
+      {
+        await SetOutputTextAsync(AppConstants.OutputCodeText);
+        return;
+      }
+      var formatErrors = await FormatViewModelHelper.CheckOptionsValidityAsync(input, formatStyleOptions, selectedStyle);
+      if (formatErrors.Item1)
+      {
+        await SetOutputTextAsync(formatErrors.Item2);
+        return;
+      }
+
+      var documents = await DiffController.CreateFlowDocumentAsync(input, SelectedStyle, FormatOptions, new CancellationToken());
+      await SetOutputLineNumberAsync(documents.Item3);
+      configuratorView.CodeOutput.Document = documents.Item2;
     }
 
-    private string RunFormat(string text)
-    {
-      var formatter = new StyleFormatter();
-      var formattedText = formatter.FormatText(text, formatStyleOptions, selectedStyle);
-      return formattedText;
-    }
 
     private void InitializeStyleOptions(FormatOptionsAllData formatOptionsData)
     {
@@ -333,7 +351,7 @@ namespace ClangFormatEditor
       var filePath = OpenFile(string.Empty, ".cpp", AppConstants.CodeFileExtensions);
 
       if (File.Exists(filePath))
-        formatEditorView.CodeEditor.Text = File.ReadAllText(filePath);
+        configuratorView.CodeInput.Text = File.ReadAllText(filePath);
     }
 
     private async Task ResetOptionsAsync()
@@ -345,8 +363,8 @@ namespace ClangFormatEditor
         InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
       });
 
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedOption)));
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
+      OnPropertyChanged(nameof(SelectedOption));
+      OnPropertyChanged(nameof(FormatOptions));
     }
 
     private void CreateFormatFile()
@@ -393,7 +411,7 @@ namespace ClangFormatEditor
     private void EditorLoaded(object sender, EventArgs e)
     {
       windowLoaded = true;
-      formatEditorView.Loaded -= EditorLoaded;
+      configuratorView.Loaded -= EditorLoaded;
     }
 
     private static bool DropFileValidation(DragEventArgs e, out string droppedFile)
@@ -416,19 +434,55 @@ namespace ClangFormatEditor
     {
       CheckSearch = string.Empty;
       ShowOptionDescription = true;
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
+
+      OnPropertyChanged(nameof(FormatOptions));
     }
 
     private async Task FindFormatOptionsAsync(string search)
     {
       await Task.Run(() =>
-    {
-      searchResultFormatStyleOptions = formatStyleOptions.Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase)).ToList();
-      SelectedOption = searchResultFormatStyleOptions.FirstOrDefault();
-      ShowOptionDescription = searchResultFormatStyleOptions.Count != 0;
+      {
+        searchResultFormatStyleOptions = formatStyleOptions.Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase)).ToList();
+        SelectedOption = searchResultFormatStyleOptions.FirstOrDefault();
+        ShowOptionDescription = searchResultFormatStyleOptions.Count != 0;
 
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatOptions)));
-    });
+        OnPropertyChanged(nameof(FormatOptions));
+      });
+    }
+
+    private async Task SetInputLineNumberAsync(int numberOfLines)
+    {
+      InputLineNumber = await FormatViewModelHelper.GetLineNumbersAsync(numberOfLines);
+    }
+
+    private async Task SetOutputLineNumberAsync(int numberOfLines)
+    {
+      OutputLineNumber = await FormatViewModelHelper.GetLineNumbersAsync(numberOfLines);
+    }
+
+    private void OnPropertyChanged(string propertyName)
+    {
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private bool IsAnyOptionEnabled()
+    {
+      foreach (var item in formatStyleOptions)
+      {
+        if (item.IsEnabled) return true;
+      }
+      return false;
+    }
+
+    private async Task SetOutputTextAsync(string text)
+    {
+      var paragraph = new Paragraph();
+      paragraph.Inlines.Add(new Run(text));
+      configuratorView.CodeOutput.Document.Blocks.Clear();
+      configuratorView.CodeOutput.Document.Blocks.Add(paragraph);
+
+      var output = AppConstants.OutputCodeText.Split(Environment.NewLine).Length;
+      await SetOutputLineNumberAsync(output == 0 ? 1 : output);
     }
 
     #endregion

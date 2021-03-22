@@ -141,15 +141,13 @@ namespace ClangFormatEditor
     /// <param name="input">The input code thar will be formatted </param>
     /// <param name="output">The output after the format</param>
     /// <returns></returns>
-    public (FlowDocument, FlowDocument) DiffAsFlowDocuments(string input, string output)
+    public (FlowDocument, FlowDocument, int) DiffAsFlowDocuments(string input, string output)
     {
       var paragraphInput = new Paragraph();
       var paragraphOutput = new Paragraph();
       var inputOperationPerLine = new List<(object, LineChanges)>();
       var outputOperationPerLine = new List<(object, LineChanges)>();
 
-      input = input.Trim();
-      output = output.Trim();
       CreateIntputOutputLines(input, output);
       SetMaxLineWidth();
       DetectOperationPerLine(input, output, inputOperationPerLine, outputOperationPerLine);
@@ -167,7 +165,7 @@ namespace ClangFormatEditor
         CreateDiffParagraph(paragraphOutput, outputOperationPerLine, Brushes.Yellow);
       }
 
-      return CreateFlowDocuments(paragraphInput, paragraphOutput);
+      return CreateFlowDocuments(paragraphInput, paragraphOutput, outputOperationPerLine.Count);
     }
 
     private void CreateIntputOutputLines(string input, string output)
@@ -195,10 +193,17 @@ namespace ClangFormatEditor
       {
         // Both inputLines and outputLines must be equal. The method is run on both
         // This is done my adding lines that contain just Environment.NewLine to the inputLines and outputLines
-        inputLines = EqualizeDocumentLength(output, input);
-        outputLines = EqualizeDocumentLength(input, output);
+        try
+        {
+          inputLines = EqualizeDocumentLength(output, input);
+          outputLines = EqualizeDocumentLength(input, output);
+        }
+        catch (Exception e)
+        {
+          MessageBox.Show(e.Message, "Clang-Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
 
-        if (inputLines.Count < outputLines.Count) return;
+        // if (inputLines.Count != outputLines.Count) return;
       }
 
       for (int index = 0; index < outputLines.Count; index++)
@@ -288,8 +293,8 @@ namespace ClangFormatEditor
               emptyLinesToAdd -= newLineFoundPerOperation;
             }
 
-            // If no Environment.NewLine was found,  append the text from the operation to the previous line
-            if (newLineFoundPerOperation == 0)
+            // If no Environment.NewLine was found, append the text from the operation to the previous line
+            if (newLineFoundPerOperation == 0 && lines.Count - 1 >= 0)
             {
               lines[lines.Count - 1] += text;
               break;
@@ -297,7 +302,7 @@ namespace ClangFormatEditor
 
             // If one Environment.NewLine was found, append the text before Environment.NewLine to the the previous line and 
             // the text after add it to a new line
-            if (newLineFoundPerOperation == 1)
+            if (newLineFoundPerOperation == 1 && lines.Count - 1 >= 0)
             {
               lines[lines.Count - 1] += text.SubstringBefore(Environment.NewLine);
               lines.Add(text.SubstringAfter(Environment.NewLine));
@@ -306,18 +311,23 @@ namespace ClangFormatEditor
 
             // Multiple Environment.NewLine were found, append the text before the first Environment.NewLine to the the previous line 
             // and split the remaing text based on Environment.NewLine to new lines
-            var insertLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
-            lines[lines.Count - 1] += insertLines[0];
-            insertLines.RemoveAt(0);
 
-            lines.AddRange(insertLines);
+            if (lines.Count - 1 >= 0)
+            {
+              var insertLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
+              lines[lines.Count - 1] += insertLines[0];
+              insertLines.RemoveAt(0);
+              lines.AddRange(insertLines);
+            }
             break;
           case Operation.EQUAL:
             var equalLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
 
             // If one Environment.NewLine was found, append the text before Environment.NewLine to the the previous line and 
             // the text after add it to a new line
-            if (lines.Count > 0 && equalLines.Count >= 1 && equalLines.Count > newLineFoundPerOperation)
+            if (lines.Count > 0 &&
+                equalLines.Count >= 1 &&
+                equalLines.Count > newLineFoundPerOperation)
             {
               lines[lines.Count - 1] += equalLines.First();
               equalLines.RemoveAt(0);
@@ -348,8 +358,6 @@ namespace ClangFormatEditor
 
       for (int i = 0; i < operationLines.Count; i++)
       {
-        AddLineNumberToParagraphLine(paragraph, i + 1, operationLines.Count, 2);
-
         var run = new Run();
         switch (operationLines[i].Item2)
         {
@@ -380,7 +388,7 @@ namespace ClangFormatEditor
       }
     }
 
-    private (FlowDocument, FlowDocument) CreateFlowDocuments(Paragraph paragraphInput, Paragraph paragraphOutput)
+    private (FlowDocument, FlowDocument, int) CreateFlowDocuments(Paragraph paragraphInput, Paragraph paragraphOutput, int lineCount)
     {
       var diffInput = new FlowDocument();
       var diffOutput = new FlowDocument();
@@ -390,7 +398,7 @@ namespace ClangFormatEditor
       diffInput.PageWidth = maxLineWidth;
       diffOutput.PageWidth = maxLineWidth;
 
-      return (diffInput, diffOutput);
+      return (diffInput, diffOutput, lineCount);
     }
 
     private void SetMaxLineWidth()
@@ -424,7 +432,7 @@ namespace ClangFormatEditor
       return (int)maxSize + LineWidthSafety;
     }
 
-    private string AddPadding(string text, int targetPadding, bool isNewLine)
+    private static string AddPadding(string text, int targetPadding, bool isNewLine)
     {
       var paddingCount = targetPadding - text.Length;
       if (isNewLine)
@@ -462,7 +470,7 @@ namespace ClangFormatEditor
       }
     }
 
-    private void ColorTextDependingOnOperation(Paragraph paragraph, List<Diff> localdiffs)
+    private static void ColorTextDependingOnOperation(Paragraph paragraph, List<Diff> localdiffs)
     {
       foreach (Diff aDiff in localdiffs)
       {
@@ -490,18 +498,7 @@ namespace ClangFormatEditor
       paragraph.Inlines.Add(Environment.NewLine);
     }
 
-    private void AddLineNumberToParagraphLine(Paragraph paragraph, int currentLineNumber, int numberOfLines, int paddingLeft)
-    {
-      int numberOfSpaces = LengthOfNumber(numberOfLines) - LengthOfNumber(currentLineNumber) + paddingLeft;
-      var lineNumber = string.Concat(new string(' ', numberOfSpaces), (currentLineNumber).ToString(), " ");
-      var lineNumberRun = new Run(lineNumber)
-      {
-        Background = (Brush)new BrushConverter().ConvertFrom("#D3D3D3")
-      };
-      paragraph.Inlines.Add(lineNumberRun);
-    }
-
-    private int LengthOfNumber(int numberOfLines)
+    private static int LengthOfNumber(int numberOfLines)
     {
       return (int)Math.Floor(Math.Log10(numberOfLines) + 1);
     }

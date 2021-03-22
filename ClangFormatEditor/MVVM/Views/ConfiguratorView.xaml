@@ -7,11 +7,11 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:searchBox="clr-namespace:ClangFormatEditor.MVVM.Views"
   Title="Clang-Format Configurator"
-  Width="1100"
-  Height="750"
   MinWidth="1100"
   MinHeight="750"
+  d:DataContext="{d:DesignInstance Type=local:ConfiguratorViewModel}"
   Background="WhiteSmoke"
+  DataContext="ConfiguratorViewModel"
   Icon="/ClangFormatEditor;component/Resources/ClangPowerToolsIco.ico"
   ResizeMode="CanResize"
   ShowInTaskbar="true"
@@ -43,6 +43,7 @@
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="10" />
     </Grid.ColumnDefinitions>
+
     <!--  Parent grid containing the two secondary grids  -->
     <Grid Grid.Row="1" Grid.Column="1">
       <Grid>
@@ -203,7 +204,9 @@
           <FlowDocument>
             <Paragraph>
               <Run FontWeight="DemiBold" Text="{Binding SelectedOption.Name}" />
-              <Run Text="(" /><Run Background="#FFCDCDCD" Text="{Binding SelectedOption.Paramater}" /><Run Text=")" />
+              <Run Text="(" />
+              <Run Background="#FFCDCDCD" Text="{Binding SelectedOption.Paramater}" />
+              <Run Text=")" />
             </Paragraph>
           </FlowDocument>
         </RichTextBox>
@@ -235,81 +238,149 @@
     <Grid Grid.Row="1" Grid.Column="3">
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
-        <RowDefinition Height="225" />
+        <RowDefinition Height="auto" />
       </Grid.RowDefinitions>
 
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
 
+      <!--  Code Input/Output  -->
+      <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" MinWidth="100" />
+          <ColumnDefinition Width="2" />
+          <ColumnDefinition Width="*" MinWidth="100" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-      <TabControl Grid.Row="0">
-        <TabItem Padding="8" FontSize="15">
-          <TabItem.Header>
-            <StackPanel Orientation="Horizontal">
-              <Image
-                Width="15"
-                Height="15"
-                Margin="3"
-                Source="/ClangFormatEditor;component/Resources/InputIcon.png" />
-              <TextBlock
-                Width="65"
-                FontSize="16"
-                FontWeight="DemiBold"
-                Text="Input" />
-            </StackPanel>
-          </TabItem.Header>
-          <TextBox
-            Name="CodeEditor"
+        <!--  Input  -->
+        <Grid Grid.Row="0" Grid.Column="0">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
+          <StackPanel
             Grid.Row="0"
-            MinWidth="400"
-            MinHeight="400"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Image
+              Width="15"
+              Height="15"
+              Margin="3"
+              Source="/ClangFormatEditor;component/Resources/InputIcon.png" />
+            <TextBlock
+              Width="65"
+              FontSize="16"
+              FontWeight="DemiBold"
+              Text="Input" />
+          </StackPanel>
+
+          <TextBox
+            Name="InputLineNumber"
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="#D3D3D3"
+            FontFamily="Consolas"
+            FontSize="12"
+            IsEnabled="False"
+            ScrollViewer.ScrollChanged="Input_ScrollChanged"
+            Text="{Binding InputLineNumber, UpdateSourceTrigger=PropertyChanged}"
+            TextAlignment="Right" />
+
+          <TextBox
+            Name="CodeInput"
+            Grid.Row="1"
+            Grid.Column="1"
             AcceptsReturn="True"
             AcceptsTab="True"
             AllowDrop="True"
             Background="Black"
-            FontFamily="Courier New"
-            FontSize="14"
+            FontFamily="Consolas"
+            FontSize="12"
             Foreground="White"
             HorizontalScrollBarVisibility="Auto"
             PreviewDragOver="CodeEditor_PreviewDragOver"
             PreviewDrop="CodeEditor_PreviewDrop"
-            TextChanged="RunFormat_Editor"
+            ScrollViewer.ScrollChanged="Input_ScrollChanged"
+            Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"
             TextWrapping="NoWrap"
             VerticalScrollBarVisibility="Auto" />
-        </TabItem>
-        <TabItem Padding="8" FontSize="15">
-          <TabItem.Header>
-            <StackPanel Orientation="Horizontal">
-              <Image
-                Width="15"
-                Height="15"
-                Margin="3"
-                Source="/ClangFormatEditor;component/Resources/OutputIcon.png" />
-              <TextBlock
-                Width="65"
-                FontSize="16"
-                FontWeight="DemiBold"
-                Text="Output" />
-            </StackPanel>
-          </TabItem.Header>
-          <TextBox
-            Name="CodeEditorReadOnly"
+        </Grid>
+
+        <!--  Splitter  -->
+        <GridSplitter
+          Grid.Row="1"
+          Grid.Column="1"
+          Width="2"
+          Margin="0,25,0,0"
+          HorizontalAlignment="Stretch"
+          Background="#9E005A" />
+
+        <!--  Output  -->
+        <Grid Grid.Row="0" Grid.Column="2">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
+          <StackPanel
             Grid.Row="0"
-            MinWidth="400"
-            MinHeight="400"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Image
+              Width="15"
+              Height="15"
+              Margin="3"
+              Source="/ClangFormatEditor;component/Resources/OutputIcon.png" />
+            <TextBlock
+              Width="65"
+              FontSize="16"
+              FontWeight="DemiBold"
+              Text="Output" />
+          </StackPanel>
+
+          <TextBox
+            Name="OutputLineNumber"
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="#D3D3D3"
+            FontFamily="Consolas"
+            FontSize="12"
+            IsEnabled="False"
+            ScrollViewer.ScrollChanged="Output_ScrollChanged"
+            Text="{Binding OutputLineNumber, UpdateSourceTrigger=PropertyChanged}"
+            TextAlignment="Right" />
+
+          <RichTextBox
+            Name="CodeOutput"
+            Grid.Row="1"
+            Grid.Column="1"
             AcceptsReturn="True"
             AcceptsTab="True"
-            Background="DimGray"
-            FontFamily="Courier New"
-            FontSize="14"
-            Foreground="White"
+            FontFamily="Consolas"
+            FontSize="12"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
-            TextWrapping="NoWrap"
+            ScrollViewer.ScrollChanged="Output_ScrollChanged"
             VerticalScrollBarVisibility="Auto" />
-        </TabItem>
-      </TabControl>
+        </Grid>
+      </Grid>
 
       <!--  Buttons  -->
       <Grid Grid.Row="1">
@@ -317,23 +388,36 @@
           <RowDefinition Height="20" />
           <RowDefinition Height="auto" />
           <RowDefinition Height="20" />
-          <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="150" />
-          <ColumnDefinition Width="20" />
+          <ColumnDefinition Width="10" />
           <ColumnDefinition Width="150" />
-          <ColumnDefinition Width="20" />
+          <ColumnDefinition Width="10" />
+          <ColumnDefinition Width="150" />
+          <ColumnDefinition Width="10" />
           <ColumnDefinition Width="150" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!--  Reset button  -->
+        <!--  Select file button  -->
         <Button
           Grid.Row="1"
           Grid.Column="1"
+          Width="150"
+          Height="30"
+          Command="{Binding SelctCodeFileCommand}"
+          Content="Select Code File"
+          FontSize="14"
+          Foreground="White"
+          Style="{StaticResource SettingsButton}" />
+
+        <!--  Reset button  -->
+        <Button
+          Grid.Row="1"
+          Grid.Column="3"
           Width="150"
           Height="30"
           Command="{Binding ResetCommand}"
@@ -356,7 +440,7 @@
         <!--  Export button  -->
         <Button
           Grid.Row="1"
-          Grid.Column="3"
+          Grid.Column="7"
           Width="150"
           Command="{Binding ImportFormatFileCommand}"
           Content="Import .clang-format"
@@ -364,20 +448,7 @@
           Foreground="White"
           Style="{StaticResource SettingsButton}" />
 
-        <!--  Select file button  -->
-        <Button
-          Grid.Row="3"
-          Grid.Column="3"
-          Width="150"
-          Height="30"
-          Command="{Binding SelctCodeFileCommand}"
-          Content="Select Code File"
-          FontSize="14"
-          Foreground="White"
-          Style="{StaticResource SettingsButton}" />
-
       </Grid>
-
     </Grid>
   </Grid>
 </Window>

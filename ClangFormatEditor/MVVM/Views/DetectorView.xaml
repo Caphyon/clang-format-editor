@@ -5,9 +5,11 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:ClangFormatEditor"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:viewmodels="clr-namespace:ClangFormatEditor.MVVM.ViewModels"
   Title="Clang-Format Detector"
   MinWidth="1000"
   MinHeight="750"
+  d:DataContext="{d:DesignInstance Type=viewmodels:DetectorViewModel}"
   Background="WhiteSmoke"
   Icon="/ClangFormatEditor;component/Resources/ClangPowerToolsIco.ico"
   ResizeMode="CanResize"
@@ -42,79 +44,137 @@
     <!--  Diff flow document  -->
     <Grid Grid.Row="1" Grid.Column="1">
       <Grid.RowDefinitions>
-        <RowDefinition Height="25" />
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
 
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" MinWidth="165" />
+        <ColumnDefinition Width="2" />
+        <ColumnDefinition Width="*" MinWidth="165" />
       </Grid.ColumnDefinitions>
 
       <!--  Input Diff  -->
-      <StackPanel
-        Grid.Row="0"
-        Grid.Column="0"
-        HorizontalAlignment="Center"
-        Orientation="Horizontal">
-        <Image
-          Width="15"
-          Height="15"
-          Margin="3"
-          VerticalAlignment="Center"
-          Source="/ClangFormatEditor;component/Resources/FileIcon.png" />
-        <TextBlock
-          Width="32"
-          FontSize="16"
-          FontWeight="DemiBold"
-          Text="File" />
-        <ComboBox
-          Name="FilesComboBox"
-          Height="23"
-          VerticalAlignment="Top"
-          ItemsSource="{Binding FileNames}"
-          SelectedIndex="{Binding SelectedIndex}"
-          SelectedItem="{Binding SelectedFile, Mode=TwoWay}" />
-      </StackPanel>
+      <Grid Grid.Row="0" Grid.Column="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="25" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-      <RichTextBox
-        x:Name="DiffInput"
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel
+          Grid.Row="0"
+          Grid.Column="1"
+          HorizontalAlignment="Center"
+          Orientation="Horizontal">
+          <Image
+            Width="15"
+            Height="15"
+            Margin="3"
+            VerticalAlignment="Center"
+            Source="/ClangFormatEditor;component/Resources/FileIcon.png" />
+          <TextBlock
+            Width="32"
+            FontSize="16"
+            FontWeight="DemiBold"
+            Text="File" />
+          <ComboBox
+            Name="FilesComboBox"
+            Height="23"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding FileNames}"
+            SelectedIndex="{Binding SelectedIndex}"
+            SelectedItem="{Binding SelectedFile, Mode=TwoWay}" />
+        </StackPanel>
+
+        <TextBox
+          Name="DiffInputLineNumber"
+          Grid.Row="1"
+          Grid.Column="0"
+          Background="#D3D3D3"
+          FontFamily="Consolas"
+          FontSize="12"
+          IsEnabled="False"
+          ScrollViewer.ScrollChanged="Diff_ScrollChanged"
+          Text="{Binding LineNumber, UpdateSourceTrigger=PropertyChanged}"
+          TextAlignment="Right" />
+
+        <RichTextBox
+          Name="DiffInput"
+          Grid.Row="1"
+          Grid.Column="1"
+          FontFamily="Consolas"
+          HorizontalScrollBarVisibility="Auto"
+          IsReadOnly="True"
+          ScrollViewer.ScrollChanged="Diff_ScrollChanged"
+          VerticalScrollBarVisibility="Auto" />
+      </Grid>
+
+      <!--  Splitter  -->
+      <GridSplitter
         Grid.Row="1"
-        Grid.Column="0"
-        FontFamily="Consolas"
-        HorizontalScrollBarVisibility="Auto"
-        IsReadOnly="True"
-        ScrollViewer.ScrollChanged="Diff_ScrollChanged"
-        VerticalScrollBarVisibility="Auto" />
+        Grid.Column="1"
+        Width="2"
+        Margin="0,25,0,0"
+        HorizontalAlignment="Stretch"
+        Background="#9E005A" />
 
       <!--  Output Diff  -->
-      <StackPanel
-        Grid.Row="0"
-        Grid.Column="1"
-        HorizontalAlignment="Center"
-        Orientation="Horizontal">
-        <Image
-          Width="20"
-          Height="20"
-          Margin="3"
-          VerticalAlignment="Center"
-          Source="/ClangFormatEditor;component/Resources/PreviewIcon.png" />
-        <TextBlock
-          Width="112"
-          FontSize="16"
-          FontWeight="DemiBold"
-          Text="Format Preview" />
-      </StackPanel>
+      <Grid Grid.Row="1" Grid.Column="2">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="25" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-      <RichTextBox
-        x:Name="DiffOutput"
-        Grid.Row="1"
-        Grid.Column="1"
-        FontFamily="Consolas"
-        HorizontalScrollBarVisibility="Auto"
-        IsReadOnly="True"
-        ScrollViewer.ScrollChanged="Diff_ScrollChanged"
-        VerticalScrollBarVisibility="Auto" />
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel
+          Grid.Row="0"
+          Grid.Column="3"
+          HorizontalAlignment="Center"
+          Orientation="Horizontal">
+          <Image
+            Width="20"
+            Height="20"
+            Margin="3"
+            VerticalAlignment="Center"
+            Source="/ClangFormatEditor;component/Resources/PreviewIcon.png" />
+          <TextBlock
+            Width="112"
+            FontSize="16"
+            FontWeight="DemiBold"
+            Text="Format Preview" />
+        </StackPanel>
+
+        <TextBox
+          Name="DiffOutputLineNumber"
+          Grid.Row="1"
+          Grid.Column="0"
+          Background="#D3D3D3"
+          FontFamily="Consolas"
+          FontSize="12"
+          IsEnabled="False"
+          ScrollViewer.ScrollChanged="Diff_ScrollChanged"
+          Text="{Binding LineNumber, UpdateSourceTrigger=PropertyChanged}"
+          TextAlignment="Right" />
+
+        <RichTextBox
+          Name="DiffOutput"
+          Grid.Row="1"
+          Grid.Column="1"
+          FontFamily="Consolas"
+          HorizontalScrollBarVisibility="Auto"
+          IsReadOnly="True"
+          ScrollViewer.ScrollChanged="Diff_ScrollChanged"
+          VerticalScrollBarVisibility="Auto" />
+      </Grid>
+
     </Grid>
 
     <!--  Detected Format Options  -->
