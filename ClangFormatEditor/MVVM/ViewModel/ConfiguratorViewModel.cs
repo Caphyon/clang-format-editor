@@ -363,6 +363,7 @@ namespace ClangFormatEditor
         InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
       });
 
+      await SetOutputTextAsync(AppConstants.OutputCodeText);
       OnPropertyChanged(nameof(SelectedOption));
       OnPropertyChanged(nameof(FormatOptions));
     }
