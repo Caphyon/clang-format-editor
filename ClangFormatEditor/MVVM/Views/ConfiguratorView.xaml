@@ -39,7 +39,6 @@
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="10" />
       <ColumnDefinition Width="auto" />
-      <ColumnDefinition Width="5" />
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="10" />
     </Grid.ColumnDefinitions>
@@ -235,7 +234,7 @@
     </Grid>
 
     <!--  Code editor  -->
-    <Grid Grid.Row="1" Grid.Column="3">
+    <Grid Grid.Row="1" Grid.Column="2">
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
         <RowDefinition Height="auto" />
