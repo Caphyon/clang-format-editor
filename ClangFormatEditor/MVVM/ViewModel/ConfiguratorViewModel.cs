@@ -49,10 +49,10 @@ namespace ClangFormatEditor
 
     #region Constructor
 
-    public ConfiguratorViewModel(ConfiguratorView formatEditorView)
+    public ConfiguratorViewModel(ConfiguratorView configuratorView)
     {
-      formatEditorView.Loaded += EditorLoaded;
-      this.configuratorView = formatEditorView;
+      configuratorView.Loaded += EditorLoaded;
+      this.configuratorView = configuratorView;
       InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
       SetOutputTextAsync(AppConstants.OutputCodeText).SafeFireAndForget();
     }
