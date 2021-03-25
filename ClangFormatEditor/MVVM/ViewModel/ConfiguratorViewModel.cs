@@ -49,10 +49,10 @@ namespace ClangFormatEditor
 
     #region Constructor
 
-    public ConfiguratorViewModel(ConfiguratorView formatEditorView)
+    public ConfiguratorViewModel(ConfiguratorView configuratorView)
     {
-      formatEditorView.Loaded += EditorLoaded;
-      this.configuratorView = formatEditorView;
+      configuratorView.Loaded += EditorLoaded;
+      this.configuratorView = configuratorView;
       InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
       SetOutputTextAsync(AppConstants.OutputCodeText).SafeFireAndForget();
     }
@@ -363,6 +363,7 @@ namespace ClangFormatEditor
         InitializeStyleOptions(FormatOptionsProvider.CustomOptionsData);
       });
 
+      await SetOutputTextAsync(AppConstants.OutputCodeText);
       OnPropertyChanged(nameof(SelectedOption));
       OnPropertyChanged(nameof(FormatOptions));
     }
