@@ -1,0 +1,18 @@
+;aiu;
+
+[7.3.0]
+Name = Clang Format Editor
+ProductVersion = 7.3.0
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 4761088
+SHA256 = 9C6DD24588E01E0CD07A59252046711AFFB40345C70B3859F38AE0BB52F8C22D
+MD5 = 83441a6a797e1f24288988a7c9ba51b2
+ServerFileName = Clang Format Editor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 7.3.0
+Description = v7.3.0
+Enhancement = Diff is now available in the Configurator Output
+Enhancement1 = Configurator Output is displayed side-by-side
+Enhancement2 = Resizable split panels for Detector and Configurator diff 
+BugFix = Certain clang-format flags are deprecated
+BugFix1 = Crash when setting incompatible input values to clang-format options
