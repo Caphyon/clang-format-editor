@@ -202,8 +202,6 @@ namespace ClangFormatEditor
         {
           MessageBox.Show(e.Message, "Clang-Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-
-        // if (inputLines.Count != outputLines.Count) return;
       }
 
       for (int index = 0; index < outputLines.Count; index++)
@@ -351,7 +349,7 @@ namespace ClangFormatEditor
       return lines;
     }
 
-    private void CreateDiffParagraph(Paragraph paragraph, List<(object, LineChanges)> operationLines, Brush lineDiffColor)
+    private static void CreateDiffParagraph(Paragraph paragraph, List<(object, LineChanges)> operationLines, Brush lineDiffColor)
     {
       paragraph.FontFamily = new FontFamily(AppConstants.FontFamily);
       paragraph.FontSize = AppConstants.FontSize;
@@ -359,10 +357,11 @@ namespace ClangFormatEditor
       for (int i = 0; i < operationLines.Count; i++)
       {
         var run = new Run();
+        string text = operationLines[i].Item1.ToString().TrimEnd();
         switch (operationLines[i].Item2)
         {
           case LineChanges.NOCHANGES:
-            run.Text = (string)operationLines[i].Item1;
+            run.Text = text;
             paragraph.Inlines.Add(run);
             paragraph.Inlines.Add(Environment.NewLine);
             break;
@@ -373,14 +372,14 @@ namespace ClangFormatEditor
             }
             else
             {
-              run.Text = AddPadding((string)operationLines[i].Item1, maxLineWidth, false);
+              run.Text = text;
               run.Background = lineDiffColor;
               paragraph.Inlines.Add(run);
               paragraph.Inlines.Add(Environment.NewLine);
             }
             break;
           case LineChanges.NEWLINE:
-            run.Text = AddPadding((string)operationLines[i].Item1, maxLineWidth, true);
+            run.Text = text;
             run.Background = (Brush)new BrushConverter().ConvertFrom("#D3D3D3");
             paragraph.Inlines.Add(run);
             break;
@@ -430,16 +429,6 @@ namespace ClangFormatEditor
         }
       }
       return (int)maxSize + LineWidthSafety;
-    }
-
-    private static string AddPadding(string text, int targetPadding, bool isNewLine)
-    {
-      var paddingCount = targetPadding - text.Length;
-      if (isNewLine)
-      {
-        return new string(' ', paddingCount) + text;
-      }
-      return text + new string(' ', paddingCount);
     }
 
     private List<Diff> GetDiff(string inputLine, string outputLine)
