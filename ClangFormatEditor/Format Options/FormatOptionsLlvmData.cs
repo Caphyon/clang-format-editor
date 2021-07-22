@@ -7,7 +7,7 @@ namespace ClangFormatEditor
 {
   public class FormatOptionsLlvmData : FormatOptionsHandler
   {
-    public List<IFormatOption> FormatOptions = new()
+    public List<IFormatOption> FormatOptions { get; set; } = new()
     {
       new FormatOptionInputModel { Name = "AccessModifierOffset", Paramater = "int", Description = "The extra indent or outdent of access modifiers, e.g. \"public:\"", Input = "-2" },
       new FormatOptionInputModel { Name = "AlignAfterOpenBracket", Paramater = "BracketAlignmentStyle", Description = "If \"true\", horizontally aligns arguments after an open bracket.\r\nThis applies to round brackets (parentheses), angle brackets and square brackets.\r\nPossible values:\r\n- BAS_Align (in configuration: Align) Align parameters on the open bracket, e.g.:\r\n- BAS_DontAlign (in configuration: DontAlign) Don’t align, instead use ContinuationIndentWidth, e.g.:\r\n- BAS_AlwaysBreak (in configuration: AlwaysBreak) Always break after an open bracket, if the parameters don’t fit on a single line, e.g.:", Input = "Align" },
