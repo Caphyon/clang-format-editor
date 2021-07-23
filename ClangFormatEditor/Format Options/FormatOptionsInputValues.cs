@@ -19,7 +19,6 @@ namespace ClangFormatEditor
       { "AllowShortFunctionsOnASingleLine", new string[] { "None", "InlineOnly", "Empty", "Inline", "All" } },
       { "AlwaysBreakAfterReturnType", new string[] { "None", "All", "TopLevel", "AllDefinitions", "TopLevelDefinitions" } },
       { "AllowShortIfStatementsOnASingleLine", new string[] { "Never", "WithoutElse", "Always" } },
-      { "AlwaysBreakAfterReturnType", new string[] { "None", "All", "TopLevel", "AllDefinitions", "TopLevelDefinitions" } },
       { "AlwaysBreakTemplateDeclarations", new string[] { "No", "MultiLine", "Yes" } },
       { "BitFieldColonSpacing", new string[] { "None", "Both", "Before", "After" } },
       { "BreakBeforeBinaryOperators", new string[] { "None", "NonAssignment", "All" } },
