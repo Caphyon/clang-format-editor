@@ -15,6 +15,7 @@ namespace ClangFormatEditor
       var mainWindow = new MainWindow();
       mainWindow.Show();
       Update(e);
+      ProjectSetup.CreateDirectory();
     }
 
     private static void Update(StartupEventArgs e)
