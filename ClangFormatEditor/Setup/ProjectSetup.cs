@@ -18,14 +18,15 @@ namespace ClangFormatEditor
       }
     }
 
-    private static readonly ProjectSetup instance = new ProjectSetup();
+    private static readonly ProjectSetup instance = new();
 
     #endregion
+
+    #region Constructor
 
     static ProjectSetup()
     {
       AppDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppConstants.ClangFormatEditor);
-      CreateDirectory();
     }
 
     private ProjectSetup()
@@ -33,19 +34,25 @@ namespace ClangFormatEditor
 
     }
 
-    #region Constructor
-
-
     #endregion
 
     #region Methods
 
-    private static void CreateDirectory()
+    public static void CreateDirectory()
     {
       try
       {
-        if (FileSystem.DoesFileExist(AppDataDirectory, AppConstants.ClangFormatExe)) return;
-        FileSystem.CreateDirectory(AppDataDirectory);
+        if (Directory.Exists(AppDataDirectory))
+        {
+          if (FileSystem.DoesFileExist(AppDataDirectory, AppConstants.ClangFormatExe))
+          {
+            File.Delete(Path.Combine(AppDataDirectory, AppConstants.ClangFormatExe));
+          }
+        }
+        else
+        {
+          FileSystem.CreateDirectory(AppDataDirectory);
+        }
         File.Copy(AppConstants.ClangFormatExe, Path.Combine(AppDataDirectory, AppConstants.ClangFormatExe));
       }
       catch (Exception e)
