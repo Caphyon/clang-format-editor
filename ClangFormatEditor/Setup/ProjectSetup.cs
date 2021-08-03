@@ -22,11 +22,10 @@ namespace ClangFormatEditor
 
     #endregion
 
-    #region Constructor
-
     static ProjectSetup()
     {
       AppDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppConstants.ClangFormatEditor);
+      CreateDirectory();
     }
 
     private ProjectSetup()
@@ -34,25 +33,19 @@ namespace ClangFormatEditor
 
     }
 
+    #region Constructor
+
+
     #endregion
 
     #region Methods
 
-    public static void CreateDirectory()
+    private static void CreateDirectory()
     {
       try
       {
-        if (Directory.Exists(AppDataDirectory))
-        {
-          if (FileSystem.DoesFileExist(AppDataDirectory, AppConstants.ClangFormatExe))
-          {
-            File.Delete(Path.Combine(AppDataDirectory, AppConstants.ClangFormatExe));
-          }
-        }
-        else
-        {
-          FileSystem.CreateDirectory(AppDataDirectory);
-        }
+        if (FileSystem.DoesFileExist(AppDataDirectory, AppConstants.ClangFormatExe)) return;
+        FileSystem.CreateDirectory(AppDataDirectory);
         File.Copy(AppConstants.ClangFormatExe, Path.Combine(AppDataDirectory, AppConstants.ClangFormatExe));
       }
       catch (Exception e)

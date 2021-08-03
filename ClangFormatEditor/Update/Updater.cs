@@ -46,14 +46,15 @@ namespace ClangFormatEditor.Update
         switch (process.ExitCode)
         {
           case UpdaterConstants.NoUpdateReturnCode:
+            process.Close();
             return;
           case UpdaterConstants.UpdateFoundReturnCode:
             StartUpdaterProcess(GetArguments(UpdaterConstants.StartUpdateParameters), StartUpdateProcessExited);
             break;
           default:
+            process.Close();
             return;
         }
-        process.Close();
       }
     }
 
@@ -62,6 +63,7 @@ namespace ClangFormatEditor.Update
       if (sender is Process process)
       {
         process.Close();
+        UpdateClangFormatExe();
       }
     }
 
@@ -74,6 +76,20 @@ namespace ClangFormatEditor.Update
     {
       var path = Path.Combine(UpdaterConstants.Path, UpdaterConstants.Executable);
       return string.Concat(UpdaterConstants.CommandParamater, "\"", path, "\"", updateParameters);
+    }
+
+    private static void UpdateClangFormatExe()
+    {
+      try
+      {
+        if (FileSystem.DoesFileExist(ProjectSetup.AppDataDirectory, AppConstants.ClangFormatExe)) return;
+        File.Delete(Path.Combine(ProjectSetup.AppDataDirectory, AppConstants.ClangFormatExe));
+        File.Copy(AppConstants.ClangFormatExe, Path.Combine(ProjectSetup.AppDataDirectory, AppConstants.ClangFormatExe));
+      }
+      catch (Exception e)
+      {
+        MessageBox.Show(e.Message, "Clang-Format Setup Error", MessageBoxButton.OK, MessageBoxImage.Error);
+      }
     }
 
     #endregion
