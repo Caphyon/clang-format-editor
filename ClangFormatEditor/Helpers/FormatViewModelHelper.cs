@@ -19,7 +19,12 @@ namespace ClangFormatEditor.Helpers
         output = formatter.FormatText(input, formatStyleOptions, formatStyle);
       });
 
-      return (output.Contains("YAML"), output);
+      bool errorDetected = false;
+      if (output.Contains("YAML") || output.Contains("Error") || output.Contains("do(es)"))
+      {
+        errorDetected = true;
+      }
+      return (errorDetected, output);
     }
 
     public static async Task<string> GetLineNumbersAsync(int numberOfLines)
