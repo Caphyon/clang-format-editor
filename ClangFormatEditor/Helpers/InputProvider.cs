@@ -152,14 +152,14 @@ namespace ClangFormatEditor
     {
       var inputMultipleDataView = new InputMultipleDataView(multipleInputModel.MultipleInput, owner);
       inputMultipleDataView.Closed += CloseInputDataView;
-      inputMultipleDataView.Show();
+      inputMultipleDataView.ShowDialog();
     }
 
     private void OpenToggleDataView(FormatOptionMultipleToggleModel multipleToggleModel, Window owner)
     {
       var toggleMultipleDataView = new ToggleMultipleDataView(multipleToggleModel.ToggleFlags, owner);
       toggleMultipleDataView.Closed += CloseToggleDataView;
-      toggleMultipleDataView.Show();
+      toggleMultipleDataView.ShowDialog();
     }
 
     private void CloseInputDataView(object sender, EventArgs e)
