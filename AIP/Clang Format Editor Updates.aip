@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="17.9" version="18.0" Modules="update" RootPath="." Language="en" Id="{1B19450C-D57B-44BF-B97F-91C6E160CC9F}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="17.9" version="18.5" Modules="update" RootPath="." Language="en" Id="{1B19450C-D57B-44BF-B97F-91C6E160CC9F}" Backup="false">
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;aiu-ue.ail"/>
     <ROW Path="&lt;AI_DICTS&gt;aiu-ue_en.ail"/>
@@ -17,6 +17,19 @@
     <ROW Section="7.4.1" Key="Description" Value="v7.4.1"/>
     <ROW Section="7.4.1" Key="Enhancement" Value="Diff is now available in the Configurator Output&#13;&#10;Configurator Output is displayed side-by-side&#13;&#10;Resizable split panels for Detector and Configurator diff "/>
     <ROW Section="7.4.1" Key="BugFix" Value="Clang-Format Editor crash due to text padding&#13;&#10;Certain Clang-Format Editor options don&apos;t have the correct default value"/>
+    <ROW Section="7.5" Key="Name" Value="Clang Format Editor"/>
+    <ROW Section="7.5" Key="ProductVersion" Value="7.5.0" ValueLocId="-"/>
+    <ROW Section="7.5" Key="URL" Value="https://clangpowertools.com/ClangFormatEditor.msi" ValueLocId="-"/>
+    <ROW Section="7.5" Key="Size" Value="Z:\Company\Releases\Clang Power Tools\v7.5.0\Clang Format Editor.msi" ValueLocId="-"/>
+    <ROW Section="7.5" Key="ReleaseDate" Value="21253" ValueLocId="-"/>
+    <ROW Section="7.5" Key="SHA256" Value="Z:\Company\Releases\Clang Power Tools\v7.5.0\Clang Format Editor.msi" ValueLocId="-"/>
+    <ROW Section="7.5" Key="MD5" Value="Z:\Company\Releases\Clang Power Tools\v7.5.0\Clang Format Editor.msi" ValueLocId="-"/>
+    <ROW Section="7.5" Key="ServerFileName" Value="Clang Format Editor.msi" ValueLocId="-"/>
+    <ROW Section="7.5" Key="RegistryKey" Value="HKUD\Software\Caphyon\Clang Format Editor\Version" ValueLocId="-"/>
+    <ROW Section="7.5" Key="Version" Value="7.5.0" ValueLocId="-"/>
+    <ROW Section="7.5" Key="Enhancement" Value="Updated with new Clang 12 features"/>
+    <ROW Section="7.5" Key="BugFix" Value="Various bug-fixes and improvements"/>
+    <ROW Section="7.5" Key="Replaces" Value="7.4.1" ValueLocId="-"/>
     <ATTRIBUTE name="OutputFileName" value="ClangFormatEditorUpdates.txt"/>
     <ATTRIBUTE name="OutputFolder" value="."/>
   </COMPONENT>

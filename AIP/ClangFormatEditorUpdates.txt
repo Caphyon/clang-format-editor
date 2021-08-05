@@ -1,5 +1,20 @@
 ;aiu;
 
+[7.5]
+Name = Clang Format Editor
+ProductVersion = 7.5.0
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 4956160
+ReleaseDate = 05/08/2021
+SHA256 = 86A5F393A3BA3E15239DD60D0C2A2802D89A44104970444A4A1D59473E25746F
+MD5 = 0a7614f34df2cb96f7d45e9d3109b67d
+ServerFileName = Clang Format Editor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 7.5.0
+Enhancement = Updated with new Clang 12 features
+BugFix = Various bug-fixes and improvements
+Replaces = All
+
 [7.4.1]
 Name = Clang Format Editor
 ProductVersion = 7.4.1
