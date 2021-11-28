@@ -70,7 +70,7 @@
         <ListView
           Name="FormatOptions"
           Grid.Row="1"
-          Width="465"
+          Width="auto"
           HorizontalAlignment="Left"
           ItemsSource="{Binding FormatOptions, Mode=TwoWay}"
           SelectedItem="{Binding SelectedOption}"
@@ -88,7 +88,7 @@
                   <DataTemplate>
                     <TextBlock
                       Grid.Column="0"
-                      Width="250"
+                      MinWidth="250"
                       FontSize="12"
                       Foreground="Black"
                       Text="{Binding Name}"
