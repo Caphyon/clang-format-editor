@@ -34,5 +34,15 @@ jobs:
       - name: Build Solution
         run: msbuild ClangFormatEditor.sln /t:ClangFormatEditor /p:Configuration="Release"
 
+      - name: Create Clang Format Editor from AIP
+        uses: caphyon/advinst-github-action@v1.0
+        with:
+          advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
+          advinst-enable-automation: 'true'
+          aip-path: AIP\.aip
+          aip-build-name: DefaultBuild
+          aip-package-name: Clang Format Editor.msi
+          aip-output-dir: AIP
+
       - name: Execute unit tests
         run: dotnet test
