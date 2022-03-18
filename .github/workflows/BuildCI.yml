@@ -39,7 +39,7 @@ jobs:
         with:
           advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
           advinst-enable-automation: 'true'
-          aip-path: AIP\.aip
+          aip-path: AIP\Clang Format Editor.aip
           aip-build-name: DefaultBuild
           aip-package-name: Clang Format Editor.msi
           aip-output-dir: AIP
