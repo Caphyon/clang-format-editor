@@ -44,5 +44,11 @@ jobs:
           aip-package-name: Clang Format Editor.msi
           aip-output-dir: ${{ github.workspace }}\AIP
 
+      - name: Archive production Clang Format Editor artifacts (cpt generated with advanced installer)
+        uses: actions/upload-artifact@v2
+        with:
+          name: AIP
+          path: AIP\Clang Format Editor.msi
+
       - name: Execute unit tests
         run: dotnet test
