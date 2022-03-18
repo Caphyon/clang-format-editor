@@ -6,7 +6,7 @@
     <ROW Property="AI_PREDEF_LCONDS_PROPS" Value="AI_DETECTED_INTERNET_CONNECTION"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
-    <ROW Property="ARPPRODUCTICON" Value="ClangFormatEditor.exe" Type="8"/>
+    <ROW Property="ARPPRODUCTICON" Value="ClangFormatEditor_1.exe" Type="8"/>
     <ROW Property="AiSkipExitDlg" Value="1"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Caphyon"/>
@@ -181,7 +181,7 @@
     <ROW Feature_="MainFeature" Component_="ClangFormatEditor"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
-    <ROW Name="ClangFormatEditor.exe" SourcePath="&lt;ROOT_SRC_DIR&gt;Clang-Format Editor Resources\ClangFormatEditor.exe" Index="0"/>
+    <ROW Name="ClangFormatEditor_1.exe" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.exe" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIniFileComponent">
     <ROW IniFile="AppDir" FileName="CLANGF~1.INI|Clang Format Editor Updater.ini" DirProperty="APPDIR" Section="General" Key="AppDir" Value="[APPDIR]" Action="0" Component_="updater.exe"/>
