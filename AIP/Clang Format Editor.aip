@@ -38,8 +38,11 @@
     <ROW Component="AEEB73CE673349D2BADF9D8EB73C7437" ComponentId="{782184F2-CF06-4214-81B9-C20DE1D10D41}" Directory_="APPDIR" Attributes="4" KeyPath="AEEB73CE673349D2BADF9D8EB73C7437" Options="2"/>
     <ROW Component="APPDIR" ComponentId="{83CB0D8C-02BE-4ED4-850E-38461209BA02}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="ClangFormatEditor" ComponentId="{933DCB4E-AFCE-4867-9BB6-2CDB4BC13758}" Directory_="ClangFormatEditor_Dir" Attributes="0"/>
+    <ROW Component="ClangFormatEditor.dll" ComponentId="{6AF7866F-930C-41EB-A57B-A1304B673F23}" Directory_="APPDIR" Attributes="0" KeyPath="ClangFormatEditor.dll"/>
     <ROW Component="ClangFormatEditor.exe" ComponentId="{0F5E9646-B27A-4C39-9BFB-5E88BB2DFAB6}" Directory_="APPDIR" Attributes="0" KeyPath="ClangFormatEditor.exe"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{94752F97-80BF-40D8-A057-BEF5861F6104}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
     <ROW Component="ProductInformation" ComponentId="{7210D48F-F871-4E69-846B-5F73C567C626}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="YamlDotNet.dll" ComponentId="{9511C024-35E6-4684-A0F5-B1DA1C177DFE}" Directory_="APPDIR" Attributes="0" KeyPath="YamlDotNet.dll"/>
     <ROW Component="clangformat.exe" ComponentId="{92E1656A-031D-4EE3-884D-B1E7BEB00C81}" Directory_="APPDIR" Attributes="0" KeyPath="clangformat.exe"/>
     <ROW Component="license.txt" ComponentId="{841D7BA9-BFB0-4DC9-80A7-FFAB7368D100}" Directory_="APPDIR" Attributes="0" KeyPath="license.txt" Type="0"/>
     <ROW Component="updater.exe" ComponentId="{CEEEC9C8-D7DC-45E1-92DC-6114F397FF58}" Directory_="APPDIR" Attributes="0" KeyPath="updater.exe"/>
@@ -52,8 +55,12 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
     <ROW File="clangformat.exe" Component_="clangformat.exe" FileName="CLANG-~1.EXE|clang-format.exe" Attributes="0" SourcePath="..\ClangFormatEditor\clang-format.exe" SelfReg="false" DigSign="true"/>
     <ROW File="ClangFormatEditor.exe" Component_="ClangFormatEditor.exe" FileName="CLANGF~1.EXE|ClangFormatEditor.exe" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.exe" SelfReg="false" DigSign="true"/>
-    <ROW File="license.txt" Component_="license.txt" FileName="license.txt" Attributes="0" SourcePath="..\ClangFormatEditor\license.txt" SelfReg="false"/>
+    <ROW File="license.txt" Component_="license.txt" FileName="license.txt" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\license.txt" SelfReg="false"/>
     <ROW File="updater.exe" Component_="updater.exe" FileName="CLANGF~2.EXE|Clang Format Editor Updater.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_STUBS&gt;updater.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="ClangFormatEditor.dll" Component_="ClangFormatEditor.dll" FileName="CLANGF~1.DLL|ClangFormatEditor.dll" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.dll" SelfReg="false"/>
+    <ROW File="ClangFormatEditor.runtimeconfig.json" Component_="license.txt" FileName="CLANGF~1.JSO|ClangFormatEditor.runtimeconfig.json" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.runtimeconfig.json" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\Newtonsoft.Json.dll" SelfReg="false"/>
+    <ROW File="YamlDotNet.dll" Component_="YamlDotNet.dll" FileName="YAMLDO~1.DLL|YamlDotNet.dll" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\YamlDotNet.dll" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="ROOT_SRC_DIR" Path="[|ROOT_SRC_DIR_PROP]\v[|ProductVersion]" Type="2" Content="0"/>
@@ -179,6 +186,9 @@
     <ROW Feature_="AEEB73CE673349D2BADF9D8EB73C7437" Component_="AEEB73CE673349D2BADF9D8EB73C7437"/>
     <ROW Feature_="MainFeature" Component_="updater.exe"/>
     <ROW Feature_="MainFeature" Component_="ClangFormatEditor"/>
+    <ROW Feature_="MainFeature" Component_="ClangFormatEditor.dll"/>
+    <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
+    <ROW Feature_="MainFeature" Component_="YamlDotNet.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="ClangFormatEditor.exe" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.exe" Index="0"/>
