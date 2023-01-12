@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="16.9" version="18.0" Modules="enterprise" RootPath="." Language="en" Id="{FCC76E6F-F035-4FEE-89F7-C29FBFF6D0CA}" Backup="false">
+<DOCUMENT Type="Advanced Installer" CreateVersion="16.9" version="19.2" Modules="enterprise" RootPath="." Language="en" Id="{FCC76E6F-F035-4FEE-89F7-C29FBFF6D0CA}" Backup="false">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_CURRENT_YEAR" Value="2022" ValueLocId="-"/>
     <ROW Property="AI_PREDEF_LCONDS_PROPS" Value="AI_DETECTED_INTERNET_CONNECTION"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
@@ -37,7 +38,9 @@
     <ROW Component="AEEB73CE673349D2BADF9D8EB73C7437" ComponentId="{782184F2-CF06-4214-81B9-C20DE1D10D41}" Directory_="APPDIR" Attributes="4" KeyPath="AEEB73CE673349D2BADF9D8EB73C7437" Options="2"/>
     <ROW Component="APPDIR" ComponentId="{83CB0D8C-02BE-4ED4-850E-38461209BA02}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="ClangFormatEditor" ComponentId="{933DCB4E-AFCE-4867-9BB6-2CDB4BC13758}" Directory_="ClangFormatEditor_Dir" Attributes="0"/>
+    <ROW Component="ClangFormatEditor.dll" ComponentId="{6AF7866F-930C-41EB-A57B-A1304B673F23}" Directory_="APPDIR" Attributes="0" KeyPath="ClangFormatEditor.dll"/>
     <ROW Component="ClangFormatEditor.exe" ComponentId="{0F5E9646-B27A-4C39-9BFB-5E88BB2DFAB6}" Directory_="APPDIR" Attributes="0" KeyPath="ClangFormatEditor.exe"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{94752F97-80BF-40D8-A057-BEF5861F6104}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
     <ROW Component="ProductInformation" ComponentId="{7210D48F-F871-4E69-846B-5F73C567C626}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="clangformat.exe" ComponentId="{92E1656A-031D-4EE3-884D-B1E7BEB00C81}" Directory_="APPDIR" Attributes="0" KeyPath="clangformat.exe"/>
     <ROW Component="license.txt" ComponentId="{841D7BA9-BFB0-4DC9-80A7-FFAB7368D100}" Directory_="APPDIR" Attributes="0" KeyPath="license.txt" Type="0"/>
@@ -49,10 +52,13 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="clangformat.exe" Component_="clangformat.exe" FileName="CLANG-~1.EXE|clang-format.exe" Attributes="0" SourcePath="&lt;ROOT_SRC_DIR&gt;Clang-Format Editor Resources\clang-format.exe" SelfReg="false" DigSign="true"/>
-    <ROW File="ClangFormatEditor.exe" Component_="ClangFormatEditor.exe" FileName="CLANGF~1.EXE|ClangFormatEditor.exe" Attributes="0" SourcePath="&lt;ROOT_SRC_DIR&gt;Clang-Format Editor Resources\ClangFormatEditor.exe" SelfReg="false" DigSign="true"/>
-    <ROW File="license.txt" Component_="license.txt" FileName="license.txt" Attributes="0" SourcePath="&lt;ROOT_SRC_DIR&gt;Clang-Format Editor Resources\license.txt" SelfReg="false"/>
+    <ROW File="clangformat.exe" Component_="clangformat.exe" FileName="CLANG-~1.EXE|clang-format.exe" Attributes="0" SourcePath="..\ClangFormatEditor\clang-format.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="ClangFormatEditor.exe" Component_="ClangFormatEditor.exe" FileName="CLANGF~1.EXE|ClangFormatEditor.exe" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="license.txt" Component_="license.txt" FileName="license.txt" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\license.txt" SelfReg="false"/>
     <ROW File="updater.exe" Component_="updater.exe" FileName="CLANGF~2.EXE|Clang Format Editor Updater.exe" Version="65535.65535.65535.65535" Attributes="0" SourcePath="&lt;AI_STUBS&gt;updater.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="ClangFormatEditor.dll" Component_="ClangFormatEditor.dll" FileName="CLANGF~1.DLL|ClangFormatEditor.dll" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.dll" SelfReg="false"/>
+    <ROW File="ClangFormatEditor.runtimeconfig.json" Component_="license.txt" FileName="CLANGF~1.JSO|ClangFormatEditor.runtimeconfig.json" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.runtimeconfig.json" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\Newtonsoft.Json.dll" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="ROOT_SRC_DIR" Path="[|ROOT_SRC_DIR_PROP]\v[|ProductVersion]" Type="2" Content="0"/>
@@ -64,7 +70,7 @@
     <ROW Action="AI_DetectSoftware" Sequence="151"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" PackageFolder="\\storage\shared\Company\Releases\Clang Power Tools\v[|ProductVersion]" Languages="en" InstallationType="4" UseLargeSchema="true"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="." Languages="en" InstallationType="4" UseLargeSchema="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.CacheComponent">
     <ATTRIBUTE name="Enable" value="false"/>
@@ -74,7 +80,7 @@
     <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
-    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" DescriptionUrl="https://clangpowertools.com" SignOptions="7" SignTool="0" UseSha256="1" Thumbprint="88b69ab162b1c0677cee090370532e1125819904 Subject: Caphyon SRL&#10;Issuer: thawte SHA256 Code Signing CA&#10;Valid from 03/06/2020 to 03/06/2023&#10;User\MY" Subject="CN=Caphyon SRL, OU=SECURE APPLICATION DEVELOPMENT, O=Caphyon SRL, L=Craiova, S=Dolj, C=RO"/>
+    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" DescriptionUrl="https://clangpowertools.com" SignOptions="0" SignTool="0" UseSha256="1" Thumbprint="88b69ab162b1c0677cee090370532e1125819904 Subject: Caphyon SRL&#10;Issuer: thawte SHA256 Code Signing CA&#10;Valid from 03/06/2020 to 03/06/2023&#10;User\MY" Subject="CN=Caphyon SRL, OU=SECURE APPLICATION DEVELOPMENT, O=Caphyon SRL, L=Craiova, S=Dolj, C=RO"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
@@ -84,6 +90,7 @@
     <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
     <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
     <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="Themes.aip" Path="&lt;AI_FRAGS&gt;Themes.aip"/>
     <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
     <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
     <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
@@ -103,6 +110,7 @@
     <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
     <ROW Name="aipackagechainer.exe" SourcePath="&lt;AI_CUSTACTS&gt;aipackagechainer.exe"/>
+    <ROW Name="file_deleter.ps1" SourcePath="&lt;AI_SCRIPTS&gt;file_deleter.ps1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
     <ROW Dialog_="WelcomeDlg" Control="Title" Type="Text" X="135" Y="20" Width="220" Height="60" Attributes="196611" Text="[ProductName] [ProductVersion]" TextStyle="VerdanaBold13" Order="500" MsiKey="WelcomeDlg#Title"/>
@@ -176,9 +184,11 @@
     <ROW Feature_="AEEB73CE673349D2BADF9D8EB73C7437" Component_="AEEB73CE673349D2BADF9D8EB73C7437"/>
     <ROW Feature_="MainFeature" Component_="updater.exe"/>
     <ROW Feature_="MainFeature" Component_="ClangFormatEditor"/>
+    <ROW Feature_="MainFeature" Component_="ClangFormatEditor.dll"/>
+    <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
-    <ROW Name="ClangFormatEditor.exe" SourcePath="&lt;ROOT_SRC_DIR&gt;Clang-Format Editor Resources\ClangFormatEditor.exe" Index="0"/>
+    <ROW Name="ClangFormatEditor.exe" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.exe" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIniFileComponent">
     <ROW IniFile="AppDir" FileName="CLANGF~1.INI|Clang Format Editor Updater.ini" DirProperty="APPDIR" Section="General" Key="AppDir" Value="[APPDIR]" Action="0" Component_="updater.exe"/>
