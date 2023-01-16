@@ -43,7 +43,7 @@ namespace ClangFormatEditor
       { "SpaceAroundPointerQualifiers", new string[] { "Default", "Before", "After", "Both" } },
       { "SpaceBeforeParens", new string[] { "Never", "ControlStatements", "NonEmptyParentheses", "Always", "ControlStatementsExceptForEachMacros" } },
       { "SpacesBeforeTrailingComments", new string[] { "1", "2", "3" } },
-      { "Standard", new string[] { "Cpp11", "Cpp14", "Cpp17", "Cpp20", "Auto", "Latest" } },
+      { "Standard", new string[] { "c++11", "c++14", "c++17", "c++20", "Auto", "Latest" } },
       { "TabWidth", new string[] { "4", "6", "8", "10" } },
       { "UseTab", new string[] { "Never", "ForIndentation", "ForContinuationAndIndentation", "AlignWithSpaces", "Always" } },
     };
