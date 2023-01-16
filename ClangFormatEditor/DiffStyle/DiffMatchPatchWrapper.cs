@@ -346,6 +346,15 @@ namespace ClangFormatEditor
             break;
         }
       }
+      
+      if(lines.Count < emptyLinesToAdd)
+      {
+        for (int i = lines.Count; i <= Math.Abs(emptyLinesToAdd); i++)
+        {
+          lines.Add(Environment.NewLine);
+        }
+      }
+
       return lines;
     }
 
