@@ -1,5 +1,21 @@
 ;aiu;
 
+[2023.1.2]
+Name = Clang Format Editor
+ProductVersion = 2023.1.2
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6456832
+ReleaseDate = 16/01/2023
+SHA256 = 43E4A00258C4566B9B0FFFB45244E812B19B944076C5B3749B6A9A91BD357DCB
+MD5 = d42f985093ebcb50ff0b52ab463909ea
+ServerFileName = Clang Format Editor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.1.2
+Enhancement = Updated Clang Format to v15.0.6
+BugFix = Wrong default value cpp-standard
+BugFix1 = Incorrect detections on some inputs
+Replaces = All
+
 [7.5]
 Name = Clang Format Editor
 ProductVersion = 7.5.0

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="16.9" version="19.2" Modules="enterprise" RootPath="." Language="en" Id="{FCC76E6F-F035-4FEE-89F7-C29FBFF6D0CA}" Backup="false">
+<DOCUMENT Type="Advanced Installer" CreateVersion="16.9" version="20.2" Modules="enterprise" RootPath="." Language="en" Id="{FCC76E6F-F035-4FEE-89F7-C29FBFF6D0CA}" Backup="false">
+  <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
+    <ROW Name="HiddenItems" Value="ActSyncAppComponent;CPLAppletComponent;AutorunComponent;GameUxComponent;SilverlightSlnComponent;SharePointSlnComponent;AppXAppDetailsComponent;FixupComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;MsiXDiffComponent;MsixManifestEditorComponent"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_CURRENT_YEAR" Value="2022" ValueLocId="-"/>
+    <ROW Property="AI_CURRENT_YEAR" Value="2023" ValueLocId="-"/>
+    <ROW Property="AI_PACKAGING_TOOL" Value="Advanced Installer 20.2 build 2c3f1cf9" ValueLocId="-"/>
     <ROW Property="AI_PREDEF_LCONDS_PROPS" Value="AI_DETECTED_INTERNET_CONNECTION"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
@@ -10,10 +14,10 @@
     <ROW Property="AiSkipExitDlg" Value="1"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Caphyon"/>
-    <ROW Property="ProductCode" Value="1033:{6B9B3828-407A-4F77-933F-43C0B1ED8833} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{D207F6EE-1F4B-470D-A111-051D08396723} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Clang Format Editor"/>
-    <ROW Property="ProductVersion" Value="7.5.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="2023.1.2"/>
     <ROW Property="ROOT_SRC_DIR_PROP" Value="\\storage\shared\Company\Releases\Clang Power Tools"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
@@ -42,6 +46,7 @@
     <ROW Component="ClangFormatEditor.exe" ComponentId="{0F5E9646-B27A-4C39-9BFB-5E88BB2DFAB6}" Directory_="APPDIR" Attributes="0" KeyPath="ClangFormatEditor.exe"/>
     <ROW Component="Newtonsoft.Json.dll" ComponentId="{94752F97-80BF-40D8-A057-BEF5861F6104}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
     <ROW Component="ProductInformation" ComponentId="{7210D48F-F871-4E69-846B-5F73C567C626}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="YamlDotNet.dll" ComponentId="{1D513243-4BCC-433F-819D-97B485C28092}" Directory_="APPDIR" Attributes="0" KeyPath="YamlDotNet.dll"/>
     <ROW Component="clangformat.exe" ComponentId="{92E1656A-031D-4EE3-884D-B1E7BEB00C81}" Directory_="APPDIR" Attributes="0" KeyPath="clangformat.exe"/>
     <ROW Component="license.txt" ComponentId="{841D7BA9-BFB0-4DC9-80A7-FFAB7368D100}" Directory_="APPDIR" Attributes="0" KeyPath="license.txt" Type="0"/>
     <ROW Component="updater.exe" ComponentId="{CEEEC9C8-D7DC-45E1-92DC-6114F397FF58}" Directory_="APPDIR" Attributes="0" KeyPath="updater.exe"/>
@@ -59,6 +64,8 @@
     <ROW File="ClangFormatEditor.dll" Component_="ClangFormatEditor.dll" FileName="CLANGF~1.DLL|ClangFormatEditor.dll" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.dll" SelfReg="false"/>
     <ROW File="ClangFormatEditor.runtimeconfig.json" Component_="license.txt" FileName="CLANGF~1.JSO|ClangFormatEditor.runtimeconfig.json" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.runtimeconfig.json" SelfReg="false"/>
     <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\Newtonsoft.Json.dll" SelfReg="false"/>
+    <ROW File="ClangFormatEditor.deps.json" Component_="license.txt" FileName="CLANGF~2.JSO|ClangFormatEditor.deps.json" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.deps.json" SelfReg="false"/>
+    <ROW File="YamlDotNet.dll" Component_="YamlDotNet.dll" FileName="YAMLDO~1.DLL|YamlDotNet.dll" Attributes="0" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\YamlDotNet.dll" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="ROOT_SRC_DIR" Path="[|ROOT_SRC_DIR_PROP]\v[|ProductVersion]" Type="2" Content="0"/>
@@ -109,7 +116,7 @@
     <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
     <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
-    <ROW Name="aipackagechainer.exe" SourcePath="&lt;AI_CUSTACTS&gt;aipackagechainer.exe"/>
+    <ROW Name="aipackagechainer.exe" SourcePath="&lt;AI_CUSTACTS&gt;aipackagechainer.exe" DigSign="true"/>
     <ROW Name="file_deleter.ps1" SourcePath="&lt;AI_SCRIPTS&gt;file_deleter.ps1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
@@ -164,6 +171,7 @@
     <ROW Action="AI_LaunchApp" Type="1" Source="aicustact.dll" Target="[#ClangFormatEditor.exe]"/>
     <ROW Action="AI_LaunchChainer" Type="3314" Source="AI_PREREQ_CHAINER"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Type="65" Source="aicustact.dll" Target="PreserveInstallType"/>
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
     <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
@@ -186,6 +194,7 @@
     <ROW Feature_="MainFeature" Component_="ClangFormatEditor"/>
     <ROW Feature_="MainFeature" Component_="ClangFormatEditor.dll"/>
     <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
+    <ROW Feature_="MainFeature" Component_="YamlDotNet.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="ClangFormatEditor.exe" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.exe" Index="0"/>
@@ -231,6 +240,7 @@
     <ROW Action="AI_InstallPrerequisite" Sequence="1299"/>
     <ROW Action="AI_InstallPostPrerequisite" Sequence="1301"/>
     <ROW Action="AI_CleanPrereq" Sequence="1302"/>
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Sequence="199"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
     <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
@@ -241,7 +251,15 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
     <ROW Registry="AEEB73CE673349D2BADF9D8EB73C7437" Root="-1" Key="Software\Caphyon\Advanced Installer\Prereqs\[ProductCode]\[ProductVersion]" Name="AEEB73CE673349D2BADF9D8EB73C7437" Value="1" Component_="AEEB73CE673349D2BADF9D8EB73C7437"/>
+    <ROW Registry="AdvancedInstaller" Root="-1" Key="Software\Caphyon\Advanced Installer" Name="\"/>
+    <ROW Registry="Caphyon" Root="-1" Key="Software\Caphyon" Name="\"/>
+    <ROW Registry="Manufacturer" Root="-1" Key="Software\[Manufacturer]" Name="\"/>
     <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="Prereqs" Root="-1" Key="Software\Caphyon\Advanced Installer\Prereqs" Name="\"/>
+    <ROW Registry="ProductCode" Root="-1" Key="Software\Caphyon\Advanced Installer\Prereqs\[ProductCode]" Name="\"/>
+    <ROW Registry="ProductName" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="\"/>
+    <ROW Registry="ProductVersion" Root="-1" Key="Software\Caphyon\Advanced Installer\Prereqs\[ProductCode]\[ProductVersion]" Name="\"/>
+    <ROW Registry="Software" Root="-1" Key="Software" Name="\"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
