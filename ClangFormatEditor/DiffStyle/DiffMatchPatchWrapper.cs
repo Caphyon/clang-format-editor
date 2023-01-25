@@ -336,7 +336,7 @@ namespace ClangFormatEditor
             }
 
             // Insert empty lines to equalize the length of the input and output
-            if (newLineFoundPerOperation > 1)
+            if (newLineFoundPerOperation >= 1 || emptyLinesToAdd >= 1)
             {
               for (int i = 0; i < emptyLinesToAdd; i++)
               {
@@ -350,15 +350,6 @@ namespace ClangFormatEditor
             break;
         }
       }
-      
-      if(lines.Count < emptyLinesToAdd)
-      {
-        for (int i = lines.Count; i <= emptyLinesToAdd - lines.Count; i++)
-        {
-          lines.Add(Environment.NewLine);
-        }
-      }
-
       return lines;
     }
 
