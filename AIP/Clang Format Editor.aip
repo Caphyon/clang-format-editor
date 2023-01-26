@@ -39,7 +39,7 @@
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AEEB73CE673349D2BADF9D8EB73C7437" ComponentId="{782184F2-CF06-4214-81B9-C20DE1D10D41}" Directory_="APPDIR" Attributes="4" KeyPath="AEEB73CE673349D2BADF9D8EB73C7437" Options="2"/>
+    <ROW Component="AEEB73CE673349D2BADF9D8EB73C7437" ComponentId="{BCB5054B-158D-4054-B44E-F49D32270A82}" Directory_="APPDIR" Attributes="4" KeyPath="AEEB73CE673349D2BADF9D8EB73C7437" Options="2"/>
     <ROW Component="APPDIR" ComponentId="{83CB0D8C-02BE-4ED4-850E-38461209BA02}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="ClangFormatEditor" ComponentId="{933DCB4E-AFCE-4867-9BB6-2CDB4BC13758}" Directory_="ClangFormatEditor_Dir" Attributes="0"/>
     <ROW Component="ClangFormatEditor.dll" ComponentId="{6AF7866F-930C-41EB-A57B-A1304B673F23}" Directory_="APPDIR" Attributes="0" KeyPath="ClangFormatEditor.dll"/>
@@ -52,7 +52,7 @@
     <ROW Component="updater.exe" ComponentId="{CEEEC9C8-D7DC-45E1-92DC-6114F397FF58}" Directory_="APPDIR" Attributes="0" KeyPath="updater.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="AEEB73CE673349D2BADF9D8EB73C7437" Title=".NET Desktop Runtime 5.0.0 x86" Description=".NET Desktop Runtime 5.0.0 x86" Display="3" Level="1" Attributes="0"/>
+    <ROW Feature="AEEB73CE673349D2BADF9D8EB73C7437" Title=".NET Desktop Runtime 5.0.17 x86" Description=".NET Desktop Runtime 5.0.17 x86" Display="3" Level="1" Attributes="0"/>
     <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
@@ -106,10 +106,10 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiActionTextComponent">
     <ROW Action="AI_ConfigureChainer" Description="Configuring prerequisites launcher" DescriptionLocId="ActionText.Description.AI_ConfigureChainer" Template="Configure Launcher" TemplateLocId="ActionText.Template.AI_ConfigureChainer"/>
-    <ROW Action="AI_DownloadPrereq" Description="Downloading prerequisite software" DescriptionLocId="ActionText.Description.AI_DownloadPrereq" Template="Downloading [1]{[2] completed}" TemplateLocId="ActionText.Template.AI_DownloadPrereq"/>
-    <ROW Action="AI_ExtractPrereq" Description="Extracting prerequisite software" DescriptionLocId="ActionText.Description.AI_ExtractPrereq" Template="Extracting [1]{[2] completed}" TemplateLocId="ActionText.Template.AI_ExtractPrereq"/>
-    <ROW Action="AI_InstallPostPrerequisite" Description="Installing prerequisite software" DescriptionLocId="ActionText.Description.AI_InstallPrerequisite" Template="Installing [1]{[2] completed}" TemplateLocId="ActionText.Template.AI_InstallPrerequisite"/>
-    <ROW Action="AI_InstallPrerequisite" Description="Installing prerequisite software" DescriptionLocId="ActionText.Description.AI_InstallPrerequisite" Template="Installing [1]{[2] completed}" TemplateLocId="ActionText.Template.AI_InstallPrerequisite"/>
+    <ROW Action="AI_DownloadPrereq" Description="Downloading prerequisite software" DescriptionLocId="ActionText.Description.AI_DownloadPrereq" Template="[1]" TemplateLocId="ActionText.Template.AI_DownloadPrereq"/>
+    <ROW Action="AI_ExtractPrereq" Description="Extracting prerequisite software" DescriptionLocId="ActionText.Description.AI_ExtractPrereq" Template="[1]" TemplateLocId="ActionText.Template.AI_ExtractPrereq"/>
+    <ROW Action="AI_InstallPostPrerequisite" Description="Installing prerequisite software" DescriptionLocId="ActionText.Description.AI_InstallPrerequisite" Template="[1]" TemplateLocId="ActionText.Template.AI_InstallPrerequisite"/>
+    <ROW Action="AI_InstallPrerequisite" Description="Installing prerequisite software" DescriptionLocId="ActionText.Description.AI_InstallPrerequisite" Template="[1]" TemplateLocId="ActionText.Template.AI_InstallPrerequisite"/>
     <ROW Action="AI_VerifyPrereq" Description="Verifying prerequisites" DescriptionLocId="ActionText.Description.AI_VerifyPrereq" Template="[1] was not installed correctly." TemplateLocId="ActionText.Template.AI_VerifyPrereq"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
@@ -189,12 +189,12 @@
     <ROW Feature_="MainFeature" Component_="clangformat.exe"/>
     <ROW Feature_="MainFeature" Component_="ClangFormatEditor.exe"/>
     <ROW Feature_="MainFeature" Component_="license.txt"/>
-    <ROW Feature_="AEEB73CE673349D2BADF9D8EB73C7437" Component_="AEEB73CE673349D2BADF9D8EB73C7437"/>
     <ROW Feature_="MainFeature" Component_="updater.exe"/>
     <ROW Feature_="MainFeature" Component_="ClangFormatEditor"/>
     <ROW Feature_="MainFeature" Component_="ClangFormatEditor.dll"/>
     <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
     <ROW Feature_="MainFeature" Component_="YamlDotNet.dll"/>
+    <ROW Feature_="AEEB73CE673349D2BADF9D8EB73C7437" Component_="AEEB73CE673349D2BADF9D8EB73C7437"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="ClangFormatEditor.exe" SourcePath="..\ClangFormatEditor\bin\Release\net5.0-windows\ClangFormatEditor.exe" Index="0"/>
@@ -219,11 +219,11 @@
     <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
     <ROW Action="AI_DetectSoftware" Sequence="102"/>
-    <ROW Action="AI_AppSearchEx" Sequence="101"/>
-    <ROW Action="AI_VerifyPrereq" Sequence="1101"/>
     <ROW Action="AI_UPDATER_UNINSTALL" Condition="($updater.exe = 2) AND (?updater.exe = 3) AND NOT (UPGRADINGPRODUCTCODE)" Sequence="1551"/>
     <ROW Action="AI_ConfigureChainer" Condition="((UILevel = 2) OR (UILevel = 3)) AND (NOT UPGRADINGPRODUCTCODE)" Sequence="6598"/>
     <ROW Action="AI_LaunchChainer" Condition="AI_PREREQ_CHAINER AND (NOT UPGRADINGPRODUCTCODE)" Sequence="6599"/>
+    <ROW Action="AI_VerifyPrereq" Sequence="1101"/>
+    <ROW Action="AI_AppSearchEx" Sequence="101"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
@@ -234,13 +234,13 @@
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="103"/>
     <ROW Action="AI_DetectSoftware" Sequence="102"/>
     <ROW Action="AI_FinishActions" Condition="AI_INSTALL AND AiSkipExitDlg" Sequence="1303"/>
-    <ROW Action="AI_AppSearchEx" Sequence="101"/>
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Sequence="199"/>
     <ROW Action="AI_DownloadPrereq" Sequence="1297"/>
     <ROW Action="AI_ExtractPrereq" Sequence="1298"/>
     <ROW Action="AI_InstallPrerequisite" Sequence="1299"/>
     <ROW Action="AI_InstallPostPrerequisite" Sequence="1301"/>
     <ROW Action="AI_CleanPrereq" Sequence="1302"/>
-    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Sequence="199"/>
+    <ROW Action="AI_AppSearchEx" Sequence="101"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
     <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
@@ -275,13 +275,11 @@
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
-    <ROW PrereqKey="AEEB73CE673349D2BADF9D8EB73C7437" DisplayName=".NET Desktop Runtime 5.0.0 x86" VersionMin="5.0" SetupFileUrl="https://download.visualstudio.microsoft.com/download/pr/b2780d75-e54a-448a-95fc-da9721b2b4c2/62310a9e9f0ba7b18741944cbae9f592/windowsdesktop-runtime-5.0.0-win-x86.exe" Location="1" ExactSize="49459144" WinNTVersions="Windows Vista x86, Windows Server 2008 x86, Windows 7 RTM x86, Windows 8 x86, Windows 10 version 1507 x86, Windows 10 version 1511 x86" WinNT64Versions="Windows Vista x64, Windows Server 2008 x64, Windows 7 RTM x64, Windows Server 2008 R2 x64, Windows 8 x64, Windows Server 2012 x64, Windows 10 version 1507 x64, Windows 10 version 1511 x64" Operator="1" Options="p" MD5="c86517ffd3483b121f3171179b108297" TargetName=".NET 5.0" Feature="AEEB73CE673349D2BADF9D8EB73C7437"/>
+    <ROW PrereqKey="AEEB73CE673349D2BADF9D8EB73C7437" DisplayName=".NET Desktop Runtime 5.0.17 x86" VersionMin="5.0" SetupFileUrl="Prerequisites\.NET 5.0\windowsdesktop-runtime-5.0.17-win-x86.exe" Location="0" ExactSize="0" WinNTVersions="Windows Vista x86, Windows Server 2008 x86, Windows 7 RTM x86, Windows 8 x86, Windows 10 version 1507 x86, Windows 10 version 1511 x86" WinNT64Versions="Windows Vista x64, Windows Server 2008 x64, Windows 7 RTM x64, Windows Server 2008 R2 x64, Windows 8 x64, Windows Server 2012 x64, Windows 10 version 1507 x64, Windows 10 version 1511 x64" Operator="1" NoUiComLine="/q /norestart" Options="f" TargetName=".NET 5.0\windowsdesktop-runtime-5.0.17-win-x86.exe" Feature="AEEB73CE673349D2BADF9D8EB73C7437"/>
     <ATTRIBUTE name="PrereqsOrder" value="AEEB73CE673349D2BADF9D8EB73C7437"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
-    <ROW SearchKey="AEEB73CE673349D2BADF9D8EB73C7437M_1" Prereq="AEEB73CE673349D2BADF9D8EB73C7437" SearchType="0" SearchString="[ProgramFilesFolder]dotnet\shared\Microsoft.WindowsDesktop.App\5.0.1\Microsoft.WindowsDesktop.App.runtimeconfig.json" Order="2" Property="PreReqSearch"/>
-    <ROW SearchKey="AEEB73CE673349D2BADF9D8EB73C7437M_2" Prereq="AEEB73CE673349D2BADF9D8EB73C7437" SearchType="0" SearchString="[ProgramFilesFolder]dotnet\shared\Microsoft.WindowsDesktop.App\5.0.2\Microsoft.WindowsDesktop.App.runtimeconfig.json" Order="3" Property="PreReqSearch_1"/>
-    <ROW SearchKey="AEEB73CE673349D2BADF9D8EB73C7437Mic" Prereq="AEEB73CE673349D2BADF9D8EB73C7437" SearchType="0" SearchString="[ProgramFilesFolder]dotnet\shared\Microsoft.WindowsDesktop.App\5.0.0\Microsoft.WindowsDesktop.App.runtimeconfig.json" Order="1" Property="PreReqSearch_AEEB73CE673349D2BADF9D"/>
+    <ROW SearchKey="AEEB73CE673349D2BADF9D8EB73C7437Mic" Prereq="AEEB73CE673349D2BADF9D8EB73C7437" SearchType="14" SearchString="[ProgramFilesFolder]dotnet\shared\Microsoft.WindowsDesktop.App" VerMin="5.0.17" Order="1" Property="PreReqSearch_AEEB73CE673349D2BADF9D"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.UpdaterComponent">
     <ROW Updater="updater.exe" URL="URL" SearchFreq="CheckFrequency" DownloadsFolder="DownloadsFolder" ID="ID" TargetDir="AppDir" AppName="ApplicationName" AppVersion="ApplicationVersion" CompanyName="CompanyName" DefCommandLine="DefaultCommandLine" Flags="Flags" IconIndex="0" UnistallCASeq="AI_UPDATER_UNINSTALL" Description="[|UpdaterName] [|ProductVersion]"/>
