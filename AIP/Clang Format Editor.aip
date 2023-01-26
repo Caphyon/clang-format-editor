@@ -39,7 +39,7 @@
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AEEB73CE673349D2BADF9D8EB73C7437" ComponentId="{BCB5054B-158D-4054-B44E-F49D32270A82}" Directory_="APPDIR" Attributes="4" KeyPath="AEEB73CE673349D2BADF9D8EB73C7437" Options="2"/>
+    <ROW Component="AEEB73CE673349D2BADF9D8EB73C7437" ComponentId="{BE54829B-F6E6-4CA7-AE7C-47BABCFE1BE7}" Directory_="APPDIR" Attributes="4" KeyPath="AEEB73CE673349D2BADF9D8EB73C7437" Options="2"/>
     <ROW Component="APPDIR" ComponentId="{83CB0D8C-02BE-4ED4-850E-38461209BA02}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="ClangFormatEditor" ComponentId="{933DCB4E-AFCE-4867-9BB6-2CDB4BC13758}" Directory_="ClangFormatEditor_Dir" Attributes="0"/>
     <ROW Component="ClangFormatEditor.dll" ComponentId="{6AF7866F-930C-41EB-A57B-A1304B673F23}" Directory_="APPDIR" Attributes="0" KeyPath="ClangFormatEditor.dll"/>
@@ -275,7 +275,7 @@
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
-    <ROW PrereqKey="AEEB73CE673349D2BADF9D8EB73C7437" DisplayName=".NET Desktop Runtime 5.0.17 x86" VersionMin="5.0" SetupFileUrl="Prerequisites\.NET 5.0\windowsdesktop-runtime-5.0.17-win-x86.exe" Location="0" ExactSize="0" WinNTVersions="Windows Vista x86, Windows Server 2008 x86, Windows 7 RTM x86, Windows 8 x86, Windows 10 version 1507 x86, Windows 10 version 1511 x86" WinNT64Versions="Windows Vista x64, Windows Server 2008 x64, Windows 7 RTM x64, Windows Server 2008 R2 x64, Windows 8 x64, Windows Server 2012 x64, Windows 10 version 1507 x64, Windows 10 version 1511 x64" Operator="1" NoUiComLine="/q /norestart" Options="f" TargetName=".NET 5.0\windowsdesktop-runtime-5.0.17-win-x86.exe" Feature="AEEB73CE673349D2BADF9D8EB73C7437"/>
+    <ROW PrereqKey="AEEB73CE673349D2BADF9D8EB73C7437" DisplayName=".NET Desktop Runtime 5.0.17 x86" VersionMin="5.0" SetupFileUrl="https://download.visualstudio.microsoft.com/download/pr/b6fe5f2a-95f4-46f1-9824-f5994f10bc69/db5ec9b47ec877b5276f83a185fdb6a0/windowsdesktop-runtime-5.0.17-win-x86.exe" Location="1" ExactSize="49729032" WinNTVersions="Windows Vista x86, Windows Server 2008 x86, Windows 7 RTM x86, Windows 8 x86, Windows 10 version 1507 x86, Windows 10 version 1511 x86" WinNT64Versions="Windows Vista x64, Windows Server 2008 x64, Windows 7 RTM x64, Windows Server 2008 R2 x64, Windows 8 x64, Windows Server 2012 x64, Windows 10 version 1507 x64, Windows 10 version 1511 x64" Operator="1" NoUiComLine="/q /norestart" Options="f" MD5="8a5e836b6ee992eae7c0820ef7fe3ca3" TargetName=".NET 5.0" Feature="AEEB73CE673349D2BADF9D8EB73C7437"/>
     <ATTRIBUTE name="PrereqsOrder" value="AEEB73CE673349D2BADF9D8EB73C7437"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
