@@ -1,5 +1,19 @@
 ;aiu;
 
+[2023.2.1]
+Name = Clang Format Editor
+ProductVersion = 2023.2.1
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6458880
+ReleaseDate = 06/02/2023
+SHA256 = E81F87A9DC5A245CC1A2AB1C1B45D42CD1249E856AD0A36C921ECF7B17527919
+MD5 = d0d30008473a53a2f3b94feaaf2c65e3
+ServerFileName = Clang Format Editor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.2.1
+BugFix = Incorrect .NET 5 prerequisite detection
+Replaces = All
+
 [2023.2.0]
 Name = Clang Format Editor
 ProductVersion = 2023.2.0
