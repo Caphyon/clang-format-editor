@@ -32,7 +32,7 @@ namespace ClangFormatEditor
       { "IncludeBlocks", new string[] { "Preserve", "Merge", "Regroup" } },
       { "IndentPPDirectives", new string[] { "None", "AfterHash", "BeforeHash" } },
       { "IndentWidth", new string[] { "2", "4", "6" } },
-      { "LineEnding", new string[] { "LF", "CLRF", "DeriveLF", "DeriveCLRF"} },
+      { "LineEnding", new string[] { "LF", "CRLF", "DeriveLF", "DeriveCLRF"} },
       { "MaxEmptyLinesToKeep", new string[] { "1", "2", "3" } },
       { "NamespaceIndentation", new string[] { "None", "Inner", "All" } },
       { "PenaltyBreakAssignment", new string[] { "1", "2", "3" } },
