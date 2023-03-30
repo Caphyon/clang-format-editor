@@ -89,6 +89,7 @@ namespace ClangFormatEditor
       new FormatOptionInputModel { Name = "JavaScriptQuotes", Paramater = "JavaScriptQuoteStyle", Description = "The JavaScriptQuoteStyle to use for JavaScript strings.\r\nPossible values:\r\n- JSQS_Leave (in configuration: Leave) Leave string quotes as they \r\n- JSQS_Single (in configuration: Single) Always use single quotes.\r\n- JSQS_Double (in configuration: Double) Always use double quotes.", Input = "Leave" },
       new FormatOptionToggleModel { Name = "JavaScriptWrapImports", Paramater = "bool", Description = "Whether to wrap JavaScript import/export statements", BooleanCombobox = ToggleValues.True },
       new FormatOptionToggleModel { Name = "KeepEmptyLinesAtTheStartOfBlocks", Paramater = "bool", Description = "If true, the empty line at the start of blocks is kept.", BooleanCombobox = ToggleValues.False },
+      new FormatOptionInputModel { Name = "LineEnding", Paramater = "string", Description = "Line ending style.", Input = "LE_DeriveLF" },
       new FormatOptionInputModel { Name = "MacroBlockBegin", Paramater = "std::string", Description = "A regular expression matching macros that start a block.", Input = "''" },
       new FormatOptionInputModel { Name = "MacroBlockEnd", Paramater = "std::string", Description = "A regular expression matching macros that end a block.", Input = "''" },
       new FormatOptionInputModel { Name = "MaxEmptyLinesToKeep", Paramater = "unsigned", Description = "The maximum number of consecutive empty lines to keep.", Input = "1" },
