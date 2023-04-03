@@ -1,5 +1,20 @@
 ;aiu;
 
+[2023.4.0]
+Name = Clang Format Editor
+ProductVersion = 2023.4.0
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6458880
+ReleaseDate = 03/04/2023
+SHA256 = 47BE6E0D916046030F74B213E375871E1B24665D2D6B5522F2A759054CB07C57
+MD5 = 86be17b16f4922a57c9bf8b93ce1c44a
+ServerFileName = Clang Format Editor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.4.0
+Enhancement = Update Clang Format to v16.0.0
+Enhancement1 = Added option to set the preferred end-of-line characters
+Replaces = All
+
 [2023.2.1]
 Name = Clang Format Editor
 ProductVersion = 2023.2.1
