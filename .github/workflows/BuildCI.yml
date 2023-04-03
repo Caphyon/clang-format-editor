@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        dotnet-version: '5.0.x'
+        dotnet-version: [ '5.0' ]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -54,6 +54,6 @@ jobs:
 
       - name: Display dotnet version
         run: dotnet --version
-  
+
       - name: Execute unit tests
         run: dotnet test
