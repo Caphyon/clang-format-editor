@@ -98,6 +98,7 @@ namespace ClangFormatEditor
       { "JavaScriptWrapImports", new FormatOptionToggleModel { Name = "JavaScriptWrapImports", Paramater = "bool", Description = "Whether to wrap JavaScript import/export statements", BooleanCombobox = ToggleValues.True } },
       { "KeepEmptyLinesAtTheStartOfBlocks", new FormatOptionToggleModel { Name = "KeepEmptyLinesAtTheStartOfBlocks", Paramater = "bool", Description = "If true, the empty line at the start of blocks is kept.", BooleanCombobox = ToggleValues.True } },
       { "Language", new FormatOptionInputModel { Name = "Language", Paramater = "JavaScriptQuoteStyle", Description = "Language, this format style is targeted at.", Input = "Cpp" } },
+      { "LineEnding", new FormatOptionInputModel { Name = "LineEnding", Paramater = "LineEndingStyle", Description = "Line ending style.", Input = "CRLF" } },
       { "MacroBlockBegin", new FormatOptionInputModel { Name = "MacroBlockBegin", Paramater = "std::string", Description = "A regular expression matching macros that start a block.", Input = "''" } },
       { "MacroBlockEnd", new FormatOptionInputModel { Name = "MacroBlockEnd", Paramater = "std::string", Description = "A regular expression matching macros that end a block.", Input = "''" } },
       { "MaxEmptyLinesToKeep", new FormatOptionInputModel { Name = "MaxEmptyLinesToKeep", Paramater = "unsigned", Description = "The maximum number of consecutive empty lines to keep.", Input = "1" } },
