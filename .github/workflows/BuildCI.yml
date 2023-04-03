@@ -16,18 +16,16 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '5.0' ]
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      - name: Setup .NET Core SDK 
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
-          
+          dotnet-version: '5.0'
+
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1
         
@@ -55,9 +53,6 @@ jobs:
         with:
           name: Clang Format Editor
           path: AIP\Clang Format Editor.msi
-
-      - name: Display dotnet version
-        run: dotnet --version
 
       - name: Execute unit tests
         run: dotnet test
