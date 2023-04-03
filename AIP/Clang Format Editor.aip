@@ -14,10 +14,10 @@
     <ROW Property="AiSkipExitDlg" Value="1"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Caphyon"/>
-    <ROW Property="ProductCode" Value="1033:{27430DA5-659A-44DF-A028-0E34455F2E6D} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{C7F006FB-D2E9-4706-80D4-18A5A8E25D9B} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Clang Format Editor"/>
-    <ROW Property="ProductVersion" Value="2023.2.1"/>
+    <ROW Property="ProductVersion" Value="2023.4.0"/>
     <ROW Property="ROOT_SRC_DIR_PROP" Value="\\storage\shared\Company\Releases\Clang Power Tools"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>

@@ -68,6 +68,18 @@
     <ROW Section="2023.2.1" Key="Version" Value="2023.2.1" ValueLocId="-"/>
     <ROW Section="2023.2.1" Key="BugFix" Value="Incorrect .NET 5 prerequisite detection"/>
     <ROW Section="2023.2.1" Key="Replaces" Value="7.4.1;7.5;2023.1.2;2023.2.0" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="Name" Value="Clang Format Editor"/>
+    <ROW Section="2023.4.0" Key="ProductVersion" Value="2023.4.0" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="URL" Value="https://clangpowertools.com/ClangFormatEditor.msi" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="Size" Value="\\storage\shared\Company\Releases\Clang Power Tools\v2023.2.1\Clang Format Editor.msi" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="ReleaseDate" Value="22147" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="SHA256" Value="\\storage\shared\Company\Releases\Clang Power Tools\v2023.2.1\Clang Format Editor.msi" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="MD5" Value="\\storage\shared\Company\Releases\Clang Power Tools\v2023.2.1\Clang Format Editor.msi" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="ServerFileName" Value="Clang Format Editor.msi" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="RegistryKey" Value="HKUD\Software\Caphyon\Clang Format Editor\Version" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="Version" Value="2023.4.0" ValueLocId="-"/>
+    <ROW Section="2023.4.0" Key="Enhancement" Value="Update Clang Format to v16.0.0&#13;&#10;Added option to set the preferred end-of-line characters"/>
+    <ROW Section="2023.4.0" Key="Replaces" Value="7.4.1;7.5;2023.1.2;2023.2.0;2023.2.1" ValueLocId="-"/>
     <ATTRIBUTE name="OutputFileName" value="ClangFormatEditorUpdates.txt"/>
     <ATTRIBUTE name="OutputFolder" value="."/>
   </COMPONENT>
