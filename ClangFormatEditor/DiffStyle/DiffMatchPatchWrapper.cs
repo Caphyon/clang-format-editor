@@ -204,7 +204,7 @@ namespace ClangFormatEditor
         }
       }
 
-      for (int index = 0; index < outputLines.Count; index++)
+      for (int index = 0; index < Math.Min(inputLines.Count, outputLines.Count); index++)
       {
         var lineDiffs = GetDiff(inputLines[index], outputLines[index]);
 
