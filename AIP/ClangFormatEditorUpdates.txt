@@ -1,5 +1,19 @@
 ;aiu;
 
+[2023.4.2]
+Name = Clang Format Editor
+ProductVersion = 2023.4.2
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6481920
+ReleaseDate = 18/08/2023
+SHA256 = 2FCFD1139E8F2A3810FAEA9E0C3AD480DBCE2DC510D9A54D63E26D845AA191D8
+MD5 = d5163dc4293eeeca899a27f9dcce8298
+ServerFileName = ClangFormatEditor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.4.2
+BugFix = The Clang Format Editor experiences a crash when attempting to use the Style Detector to large files
+Replaces = All
+
 [2023.4.1]
 Name = Clang Format Editor
 ProductVersion = 2023.4.1
