@@ -20,7 +20,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK 
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '5.0'
 
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1
@@ -33,6 +37,22 @@ jobs:
       
       - name: Build Solution
         run: msbuild ClangFormatEditor.sln /t:ClangFormatEditor /p:Configuration="Release"
+
+      - name: Create Clang Format Editor from AIP
+        uses: caphyon/advinst-github-action@v1.0
+        with:
+          advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
+          advinst-enable-automation: 'true'
+          aip-path: AIP\Clang Format Editor.aip
+          aip-build-name: DefaultBuild
+          aip-package-name: Clang Format Editor.msi
+          aip-output-dir: ${{ github.workspace }}\AIP
+
+      - name: Archive production Clang Format Editor.msi artifacts (cpt generated with advanced installer)
+        uses: actions/upload-artifact@v2
+        with:
+          name: Clang Format Editor
+          path: AIP\Clang Format Editor.msi
 
       - name: Execute unit tests
         run: dotnet test

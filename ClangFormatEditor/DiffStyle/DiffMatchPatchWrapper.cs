@@ -204,7 +204,7 @@ namespace ClangFormatEditor
         }
       }
 
-      for (int index = 0; index < outputLines.Count; index++)
+      for (int index = 0; index < Math.Min(inputLines.Count, outputLines.Count); index++)
       {
         var lineDiffs = GetDiff(inputLines[index], outputLines[index]);
 
@@ -310,13 +310,17 @@ namespace ClangFormatEditor
             // Multiple Environment.NewLine were found, append the text before the first Environment.NewLine to the the previous line 
             // and split the remaing text based on Environment.NewLine to new lines
 
+            var insertLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
             if (lines.Count - 1 >= 0)
             {
-              var insertLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
               lines[lines.Count - 1] += insertLines[0];
-              insertLines.RemoveAt(0);
-              lines.AddRange(insertLines);
             }
+            else
+            {
+              lines.Add(insertLines[0]);
+            }
+            insertLines.RemoveAt(0);
+            lines.AddRange(insertLines);
             break;
           case Operation.EQUAL:
             var equalLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None).ToList();
@@ -332,7 +336,7 @@ namespace ClangFormatEditor
             }
 
             // Insert empty lines to equalize the length of the input and output
-            if (newLineFoundPerOperation > 1)
+            if (newLineFoundPerOperation >= 1 || emptyLinesToAdd >= 1)
             {
               for (int i = 0; i < emptyLinesToAdd; i++)
               {

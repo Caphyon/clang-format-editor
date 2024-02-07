@@ -67,8 +67,8 @@ namespace ClangFormatEditor
 
       var existingFullVersion = FileVersionInfo.GetVersionInfo(installedFormatExe).FileVersion;
       var newFullVersion = FileVersionInfo.GetVersionInfo(AppConstants.ClangFormatExe).FileVersion;
-      var existingVersion = new Version(existingFullVersion.Substring(0, existingFullVersion.IndexOf(' ')));
-      var newVersionInfo = new Version(newFullVersion.Substring(0, existingFullVersion.IndexOf(' ')));
+      var existingVersion = new Version(existingFullVersion.Split(' ')[0]);
+      var newVersionInfo = new Version(newFullVersion.Split(' ')[0]);
 
       if (existingVersion < newVersionInfo)
       {

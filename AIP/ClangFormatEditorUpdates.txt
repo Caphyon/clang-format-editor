@@ -1,5 +1,94 @@
 ;aiu;
 
+[2023.4.2]
+Name = Clang Format Editor
+ProductVersion = 2023.4.2
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6481920
+ReleaseDate = 18/08/2023
+SHA256 = 2FCFD1139E8F2A3810FAEA9E0C3AD480DBCE2DC510D9A54D63E26D845AA191D8
+MD5 = d5163dc4293eeeca899a27f9dcce8298
+ServerFileName = ClangFormatEditor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.4.2
+BugFix = The Clang Format Editor experiences a crash when attempting to use the Style Detector to large files
+Replaces = All
+
+[2023.4.1]
+Name = Clang Format Editor
+ProductVersion = 2023.4.1
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6498816
+ReleaseDate = 12/04/2023
+SHA256 = 8B82EF54668D882132FECE6F8C3FF5B1CA44ADB84B003EE49AF40762C0577252
+MD5 = f20c5ae1018ffe11e34113586cd5cd2b
+ServerFileName = ClangFormatEditor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.4.1
+BugFix = The Clang Format Editor crashes when the Style Detector is run
+Replaces = All
+
+[2023.4.0]
+Name = Clang Format Editor
+ProductVersion = 2023.4.0
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6498816
+ReleaseDate = 03/04/2023
+SHA256 = E6C99D97D411BDED580457900E1F958C0406629B4A79E180A97E7ED99DBAE7AE
+MD5 = 447a3ddf0db022698e3e0d17449fdff9
+ServerFileName = ClangFormatEditor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.4.0
+Enhancement = Update Clang Format to v16.0.0
+Enhancement1 = Added option to set the preferred end-of-line characters
+Replaces = All
+
+[2023.2.1]
+Name = Clang Format Editor
+ProductVersion = 2023.2.1
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6458880
+ReleaseDate = 06/02/2023
+SHA256 = 47BE6E0D916046030F74B213E375871E1B24665D2D6B5522F2A759054CB07C57
+MD5 = 86be17b16f4922a57c9bf8b93ce1c44a
+ServerFileName = Clang Format Editor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.2.1
+BugFix = Incorrect .NET 5 prerequisite detection
+Replaces = All
+
+[2023.2.0]
+Name = Clang Format Editor
+ProductVersion = 2023.2.0
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6455808
+ReleaseDate = 01/02/2023
+SHA256 = 712D6E7B407BBB64D9EFCB56D6CEDD2E69D1BE7A53EE8829B0BFEE024B37BA2E
+MD5 = 51447c16667e2f35c877f4dfe69aa398
+ServerFileName = Clang Format Editor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.2.0
+Enhancement = Updated Clang Format to v15.0.7
+BugFix = Clang-format detector broken code view
+BugFix1 = .Net prerequisite falsely triggered
+Replaces = All
+
+[2023.1.2]
+Name = Clang Format Editor
+ProductVersion = 2023.1.2
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 6456832
+ReleaseDate = 16/01/2023
+SHA256 = 43E4A00258C4566B9B0FFFB45244E812B19B944076C5B3749B6A9A91BD357DCB
+MD5 = d42f985093ebcb50ff0b52ab463909ea
+ServerFileName = Clang Format Editor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2023.1.2
+Enhancement = Updated Clang Format to v15.0.6
+BugFix = Wrong default value cpp-standard
+BugFix1 = Incorrect detections on some inputs
+Replaces = All
+
 [7.5]
 Name = Clang Format Editor
 ProductVersion = 7.5.0
