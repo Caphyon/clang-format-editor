@@ -9,7 +9,7 @@
 		<Authors>Caphyon</Authors>
 		<Product>Clang-Format Editor</Product>
 		<RepositoryUrl>https://github.com/Caphyon/clang-format-detector</RepositoryUrl>
-		<Version>2023.4.2</Version>
+		<Version>2024.3.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

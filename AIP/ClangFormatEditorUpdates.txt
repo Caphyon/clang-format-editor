@@ -1,5 +1,20 @@
 ;aiu;
 
+[2024.3.0]
+Name = Clang Format Editor
+ProductVersion = 2024.3.0
+URL = https://clangpowertools.com/ClangFormatEditor.msi
+Size = 7225344
+ReleaseDate = 26/03/2024
+SHA256 = 19E4AFB7B077D8A40A5EEA2D0D25EDD603577B8F87BE92048CC2B61982EBB29A
+MD5 = aa45da98feb2441f88668ba933d79907
+ServerFileName = ClangFormatEditor.msi
+RegistryKey = HKUD\Software\Caphyon\Clang Format Editor\Version
+Version = 2024.3.0
+Enhancement = Update Clang Format to v18.1.2
+Enhancement1 = Migrate to runtime .NET 8
+Replaces = All
+
 [2023.4.2]
 Name = Clang Format Editor
 ProductVersion = 2023.4.2

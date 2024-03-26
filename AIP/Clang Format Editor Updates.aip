@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="17.9" version="20.3" Modules="update" RootPath="." Language="en" Id="{1B19450C-D57B-44BF-B97F-91C6E160CC9F}" Backup="false">
+<DOCUMENT Type="Advanced Installer" CreateVersion="17.9" version="21.5.1" Modules="update" RootPath="." Language="en" Id="{1B19450C-D57B-44BF-B97F-91C6E160CC9F}" Backup="false">
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;aiu-ue.ail"/>
     <ROW Path="&lt;AI_DICTS&gt;aiu-ue_en.ail"/>
@@ -104,6 +104,18 @@
     <ROW Section="2023.4.2" Key="Version" Value="2023.4.2" ValueLocId="-"/>
     <ROW Section="2023.4.2" Key="BugFix" Value="The Clang Format Editor experiences a crash when attempting to use the Style Detector to large files"/>
     <ROW Section="2023.4.2" Key="Replaces" Value="7.4.1;7.5;2023.1.2;2023.2.0;2023.2.1;2023.4.0;2023.4.1" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="Name" Value="Clang Format Editor"/>
+    <ROW Section="2024.3.0" Key="ProductVersion" Value="2024.3.0" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="URL" Value="https://clangpowertools.com/ClangFormatEditor.msi" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="Size" Value="\\storage\shared\Company\Releases\Clang Power Tools\v2024.3.0\ClangFormatEditor.msi" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="ReleaseDate" Value="22650" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="SHA256" Value="\\storage\shared\Company\Releases\Clang Power Tools\v2024.3.0\ClangFormatEditor.msi" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="MD5" Value="\\storage\shared\Company\Releases\Clang Power Tools\v2024.3.0\ClangFormatEditor.msi" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="ServerFileName" Value="ClangFormatEditor.msi" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="RegistryKey" Value="HKUD\Software\Caphyon\Clang Format Editor\Version" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="Version" Value="2024.3.0" ValueLocId="-"/>
+    <ROW Section="2024.3.0" Key="Enhancement" Value="Update Clang Format to v18.1.2&#13;&#10;Migrate to runtime .NET 8"/>
+    <ROW Section="2024.3.0" Key="Replaces" Value="7.4.1;7.5;2023.1.2;2023.2.0;2023.2.1;2023.4.0;2023.4.1;2023.4.2" ValueLocId="-"/>
     <ATTRIBUTE name="OutputFileName" value="ClangFormatEditorUpdates.txt"/>
     <ATTRIBUTE name="OutputFolder" value="."/>
   </COMPONENT>
